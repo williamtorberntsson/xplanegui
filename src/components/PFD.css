@@ -1,0 +1,15 @@
+.pfd {
+    display: flex;
+    flex-direction: column;
+}
+.mouseears {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.mousehead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
