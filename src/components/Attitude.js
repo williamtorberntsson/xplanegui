@@ -1,5 +1,5 @@
 import React from "react";
-import { FiBox, FiCircle, HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics } from "../images";
+import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics } from "../images";
 
 const Attitude = (props) => {
   let constants = {
@@ -19,7 +19,6 @@ const Attitude = (props) => {
   return (
     <span id="attitude">
       <div className="instrument attitude" style={{ height: "200px", width: "200px" }}>
-        <img src={FiBox} className="background box" style={{ display: props.showBox ? "" : "none" }} />
         <div className="roll box" style={{ transform: `rotate(${roll}deg)` }}>
           <img src={HorizonBack} className="box" />
           <div className="pitch box" style={{ top: `${pitch}%` }}>
@@ -29,7 +28,6 @@ const Attitude = (props) => {
         </div>
         <div className="mechanics box">
           <img src={HorizonMechanics} className="box" />
-          <img src={FiCircle} className="box" />
         </div>
       </div>
     </span>
