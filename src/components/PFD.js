@@ -33,7 +33,8 @@ const PFD = (props) => {
         <Altimeter altitude={altitude} pressure={5} lightTheme={props.lightTheme}/>
       </div>
       <div className="mousehead">
-        <Attitude roll={0} pitch={0} />
+        {/*<meter value="10" max="30" />*/}
+        <Attitude roll={15} pitch={10} />
         <Heading heading={45} />
       </div>
 
