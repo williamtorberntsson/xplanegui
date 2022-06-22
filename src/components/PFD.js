@@ -6,7 +6,7 @@ import Altimeter from "./Altimeter";
 import Attitude from "./Attitude";
 import Heading from "./Heading";
 
-const PFD = () => {
+const PFD = (props) => {
 
   const [altitude, setAltitude] = useState(0)
   const [roll, setRoll] = useState(0);
@@ -17,8 +17,8 @@ const PFD = () => {
     const interval = setInterval(() => {
       setRoll(roll + 1);
       setPitch(pitch + 1);
-      setAltitude((altitude + 1) % 800);
-      setSpeed((altitude + 1) % 800);
+      setAltitude((altitude + 5));
+      setSpeed((altitude + 1) % 900);
     }, 100);
 
     return () => {
@@ -29,8 +29,8 @@ const PFD = () => {
   return (
     <div className="pfd">
       <div className="mouseears">
-        <AirSpeed speed={speed} />
-        <Altimeter altitude={altitude} pressure={5}/>
+        <AirSpeed speed={speed} lightTheme={props.lightTheme} />
+        <Altimeter altitude={altitude} pressure={5} lightTheme={props.lightTheme}/>
       </div>
       <div className="mousehead">
         <Attitude roll={0} pitch={10} />

@@ -9,18 +9,18 @@ import './App.css';
 
 function App() {
 
-  const [visualMode, setVisualMode] = useState(0);
+  const [lightTheme, setLightTheme] = useState(0);
 
-  const changeVisualMode = (mode) => {
-    setVisualMode(mode);
-    console.log("Mode: :", mode)
+  const changeLightTheme = (mode) => {
+    setLightTheme(mode);
+    console.log("App mode: ", mode)
   }
 
   return (
-    <Grid container style={{ backgroundColor: `${visualMode}` }}>
+    <Grid container style={{ backgroundColor: `${lightTheme ? "black" : "white"}` }}>
       <Grid container>
         <Grid item xl={4}>
-          <PFD />
+          <PFD lightTheme={lightTheme} />
         </Grid>
         <Grid item xl={4}>
           <Map />
@@ -30,7 +30,7 @@ function App() {
         </Grid>
       </Grid>
       <Grid container>
-        <LayoutButtons parentCallback={changeVisualMode} />
+        <LayoutButtons parentCallback={changeLightTheme} />
       </Grid>
     </Grid>
   );

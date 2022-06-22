@@ -21,8 +21,8 @@ import SpeedMechanics from "./assets/img/speed_mechanics.svg";
 // Altitude meter
 import AltitudeMeterBlack from "./assets/img/altitude_meter_black.svg";
 import AltitudeMeterWhite from "./assets/img/altitude_meter_white.svg";
-//import AltitudePointerGrey from "./assets/img/altitude_pointer_grey.svg";
-//import AltitudePointerRed from "./assets/img/altitude_pointer_red.svg";
+import AltitudePointerGrey from "./assets/img/altitude_pointer_grey.svg";
+import AltitudePointerRed from "./assets/img/altitude_pointer_red.svg";
 
 // Velocity meter
 import VelocityMeterBlack from "./assets/img/velocity_meter_black.svg";
@@ -49,6 +49,10 @@ export {
   SpeedMechanics,
   AltitudeMeterBlack,
   AltitudeMeterWhite,
-  //AltitudePointerGrey,
-  //AltitudePointerRed
+  AltitudePointerGrey,
+  AltitudePointerRed,
+  VelocityMeterBlack,
+  VelocityMeterWhite,
+  VelocityPointerGrey,
+  VelocityPointerRed
 };
