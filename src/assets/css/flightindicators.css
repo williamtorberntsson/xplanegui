@@ -26,8 +26,8 @@ div.instrument .box {
 
 div.instrument .value {
   position: absolute;
-  top: 35%;
   left: 40%;
+  top: 35%;
   width: 100%;
   height: 100%;
 }

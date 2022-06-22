@@ -18,9 +18,19 @@ import AltitudeTicks from "./assets/img/altitude_ticks.svg";
 
 import SpeedMechanics from "./assets/img/speed_mechanics.svg";
 
-import ArrowRight from "./assets/img/iconmonstr-arrow-right-thin.svg";
+// Altitude meter
+import AltitudeMeterBlack from "./assets/img/altitude_meter_black.svg";
+import AltitudeMeterWhite from "./assets/img/altitude_meter_white.svg";
+//import AltitudePointerGrey from "./assets/img/altitude_pointer_grey.svg";
+//import AltitudePointerRed from "./assets/img/altitude_pointer_red.svg";
 
-import TestCircle from "./assets/img/test.svg";
+// Velocity meter
+import VelocityMeterBlack from "./assets/img/velocity_meter_black.svg";
+import VelocityMeterWhite from "./assets/img/velocity_meter_white.svg";
+import VelocityPointerGrey from "./assets/img/velocity_pointer_grey.svg";
+import VelocityPointerRed from "./assets/img/velocity_pointer_red.svg";
+
+
 
 export {
   FiBox,
@@ -37,6 +47,8 @@ export {
   AltitudePressure,
   AltitudeTicks,
   SpeedMechanics,
-  ArrowRight,
-  TestCircle
+  AltitudeMeterBlack,
+  AltitudeMeterWhite,
+  //AltitudePointerGrey,
+  //AltitudePointerRed
 };

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlnsBx="https://boxy-svg.com">
+  <g>
+    <ellipse style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" cx="250" cy="250" rx="200" ry="200"/>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="250" y1="50" x2="250" y2="80">
+      <title>0deg line</title>
+    </line>
+    <text style="font-size: 28px; paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 0.999423px;" transform="matrix(1.001155, 0, 0, 1, -8.288707, -2.404083)" x="250" y="107.373" bxOrigin="-1.000806 0.5"><title>0</title>0</text>
+    <line style="stroke: black;" x1="308.713" y1="59.3" x2="308.713" y2="79.3" transform="matrix(0.951057, 0.309017, -0.309017, 0.951057, 36.524354, -92.005759)">
+      <title>18deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="358.739" y1="85.332" x2="358.739" y2="115.332" transform="matrix(0.809017, 0.587785, -0.587785, 0.809017, 127.486666, -191.699747)">
+      <title>36deg line</title>
+    </line>
+    <text style="font-size: 28px; stroke: rgb(0, 0, 0);" x="335" y="129.983" bxOrigin="0.012849 0.000011"><title>1</title>1</text>
+    <line style="stroke: black;" x1="403.713" y1="128.321" x2="403.713" y2="148.321" transform="matrix(0.587785, 0.809017, -0.809017, 0.587785, 278.32058, -269.592758)">
+      <title>54deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="425.945" y1="177.832" x2="425.945" y2="207.832" transform="matrix(0.309017, 0.951057, -0.951057, 0.309017, 477.714934, -271.854135)">
+      <title>72deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="395" y="206.983"><title>2</title>2</text>
+    <line style="stroke: black;" x1="450" y1="250" x2="430" y2="250">
+      <title>90deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="425.945" y1="292.168" x2="425.945" y2="322.168" transform="matrix(-0.309017, 0.951057, -0.951057, -0.309017, 849.703353, -3.009682)">
+      <title>108deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="395" y="309.983"><title>3</title>3</text>
+    <line style="stroke: black;" x1="403.713" y1="351.679" x2="403.713" y2="371.679" transform="matrix(-0.587785, 0.809017, -0.809017, -0.587785, 933.61399, 247.657763)">
+      <title>126deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="358.74" y1="384.668" x2="358.74" y2="414.668" transform="matrix(-0.809017, 0.587785, -0.587785, -0.809017, 883.885672, 512.144234)">
+      <title>144deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="335" y="384.983"><title>4</title>4</text>
+    <line style="stroke: black;" x1="308.713" y1="420.701" x2="308.713" y2="440.701" transform="matrix(-0.951057, 0.309017, -0.309017, -0.951057, 735.410432, 744.924442)">
+      <title>162deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="250" y1="420" x2="250" y2="450">
+      <title>180deg line</title>
+    </line>
+    <text style="font-size: 28px; stroke: rgb(0, 0, 0); stroke-width: 0.999355px; white-space: pre;" transform="matrix(1.00129, 0, 0, 1, -8.32249, 310.37738)" x="250" y="107.373" bxOrigin="-1.000806 0.5"><title>5</title>5</text>
+    <line style="stroke: black;" x1="191.287" y1="420.701" x2="191.287" y2="440.701" transform="matrix(-0.951056, -0.309017, 0.309017, -0.951056, 240.117741, 899.432914)">
+      <title>198deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="141.26" y1="384.668" x2="141.26" y2="414.668" transform="matrix(-0.809017, -0.587785, 0.587785, -0.809017, 20.622858, 806.036769)">
+      <title>216deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="150" y="384.983"><title>6</title>6</text>
+    <line style="stroke: black;" x1="96.287" y1="351.679" x2="96.287" y2="371.679" transform="matrix(-0.587785, -0.809017, 0.809017, -0.587785, -139.721423, 652.166333)">
+      <title>234deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="74.055" y1="292.168" x2="74.055" y2="322.168" transform="matrix(-0.309017, -0.951057, 0.951057, -0.309017, -195.194888, 472.518597)">
+      <title>252deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="90" y="309.983"><title>7</title>7</text>
+    <line style="stroke: black;" x1="50" y1="250" x2="70" y2="250">
+      <title>270deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="74.055" y1="177.832" x2="74.055" y2="207.832" transform="matrix(0.309017, -0.951057, 0.951057, 0.309017, -132.223383, 203.674145)">
+      <title>288deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="90" y="206.983"><title>8</title>8</text>
+    <line style="stroke: black;" x1="96.287" y1="128.321" x2="96.287" y2="148.321" transform="matrix(0.587785, -0.809017, 0.809017, 0.587785, -72.213117, 134.915812)">
+      <title>324deg line</title>
+    </line>
+    <line style="stroke: rgb(0, 0, 0); stroke-width: 2px;" x1="141.26" y1="85.332" x2="141.26" y2="115.332" transform="matrix(0.809017, -0.587785, 0.587785, 0.809017, -31.995412, 102.192213)">
+      <title>324deg line</title>
+    </line>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; stroke: rgb(0, 0, 0); white-space: pre;" x="150" y="129.983"><title>9</title>9</text>
+    <line style="stroke: black;" x1="191.287" y1="59.299" x2="191.287" y2="79.299" transform="matrix(0.951057, -0.309017, 0.309017, 0.951057, -12.052316, 62.502651)">
+      <title>342deg line</title>
+    </line>
+  </g>
+</svg>

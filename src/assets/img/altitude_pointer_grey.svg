@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlnsBx="https://boxy-svg.com">
+  <g>
+    <title>pointer</title>
+    <path d="M 250 81 L 280 351 L 220 351 L 250 81 Z" style="fill: rgb(40, 40, 40);" bxShape="triangle 220 81 60 270 0.5 0 1@9a796aff" bxOrigin="0 0.821001">
+      <title>large_triangle</title>
+    </path>
+    <path d="M -250 -414.535 L -220 -350 L -280 -350 L -250 -414.535 Z" style="fill: rgb(40, 40, 40);" transform="matrix(-1, 0, 0, -1, 0, 0)" bxShape="triangle -280 -414.535 60 64.535 0.5 0 1@d182af1c">
+      <title>small_triangle</title>
+    </path>
+  </g>
+</svg>
