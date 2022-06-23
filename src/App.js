@@ -3,9 +3,10 @@ import PFD from './components/PFD';
 import Map from './components/Map';
 import Future from './components/Future';
 import LayoutButtons from './components/LayoutButtons';
-import { Grid, Collapse } from '@mui/material';
+import { Grid, Collapse, Box } from '@mui/material';
 
 import './App.css';
+import { light } from '@mui/material/styles/createPalette';
 
 function App() {
 
@@ -22,21 +23,41 @@ function App() {
   }
 
   return (
-    <Grid container style={{ height: "100vh", backgroundColor: `${lightTheme ? "black" : "white"}` }}>
-      <Grid container>
-        <Grid item xl={4} sx={{ display: collapse ? 'block' : 'none' }}>
-          <Collapse in={collapse}>
-            <PFD lightTheme={lightTheme} />
-          </Collapse>
-        </Grid>
-        <Grid item xl={collapse ? 4 : 8}>
+    <Grid container style={{ padding: "50px", height: "100vh", backgroundColor: "grey" }}>
+      <Grid container style={{ position: "relative", backgroundColor: "darkgreen" }}>
+        <div>
           <Map />
-        </Grid>
-        <Grid item xl={4}>
-          <Future />
+        </div>
+        <Grid container style={{ display: "absolute", height: "100%", position: "absolute" }}>
+          <Grid item xs={3}>
+            <Grid container direction="column" justifyContent="space-between" style={{ height: "100%" }}>
+              <Grid item xs={3} style={{ height: "30%" }}>
+                <Collapse in={collapse}>
+                  PFD
+                  <PFD lightTheme={lightTheme} />
+                </Collapse>
+              </Grid>
+              <Grid item xs={3} style={{ height: "30%" }}>
+                <p>Bottom Left </p>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={6}>
+            Middle area
+          </Grid>
+          <Grid item xs={3}>
+            <Grid container direction="column" justifyContent="space-between" style={{ height: "100%" }}>
+              <Grid item xs={3} style={{ height: "30%" }}>
+                <Future />
+              </Grid>
+              <Grid item xs={3} style={{ height: "30%" }}>
+                <p>Bottom Right </p>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid item position="absolute" bottom={0} left={0}>
         <LayoutButtons lightTheme={changeLightTheme} viewMode={changeViewMode} />
       </Grid>
     </Grid>

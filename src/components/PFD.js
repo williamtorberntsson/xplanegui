@@ -26,14 +26,19 @@ const PFD = (props) => {
     };
   });
 
+
+  const data = { text: "Velocity", value: 100 };
+
+
+
+
   return (
     <div className="pfd">
       <div className="mouseears">
         <AirSpeed speed={speed} lightTheme={props.lightTheme} />
-        <Altimeter altitude={altitude} pressure={5} lightTheme={props.lightTheme}/>
+        <Altimeter altitude={altitude} pressure={5} lightTheme={props.lightTheme} />
       </div>
       <div className="mousehead">
-        {/*<meter value="10" max="30" />*/}
         <Attitude roll={15} pitch={10} />
         <Heading heading={45} />
       </div>
