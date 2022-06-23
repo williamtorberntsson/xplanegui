@@ -34,6 +34,9 @@ const PFD = (props) => {
 
   return (
     <div className="pfd">
+      <div style={{textAlign: "center"}}>
+        PFD
+      </div>
       <div className="mouseears">
         <AirSpeed speed={speed} lightTheme={props.lightTheme} />
         <Altimeter altitude={altitude} pressure={5} lightTheme={props.lightTheme} />

@@ -30,13 +30,12 @@ function App() {
         <Grid container style={{ display: "absolute", height: "100%", position: "absolute" }}>
           <Grid item xs={3}>
             <Grid container direction="column" justifyContent="space-between" style={{ height: "100%" }}>
-              <Grid item xs={3} style={{ height: "30%" }}>
+              <Grid item xs={3} style={{ height: "30%"}}>
                 <Collapse in={collapse}>
-                  PFD
                   <PFD lightTheme={lightTheme} />
                 </Collapse>
               </Grid>
-              <Grid item xs={3} style={{ height: "30%" }}>
+              <Grid item xs={3} style={{ height: "30%", textAlign: "center"}}>
                 <p>Bottom Left </p>
               </Grid>
             </Grid>
@@ -49,7 +48,7 @@ function App() {
               <Grid item xs={3} style={{ height: "30%" }}>
                 <Future />
               </Grid>
-              <Grid item xs={3} style={{ height: "30%" }}>
+              <Grid item xs={3} style={{ height: "30%", textAlign: "center" }}>
                 <p>Bottom Right </p>
               </Grid>
             </Grid>
