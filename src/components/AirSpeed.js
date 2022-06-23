@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../images";
 import "../assets/css/flightindicators.css"

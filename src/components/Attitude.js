@@ -5,20 +5,19 @@ const Attitude = (props) => {
   let constants = {
     pitch_bound: 30,
     vario_bound: 1.95,
-    airspeed_limit_l: 0,
-    airspeed_limit_h: 800
   };
   let roll = props.roll;
   let pitch = props.pitch;
 
+  // limit pitch between 0 and 30
   if (pitch > constants.pitch_bound) pitch = constants.pitch_bound;
   else if (pitch < -constants.pitch_bound) pitch = -constants.pitch_bound;
 
   pitch *= 0.7;
 
   return (
-    <span id="attitude">
-      <div className="instrument attitude" style={{ height: "200px", width: "200px" }}>
+    <div>
+      <div className="instrument attitude" style={{ height: "230px", width: "230px" }}>
         <div className="roll box" style={{ transform: `rotate(${roll}deg)` }}>
           <img src={HorizonBack} className="box" />
           <div className="pitch box" style={{ top: `${pitch}%` }}>
@@ -30,7 +29,7 @@ const Attitude = (props) => {
           <img src={HorizonMechanics} className="box" />
         </div>
       </div>
-    </span>
+    </div>
   );
 };
 export default Attitude;
