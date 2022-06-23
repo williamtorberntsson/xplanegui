@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import PFD from './components/PFD';
-import Map from './components/Map';
+import WAD from './components/WAD';
 import Future from './components/Future';
 import LayoutButtons from './components/LayoutButtons';
 import { Grid } from '@mui/material';
@@ -17,15 +17,15 @@ function App() {
   }
 
   return (
-    <Grid container style={{ backgroundColor: `${visualMode}` }}>
+    <Grid container style={{ backgroundColor: `${visualMode}`, height: '100vh' }}>
       <Grid container>
-        <Grid item xl={4}>
+        <Grid item xl={4} xs={4} md={4} lg={4}>
           <PFD />
         </Grid>
-        <Grid item xl={4}>
-          <Map />
+        <Grid item xl={4} xs={4} md={4} lg={4}>
+          <WAD />
         </Grid>
-        <Grid item xl={4}>
+        <Grid item xl={4} xs={4} md={4} lg={4}>
           <Future />
         </Grid>
       </Grid>
