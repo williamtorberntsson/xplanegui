@@ -6,7 +6,6 @@ import LayoutButtons from './components/LayoutButtons';
 import { Grid, Collapse, Box } from '@mui/material';
 
 import './App.css';
-import { light } from '@mui/material/styles/createPalette';
 
 function App() {
 
@@ -42,7 +41,7 @@ function App() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} style={{textAlign: "center"}}>
             Middle area
           </Grid>
           <Grid item xs={3}>
