@@ -1,7 +1,7 @@
 
 const Future = () => {
   return(
-    <div>
+    <div style={{textAlign: "center"}}>
       Future
     </div>
   )
