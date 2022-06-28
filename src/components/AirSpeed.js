@@ -35,6 +35,10 @@ const AirSpeed = (props) => {
       break;
   }
 
+  const speedToMach = (speed) => {
+    return (speed / 340.29).toFixed(2);
+  }
+
   return (
     <span id="airspeed">
       <div className="instrument airspeed" style={{ height: "200px", width: "200px" }}>
@@ -42,8 +46,9 @@ const AirSpeed = (props) => {
         <div className="speed box" style={{ transform: `rotate(${speedRad}rad)` }}>
           <img src={props.lightTheme ? VelocityPointerRed : VelocityPointerGrey} className="box" />
         </div>
-        <div className="value" style={{color: props.lightTheme ? "white" : "black"}}>
-          <p>{speed}</p>
+        <div className="speedometer" style={{color: props.lightTheme ? "white" : "black"}}>
+          <p style={{margin: "0px", paddingLeft: "7px"}}>M</p>
+          <p style={{margin: "0px"}}>{speedToMach(speed)}</p>
         </div>
       </div>
     </span>

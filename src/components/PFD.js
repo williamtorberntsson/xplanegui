@@ -34,7 +34,7 @@ const PFD = (props) => {
 
   return (
     <div className="pfd">
-      <div style={{textAlign: "center"}}>
+      <div style={{ textAlign: "center" }}>
         PFD
       </div>
       <div className="mouseears">
@@ -43,10 +43,9 @@ const PFD = (props) => {
       </div>
       <div className="mousehead">
         <Attitude roll={0} pitch={0} />
-        <Heading heading={45} />
+        <Heading heading={0} />
+        {/* <Variometer verticalSpeed={5} /> */}
       </div>
-
-      {/*<Variometer verticalSpeed={5} />*/}
     </div>
   );
 }

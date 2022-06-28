@@ -13,7 +13,7 @@ const Attitude = (props) => {
   if (pitch > constants.pitch_bound) pitch = constants.pitch_bound;
   else if (pitch < -constants.pitch_bound) pitch = -constants.pitch_bound;
 
-  pitch *= 0.7;
+  pitch *= 0.9;
 
   return (
     <div>
