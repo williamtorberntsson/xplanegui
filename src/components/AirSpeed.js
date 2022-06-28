@@ -11,7 +11,7 @@ const AirSpeed = (props) => {
     airspeed_limit_h: 900
   };
 
-  console.log("Airspeed mode: ", props.lightTheme)
+  // console.log("Airspeed mode: ", props.lightTheme)
 
   let speed = props.speed; // m/s
   let speedRad = 0;

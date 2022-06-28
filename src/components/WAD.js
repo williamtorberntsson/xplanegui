@@ -69,7 +69,7 @@ const Navigate = () => {
   useEffect(() => {
     map.flyTo(coords)
     map.setView(coords)
-    console.log(coords)
+    // console.log(coords)
   }, [coords])
   return null
 }
@@ -78,7 +78,7 @@ const Map = ({ startPos }) => {
 
 
   return (
-    <MapContainer center={startPos} zoom={defaultZoom}>
+    <MapContainer center={startPos} zoom={defaultZoom} >
       <TileLayer
         url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
         attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
