@@ -1,13 +1,13 @@
 import { React, useState } from 'react';
 import PFD from './components/PFD';
 import WAD from './components/WAD';
-import Esri from './components/WAD_esri';
 import Future from './components/Future';
 import LayoutButtons from './components/LayoutButtons';
 import { Grid, Collapse, Box, Stack } from '@mui/material';
 
 import './App.css';
 import zIndex from '@mui/material/styles/zIndex';
+import ArcGisMap from './components/ArcGisMap';
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
   }
 
   return (
-    <Esri/>
+    <ArcGisMap/>
     // <Grid container style={{padding: '50px', height: "100vh", backgroundColor: "grey" }}>
     //   <Grid container>
     //     <Grid container style={{position: "relative", zIndex: '0' }}>
