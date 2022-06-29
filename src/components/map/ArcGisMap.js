@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 
 const Map = ({ center, orientation }) => {
-  const [zoom, setZoom] = useState(9);
+  const [zoom, setZoom] = useState(15);
   const [coords, setCoords] = useState([15.580926012604708, 58.41157469382408]);
   const [view, setView] = useState(null);
   const mapEl = useRef();
@@ -32,24 +32,24 @@ const Map = ({ center, orientation }) => {
         return camera;
       }
 
-      document.getElementById("move").addEventListener("click", () => {
-        console.log("move")
-        view.goTo(
-          shiftCamera(0.1),
-          {
-            speedFactor: 1,
-            easing: "linear"
-          });
-      })
+    //   document.getElementById("move").addEventListener("click", () => {
+    //     console.log("move")
+    //     view.goTo(
+    //       shiftCamera(0.1),
+    //       {
+    //         speedFactor: 1,
+    //         easing: "linear"
+    //       });
+    //   })
 
-      document.getElementById("tele").addEventListener("click", () => {
-        console.log("tele")
-        view.goTo({
-          target: [coords[0] + 1, coords[1] + 1],
-          heading: 100
-        });
-        setCoords([coords[0] + 1, coords[1] + 1])
-      })
+    //   document.getElementById("tele").addEventListener("click", () => {
+    //     console.log("tele")
+    //     view.goTo({
+    //       target: [coords[0] + 1, coords[1] + 1],
+    //       heading: 100
+    //     });
+    //     setCoords([coords[0] + 1, coords[1] + 1])
+    //   })
 
     })
 
@@ -70,9 +70,9 @@ const Map = ({ center, orientation }) => {
   return (
     <div>
       <div style={{ height: 800 }} ref={mapEl} />
-      <button onClick={() => setZoom(10)}>Zoom</button>
+      {/* <button onClick={() => setZoom(10)}>Zoom</button>
       <button id="move">move</button>
-      <button id="tele">tele</button>
+      <button id="tele">tele</button> */}
     </div>
 
   );

@@ -1,13 +1,12 @@
 import { React, useState, useEffect } from 'react';
 import PFD from './components/PFD';
-import WAD from './components/WAD';
 import Future from './components/Future';
 import LayoutButtons from './components/LayoutButtons';
 import { Grid, Collapse, Box, Stack } from '@mui/material';
 
 import './App.css';
 import zIndex from '@mui/material/styles/zIndex';
-import ArcGisMap from './components/ArcGisMap';
+import Nav_map from './components/map/Navigation';
 
 function App() {
 
@@ -27,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMapCenter([mapCenter[0] - 0.01, mapCenter[1] - 0.01])
+      setMapCenter([mapCenter[0] - 0.0001, mapCenter[1] - 0.0001])
       setOrientation(orientation + 5)
       console.log(mapCenter)
     }, 1000);
@@ -36,13 +35,12 @@ function App() {
   })
 
   const changeCenter = () => {
-    setMapCenter([mapCenter[0] + 0.01, mapCenter[1] + 1])
+    setMapCenter([mapCenter[0] + 0.001, mapCenter[1] + 0.001])
   }
 
   return (
     <div>
-      <ArcGisMap center={mapCenter} orientation={orientation} />
-      <button onClick={changeCenter}>Change center</button>
+      <Nav_map />
     </div>
     // <Grid container style={{padding: '50px', height: "100vh", backgroundColor: "grey" }}>
     //   <Grid container>
