@@ -12,31 +12,7 @@ function App() {
 
   const [lightTheme, setLightTheme] = useState(0);
   const [collapse, setCollapse] = useState(true);
-  const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
-  const [orientation, setOrientation] = useState(0);
 
-  const changeLightTheme = (theme) => {
-    setLightTheme(theme);
-    console.log("App mode: ", theme)
-  }
-
-  const changeViewMode = (mode) => {
-    setCollapse(!collapse);
-  }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMapCenter([mapCenter[0] - 0.0001, mapCenter[1] - 0.0001])
-      setOrientation(orientation + 5)
-      console.log(mapCenter)
-    }, 1000);
-
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  })
-
-  const changeCenter = () => {
-    setMapCenter([mapCenter[0] + 0.001, mapCenter[1] + 0.001])
-  }
 
   return (
     <div>
