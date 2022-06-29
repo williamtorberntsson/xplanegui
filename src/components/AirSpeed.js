@@ -43,7 +43,7 @@ const AirSpeed = (props) => {
           <img src={props.lightTheme ? VelocityPointerRed : VelocityPointerGrey} className="box" />
         </div>
         <div className="value" style={{color: props.lightTheme ? "white" : "black"}}>
-          <p>{speed}</p>
+          <p>{speed.toFixed(0)}</p>
         </div>
       </div>
     </span>
