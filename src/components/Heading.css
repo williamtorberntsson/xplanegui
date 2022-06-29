@@ -1,0 +1,25 @@
+.compass_mask {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.compass_value_border {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: -9px;
+}
+
+.compass_value {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.compass {
+    width: 200px;
+    height: 80px;
+    object-fit: cover;
+}

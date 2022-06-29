@@ -85,7 +85,7 @@ const Map = ({ center, rotation, pointPlacement}) => {
 
   return (
     <div>
-      <div style={{ height: 800 }} ref={mapEl} />
+      <div style={{ height: 900 }} ref={mapEl} />
     </div>
 
   );

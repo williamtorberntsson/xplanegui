@@ -15,8 +15,8 @@ function Nav_map() {
             // console.log(mapCenter)
         }, 1000);
 
-        return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-    })
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  })
 
     return (
         <ArcGisMap center={mapCenter} rotation={mapRotation} pointPlacement={pointCoords} />

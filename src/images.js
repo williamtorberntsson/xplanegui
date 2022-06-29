@@ -30,7 +30,8 @@ import VelocityMeterWhite from "./assets/img/velocity_meter_white.svg";
 import VelocityPointerGrey from "./assets/img/velocity_pointer_grey.svg";
 import VelocityPointerRed from "./assets/img/velocity_pointer_red.svg";
 
-
+// Compass
+import Compass from "./assets/img/compass.svg";
 
 export {
   FiBox,
@@ -54,5 +55,6 @@ export {
   VelocityMeterBlack,
   VelocityMeterWhite,
   VelocityPointerGrey,
-  VelocityPointerRed
+  VelocityPointerRed,
+  Compass
 };
