@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import PFD from './components/PFD';
 import WAD from './components/WAD';
 import Future from './components/Future';
@@ -13,6 +13,8 @@ function App() {
 
   const [lightTheme, setLightTheme] = useState(0);
   const [collapse, setCollapse] = useState(true);
+  const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
+  const [orientation, setOrientation] = useState(0);
 
   const changeLightTheme = (theme) => {
     setLightTheme(theme);
@@ -23,8 +25,25 @@ function App() {
     setCollapse(!collapse);
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMapCenter([mapCenter[0] - 0.01, mapCenter[1] - 0.01])
+      setOrientation(orientation + 5)
+      console.log(mapCenter)
+    }, 1000);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  })
+
+  const changeCenter = () => {
+    setMapCenter([mapCenter[0] + 0.01, mapCenter[1] + 1])
+  }
+
   return (
-    <ArcGisMap/>
+    <div>
+      <ArcGisMap center={mapCenter} orientation={orientation} />
+      <button onClick={changeCenter}>Change center</button>
+    </div>
     // <Grid container style={{padding: '50px', height: "100vh", backgroundColor: "grey" }}>
     //   <Grid container>
     //     <Grid container style={{position: "relative", zIndex: '0' }}>
