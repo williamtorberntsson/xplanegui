@@ -2,14 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 
 const Map = ({ center, rotation, pointPlacement}) => {
-  const [zoom, setZoom] = useState(15);
+  const [zoom, setZoom] = useState(4);
   const [view, setView] = useState(null);
   const [point, setPoint] = useState(null);
   const [layer, setLayer] = useState(null);
   const mapEl = useRef();
 
   useEffect(() => {
-    loadModules(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer", "esri/geometry/Point"]).then(([Map, MapView, Graphic, GraphicsLayer, Point]) => {
+    loadModules(["esri/Map", 
+                "esri/views/MapView", 
+                "esri/Graphic", 
+                "esri/layers/GraphicsLayer", 
+                "esri/geometry/Point"]).then(([Map, MapView, Graphic, GraphicsLayer, Point]) => {
 
       const map = new Map({
         basemap: 'gray-vector'
@@ -34,7 +38,7 @@ const Map = ({ center, rotation, pointPlacement}) => {
         }
       };
 
-      const pointGraphic = new Graphic({
+      let pointGraphic = new Graphic({
         geometry: point,
         symbol: simpleMarkerSymbol
       });
@@ -51,7 +55,8 @@ const Map = ({ center, rotation, pointPlacement}) => {
 
       view.when(() => {
         setView(view);
-        setPoint(point);
+        setPoint(pointGraphic);
+        setLayer(graphicsLayer);
         // setLayer(graphicsLayer);
       });
     })
@@ -59,29 +64,39 @@ const Map = ({ center, rotation, pointPlacement}) => {
     return () => {
       setView(null);
       setPoint(null);
-      // setLayer(null)
+      setLayer(null)
     };
   }, []);
 
 
   useEffect(() => {
     if (view && center) {
-      // console.log(view.center)
+      // console.log(view)
       view.center = center;
       view.rotation = rotation;
+      // view.map.layers.items[0].graphics.items[0].geometry.latitude = pointPlacement[1];
     }
-  }, [center, view, rotation]);
 
-  useEffect(() => {
-  if (view && pointPlacement) {
-    console.log(point)
-      // view.geometry.longitude = pointPlacement[0];
-      // view.geometry.latitude = pointPlacement[1];
-      point.latitude = pointPlacement[0];
-      point.longitude = pointPlacement[1];
+    if (point && pointPlacement) {
+      // console.log(point)
+        point.geometry.latitude = pointPlacement[1];
+        point.geometry.longitude = pointPlacement[0];
+        // layer.geometry = point;
+        layer.add(point)
+        
+    }
+  }, [center, rotation, pointPlacement]);
+
+  // useEffect(() => {
+  // if (view && pointPlacement) {
+  //   // console.log(point)
+  //     // view.geometry.longitude = pointPlacement[0];
+  //     // view.geometry.latitude = pointPlacement[1];
+  //     point.latitude = pointPlacement[1];
+  //     point.longitude = pointPlacement[0];
       
-  }
-  }, [view, pointPlacement]);
+  // }
+  // }, [view, pointPlacement]);
 
   return (
     <div>

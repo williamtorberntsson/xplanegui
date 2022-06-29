@@ -24,22 +24,12 @@ function App() {
     setCollapse(!collapse);
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMapCenter([mapCenter[0] - 0.0001, mapCenter[1] - 0.0001])
-      setOrientation(orientation + 5)
-      console.log(mapCenter)
-    }, 1000);
-
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  })
-
   const changeCenter = () => {
     setMapCenter([mapCenter[0] + 0.001, mapCenter[1] + 0.001])
   }
 
   return (
-    <div>
+    <div style={{padding: '10px'}}>
       {/* <Grid container style={{ padding: '50px', height: "100vh" }}>
         <Grid container>
           <Grid container style={{ position: "relative", zIndex: '0' }}>
