@@ -1,22 +1,19 @@
 import React from "react";
-import { FiBox, FiCircle, HeadingYaw, HeadingMechanics } from "../images";
+import { Compass } from "../images";
+import "./Heading.css"
 
-const Heading = (props) => {
-  let heading = props.heading;
+const NewHeading = (props) => {
+  const heading = props.heading;
+
+  const calc_heading = heading / 360 * 83.1 + 8.5; // calculate corresponding translation from heading
 
   return (
-    <span id="heading">
-      <div className="instrument heading" style={{ height: "200px", width: "200px" }}>
-        <img src={FiBox} className="background box" style={{ display: props.showBox ? "" : "none" }}/>
-        <div className="heading box" style={{ transform: `rotate(-${heading}deg)` }}>
-          <img src={HeadingYaw} className="box" />
-        </div>
-        <div className="mechanics box">
-          <img src={HeadingMechanics} className="box" />
-          <img src={FiCircle} className="box" />
-        </div>
+    <div className="compass_mask">
+      <div className="compass_value_border">
+        <p className="compass_value">{heading.toFixed(0)}</p>
       </div>
-    </span>
+      <img className="compass" style={{ objectPosition: `${calc_heading}% 0` }} src={Compass} />
+    </div>
   );
 };
-export default Heading;
+export default NewHeading;
