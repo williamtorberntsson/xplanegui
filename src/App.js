@@ -30,19 +30,19 @@ function App() {
 
   return (
     <div style={{padding: '10px'}}>
-      {/* <Grid container style={{ padding: '50px', height: "100vh" }}>
+      <Grid container style={{ padding: '50px', height: "100vh" }}>
         <Grid container>
           <Grid container style={{ position: "relative", zIndex: '0' }}>
-            <Grid item xs={12}> */}
+            <Grid item xs={12}>
               <Nav_map />
-            {/* </Grid>
+            </Grid>
           </Grid>
           <Grid container style={{ padding: '15px', height: "100%", position: "absolute", zIndex: '1' }}>
             <Grid item xs={3}>
               <Grid container direction="column" justifyContent="space-between" style={{ height: "100%" }}>
                 <Grid item xs={3} style={{ height: "30%" }}>
                   <Collapse in={collapse}>
-                    <PFD lightTheme={lightTheme} />
+                    <PFD lightTheme={lightTheme}/>
                   </Collapse>
                 </Grid>
                 <Grid item xs={3} style={{ height: "30%", textAlign: "center" }}>
@@ -68,7 +68,7 @@ function App() {
             <LayoutButtons lightTheme={changeLightTheme} viewMode={changeViewMode} />
           </Grid>
         </Grid>
-      </Grid> */}
+      </Grid>
     </div>
   );
 }

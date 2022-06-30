@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
+import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 
-const Map = ({ center, rotation, pointPlacement }) => {
-  const [zoom, setZoom] = useState(15);
+// Creates a map and adds points at {pointCoordinates} locations
+const Map = ({ center ,rotation, zoom, pointCoordinates }) => {
+  const [zoomvalue, setZoomvalue] = useState(zoom);
   const [view, setView] = useState(null);
-  const [point, setPoint] = useState(null);
-  const [point2, setPoint2] = useState(null);
+  const [points, setPoints] = useState(null);
   const [layer, setLayer] = useState(null);
   const mapEl = useRef();
 
@@ -14,7 +15,8 @@ const Map = ({ center, rotation, pointPlacement }) => {
       "esri/views/MapView",
       "esri/Graphic",
       "esri/layers/GraphicsLayer",
-      "esri/geometry/Point"]).then(([Map, MapView, Graphic, GraphicsLayer, Point]) => {
+      "esri/geometry/Point",
+      "esri/symbols/PictureMarkerSymbol"]).then(([Map, MapView, Graphic, GraphicsLayer, Point, PictureMarkerSymbol]) => {
 
         const map = new Map({
           basemap: 'gray-vector'
@@ -24,84 +26,121 @@ const Map = ({ center, rotation, pointPlacement }) => {
 
         map.add(graphicsLayer);
 
-        let aPoint = new Point({
-          type: "point",
-          longitude: pointPlacement[0],
-          latitude: pointPlacement[1],
-        });
 
-        let bPoint = new Point({
-          type: "point",
-          longitude: pointPlacement[0] + 0.1,
-          latitude: pointPlacement[1] + 0.1,
-        })
-
-        const simpleMarkerSymbol = {
-          type: "simple-marker",
-          color: [226, 119, 40],  // Orange
-          outline: {
-            color: [255, 255, 255], // White
-            width: 1
-          }
+        // Creating markers for different airplanes
+        const myAirPlaneMarker = {
+          type: "picture-marker",
+          url: myAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
         };
 
-        let pointGraphicA = new Graphic({
-          geometry: aPoint,
-          symbol: simpleMarkerSymbol
+        const enemyAirPlaneMarker = {
+          type: "picture-marker",
+          url: enemyAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
+        };
+
+        const friendlyAirPlaneMarker = {
+          type: "picture-marker",
+          url: friendlyAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
+        };
+
+
+        let pointsArray = [] // init array to add points (markings) to
+
+        // Add points for all pointCoordinates
+        pointCoordinates.forEach(function (coord, i) {
+          // Create a point
+          console.log(coord.long, coord.lat, coord.type)
+          let point = new Point({
+            type: "point",
+            longitude: coord.long,
+            latitude: coord.lat,
+          });
+
+          // Select symbol depending on type
+          let symboltype;
+          switch (coord.type) {
+            case "me":
+              symboltype = myAirPlaneMarker
+              break;
+            case "friendly":
+              symboltype = friendlyAirPlaneMarker
+              break;
+            case "enemy":
+              symboltype = enemyAirPlaneMarker
+              break;
+            default:
+              symboltype = enemyAirPlaneMarker
+          }
+          // create a graphic with the point
+          let pointGraphic = new Graphic({
+            geometry: point,
+            symbol: symboltype
+          });
+
+          pointsArray.push(pointGraphic) // add graphic to array
         });
 
-        let pointGraphicB = new Graphic({
-          geometry: bPoint,
-          symbol: simpleMarkerSymbol
-        });
-
-        graphicsLayer.addMany(pointGraphicA, pointGraphicB);
-
-        // point.latitude = 59.41157469382408;
-
+        // Create a view
         let view = new MapView({
           container: mapEl.current,
           map: map,
-          zoom: zoom,
+          zoom: zoomvalue,
+          ui: {
+            components: ["attribution"] // hides zoom buttons
+          }
         });
 
+        // Update states when ready
         view.when(() => {
           setView(view);
-          setPoint(pointGraphicA);
-          setPoint2(pointGraphicB);
+          setPoints(pointsArray)
           setLayer(graphicsLayer);
         });
       })
 
     return () => {
       setView(null);
-      setPoint(null);
-      setPoint2(null)
-      setLayer(null)
+      setPoints(null);
+      setLayer(null);
     };
   }, []);
 
+  // const distanceToCenter = 0.8
+  // const offset = [-1.6*distanceToCenter * Math.sin(mapRotation * Math.PI / 180), distanceToCenter * Math.cos(mapRotation * Math.PI / 180)];
+  // setMapCenter([pointCoords[0].long + offset[0], pointCoords[0].lat + offset[1]])
 
+  // updates the map and all points
   useEffect(() => {
     if (view && center) {
-      view.center = center;
       console.log(view.center)
-      // view.rotation = rotation;
+      view.center = center;
+      view.rotation = rotation;
     }
 
-    // if (point && pointPlacement) {
-    //   // console.log(point)
-    //   point.geometry.latitude = pointPlacement[1];
-    //   point.geometry.longitude = pointPlacement[0];
+    if (points && pointCoordinates) {
+      layer.removeAll(); // clear graphics
 
-    //   point2.geometry.latitude = pointPlacement[1] - 0.1;
-    //   point2.geometry.longitude = pointPlacement[0] - 0.1;
-    //   // layer.geometry = point;
-    //   layer.add(point)
-    //   layer.add(point2)
+      // clone and edit point for each coordinate
+      points.forEach(function (point, i) {
+        let tempPoint = point.clone();
+        tempPoint.geometry.longitude = pointCoordinates[i].long;  // update longitude
+        tempPoint.geometry.latitude = pointCoordinates[i].lat;    // update latitude
+        tempPoint.geometry.angle = pointCoordinates[i].angle;     // update angle
+        tempPoint.geometry.type = pointCoordinates[i].type;       // update type
+        layer.add(tempPoint) // add edited point to layer
+      })
+    }
 
-    // }
-  });
+  }, [center, rotation, pointCoordinates]);
 
   return (
     <div>
