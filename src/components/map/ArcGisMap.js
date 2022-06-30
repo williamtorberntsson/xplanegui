@@ -56,6 +56,9 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
           container: mapEl.current,
           map: map,
           zoom: zoomvalue,
+          ui: {
+            components: ["attribution"] // hides zoom buttons
+          }
         });
 
         view.when(() => {
