@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 
 const Map = ({ center, rotation, pointPlacement }) => {
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(15);
   const [view, setView] = useState(null);
   const [point, setPoint] = useState(null);
   const [point2, setPoint2] = useState(null);
@@ -85,22 +85,23 @@ const Map = ({ center, rotation, pointPlacement }) => {
   useEffect(() => {
     if (view && center) {
       view.center = center;
-      view.rotation = rotation;
+      console.log(view.center)
+      // view.rotation = rotation;
     }
 
-    if (point && pointPlacement) {
-      // console.log(point)
-      point.geometry.latitude = pointPlacement[1];
-      point.geometry.longitude = pointPlacement[0];
+    // if (point && pointPlacement) {
+    //   // console.log(point)
+    //   point.geometry.latitude = pointPlacement[1];
+    //   point.geometry.longitude = pointPlacement[0];
 
-      point2.geometry.latitude = pointPlacement[1] - 0.1;
-      point2.geometry.longitude = pointPlacement[0] - 0.1;
-      // layer.geometry = point;
-      layer.add(point)
-      layer.add(point2)
+    //   point2.geometry.latitude = pointPlacement[1] - 0.1;
+    //   point2.geometry.longitude = pointPlacement[0] - 0.1;
+    //   // layer.geometry = point;
+    //   layer.add(point)
+    //   layer.add(point2)
 
-    }
-  }, [center, rotation, pointPlacement]);
+    // }
+  });
 
   return (
     <div>

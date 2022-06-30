@@ -12,8 +12,19 @@ def plane():
         while True:
             posi = client.getPOSI();
 
+            groundspeed_dref = "sim/flightmodel/position/groundspeed"
+            indicated_airspeed_dref = "sim/flightmodel/position/indicated_airspeed"
+            heading_dref = "sim/flightmodel/position/true_psi"
+            groundspeed = client.getDREF(groundspeed_dref)
+            indicated_airspeed = client.getDREF(indicated_airspeed_dref)
+            heading = client.getDREF(heading_dref)
+            (groundspeed[0], indicated_airspeed[0], heading[0])
+
             return {
-                "positions": [posi[1], posi[0]]
+                "positions": [posi[1], posi[0]],
+                "groundspeed": groundspeed[0],
+                "indicated_airspeed": indicated_airspeed[0],
+                "heading": heading[0],
                 }
 
 @app.route("/env")

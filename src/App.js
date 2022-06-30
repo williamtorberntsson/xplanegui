@@ -14,18 +14,6 @@ function App() {
   const [collapse, setCollapse] = useState(true);
   const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
   const [orientation, setOrientation] = useState(0);
-  const [data, setData] = useState([{}])
-
-  useEffect(()=> {
-    fetch("/members").then(
-      res => res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    )
-  },[])
 
   const changeLightTheme = (theme) => {
     setLightTheme(theme);

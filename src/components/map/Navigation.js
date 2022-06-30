@@ -3,9 +3,22 @@ import { React, useState, useEffect } from 'react';
 import ArcGisMap from './ArcGisMap';
 
 function Nav_map() {
-    const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
+    const [mapCenter, setMapCenter] = useState([]);
     const [mapRotation, setMapRotation] = useState(0);
     const [pointCoords, setPointCoords] = useState([15.580926012604708, 58.41157469382408]);
+    const [data, setData] = useState([{}])
+
+
+    useEffect(()=> {
+        fetch("/plane").then(
+          res => res.json()
+        ).then(
+          data => {
+            setData(data)
+            console.log(data.positions)
+          }
+        )
+      })
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -19,7 +32,7 @@ function Nav_map() {
   })
 
     return (
-        <ArcGisMap center={mapCenter} rotation={mapRotation} pointPlacement={pointCoords} />
+        <ArcGisMap center={data.positions} pointPlacement={pointCoords} />
     )
 }
 

@@ -1,11 +1,12 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function(app) {
-  app.use(
-    '/members',
-    createProxyMiddleware({
+module.exports = (app) => {
+    app.use(createProxyMiddleware('/plane', {
       target: 'http://localhost:5050',
-      changeOrigin: true,
-    })
-  );
-};
+      })
+    );
+    
+    app.use(createProxyMiddleware('/env', {
+    target: 'http://localhost:5050',
+    }));
+  };
