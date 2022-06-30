@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { colors } from '@mui/material';
 
+// Creates a map and adds points at {pointCoordinates} locations
 const Map = ({ center, rotation, zoom, pointCoordinates }) => {
   const [zoomvalue, setZoomvalue] = useState(zoom);
   const [view, setView] = useState(null);
@@ -71,7 +72,7 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
     };
   }, []);
 
-
+  // updates the map and all points
   useEffect(() => {
     if (view && center) {
       view.center = center;
