@@ -9,8 +9,8 @@ function Nav_map() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setMapCenter([mapCenter[0] - 0.001, mapCenter[1] - 0.001])
-            setMapRotation(mapRotation + 0.001)
+            setMapCenter([mapCenter[0] - 0, mapCenter[1] - 0])
+            setMapRotation(mapRotation + 0.0)
             setPointCoords([pointCoords[0] + 0.001, pointCoords[1] - 0.001])
             // console.log(mapCenter)
         }, 100);
