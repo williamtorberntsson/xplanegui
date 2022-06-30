@@ -25,9 +25,27 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
 
         map.add(graphicsLayer);
 
-        const simpleMarkerSymbol = {
+        const myAirPlane = {
           type: "simple-marker",
-          color: [226, 119, 40],  // Orange
+          color: [255, 127, 0],  // Orange
+          outline: {
+            color: [255, 255, 255], // White
+            width: 1
+          }
+        };
+
+        const enemyAirPlane = {
+          type: "simple-marker",
+          color: [255, 0, 0],  // Orange
+          outline: {
+            color: [255, 255, 255], // White
+            width: 1
+          }
+        };
+
+        const friendlyAirPlane = {
+          type: "simple-marker",
+          color: [0, 255, 0],  // Orange
           outline: {
             color: [255, 255, 255], // White
             width: 1
@@ -43,10 +61,24 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
             longitude: coord[0],
             latitude: coord[1],
           });
+          let symboltype;
+          switch(coord[2]) {
+            case "me":
+              symboltype = myAirPlane
+              break;
+            case "friend":
+              symboltype = friendlyAirPlane
+              break;
+            case "enemy":
+              symboltype = enemyAirPlane
+              break;
+            default:
+              symboltype = enemyAirPlane
+          }
           // create a graphic with the point
           let pointGraphic = new Graphic({
             geometry: point,
-            symbol: simpleMarkerSymbol
+            symbol: symboltype
           });
 
           pointsArray.push(pointGraphic) // add graphic to array
