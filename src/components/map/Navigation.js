@@ -6,22 +6,53 @@ function Nav_map() {
   const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
   const [mapRotation, setMapRotation] = useState(0);
   const [pointCoords, setPointCoords] = useState([
-    [15.580926012604708, 58.41157469382408, "me"],
-    [15.680926012604708, 58.51157469382408, "friend"],
-    [15.780926012604708, 58.61157469382408, "enemy"],
-    [15.880926012604708, 58.31157469382408, "enemy"],
+    {
+      long: 15.680926012604708,
+      lat: 58.41157469382408,
+      type: "me",
+      angle: 0
+    },
+    {
+      long: 15.780926012604708,
+      lat: 58.41157469382408,
+      type: "friendly",
+      angle: 0
+    },
+    {
+      long: 15.480926012604708,
+      lat: 58.41157469382408,
+      type: "enemy",
+      angle: 0
+    },
+    {
+      long: 15.480926012604708,
+      lat: 58.51157469382408,
+      type: "enemy",
+      angle: 0
+    },
   ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMapCenter([pointCoords[0][0], pointCoords[0][1]])
-      setMapRotation(mapRotation + 0.0)
-      setPointCoords([
-        [pointCoords[0][0] + 0.001, pointCoords[0][1] - 0.002],
-        [pointCoords[1][0] + 0.001, pointCoords[1][1] + 0.001],
-        [pointCoords[2][0] - 0.001, pointCoords[2][1] + 0.001],
-        [pointCoords[3][0] + 0.003, pointCoords[3][1] - 0.001]
-      ])
+
+      // Make sure plane is center when rotating map
+
+      const distanceToCenter = 0.8
+      const offset = [-1.6*distanceToCenter * Math.sin(mapRotation * Math.PI / 180), distanceToCenter * Math.cos(mapRotation * Math.PI / 180)];
+      setMapCenter([pointCoords[0].long + offset[0], pointCoords[0].lat + offset[1]])
+      
+      let tempcoords = pointCoords;
+
+      tempcoords[0].long += 0.0000;
+      tempcoords[0].lat -= 0.0000;
+      tempcoords[1].long += 0.0001;
+      tempcoords[1].lat += 0.0001;
+      tempcoords[2].long -= 0.0001;
+      tempcoords[2].lat += 0.0001;
+      tempcoords[3].long += 0.0003;
+      tempcoords[3].lat -= 0.0001;
+
+      setPointCoords(tempcoords)
     }, 20);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.

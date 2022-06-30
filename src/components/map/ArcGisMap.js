@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
-import { colors } from '@mui/material';
+import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 
 // Creates a map and adds points at {pointCoordinates} locations
 const Map = ({ center, rotation, zoom, pointCoordinates }) => {
@@ -15,7 +15,8 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
       "esri/views/MapView",
       "esri/Graphic",
       "esri/layers/GraphicsLayer",
-      "esri/geometry/Point"]).then(([Map, MapView, Graphic, GraphicsLayer, Point]) => {
+      "esri/geometry/Point",
+      "esri/symbols/PictureMarkerSymbol"]).then(([Map, MapView, Graphic, GraphicsLayer, Point, PictureMarkerSymbol]) => {
 
         const map = new Map({
           basemap: 'gray-vector'
@@ -25,55 +26,59 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
 
         map.add(graphicsLayer);
 
-        const myAirPlane = {
-          type: "simple-marker",
-          color: [255, 127, 0],  // Orange
-          outline: {
-            color: [255, 255, 255], // White
-            width: 1
-          }
+
+        // Creating markers for different airplanes
+        const myAirPlaneMarker = {
+          type: "picture-marker",
+          url: myAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
         };
 
-        const enemyAirPlane = {
-          type: "simple-marker",
-          color: [255, 0, 0],  // Orange
-          outline: {
-            color: [255, 255, 255], // White
-            width: 1
-          }
+        const enemyAirPlaneMarker = {
+          type: "picture-marker",
+          url: enemyAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
         };
 
-        const friendlyAirPlane = {
-          type: "simple-marker",
-          color: [0, 255, 0],  // Orange
-          outline: {
-            color: [255, 255, 255], // White
-            width: 1
-          }
+        const friendlyAirPlaneMarker = {
+          type: "picture-marker",
+          url: friendlyAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
         };
 
-        let pointsArray = [] // init array to add points to
 
+        let pointsArray = [] // init array to add points (markings) to
+
+        // Add points for all pointCoordinates
         pointCoordinates.forEach(function (coord, i) {
-          // create a point
+          // Create a point
+          console.log(coord.long, coord.lat, coord.type)
           let point = new Point({
             type: "point",
-            longitude: coord[0],
-            latitude: coord[1],
+            longitude: coord.long,
+            latitude: coord.lat,
           });
+
+          // Select symbol depending on type
           let symboltype;
-          switch(coord[2]) {
+          switch (coord.type) {
             case "me":
-              symboltype = myAirPlane
+              symboltype = myAirPlaneMarker
               break;
-            case "friend":
-              symboltype = friendlyAirPlane
+            case "friendly":
+              symboltype = friendlyAirPlaneMarker
               break;
             case "enemy":
-              symboltype = enemyAirPlane
+              symboltype = enemyAirPlaneMarker
               break;
             default:
-              symboltype = enemyAirPlane
+              symboltype = enemyAirPlaneMarker
           }
           // create a graphic with the point
           let pointGraphic = new Graphic({
@@ -84,6 +89,7 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
           pointsArray.push(pointGraphic) // add graphic to array
         });
 
+        // Create a view
         let view = new MapView({
           container: mapEl.current,
           map: map,
@@ -93,6 +99,7 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
           }
         });
 
+        // Update states when ready
         view.when(() => {
           setView(view);
           setPoints(pointsArray)
@@ -120,8 +127,10 @@ const Map = ({ center, rotation, zoom, pointCoordinates }) => {
       // clone and edit point for each coordinate
       points.forEach(function (point, i) {
         let tempPoint = point.clone();
-        tempPoint.geometry.longitude = pointCoordinates[i][0];
-        tempPoint.geometry.latitude = pointCoordinates[i][1];
+        tempPoint.geometry.longitude = pointCoordinates[i].long;  // update longitude
+        tempPoint.geometry.latitude = pointCoordinates[i].lat;    // update latitude
+        tempPoint.geometry.angle = pointCoordinates[i].angle;     // update angle
+        tempPoint.geometry.type = pointCoordinates[i].type;       // update type
         layer.add(tempPoint) // add edited point to layer
       })
     }
