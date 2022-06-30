@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
+import { colors } from '@mui/material';
 
-const Map = ({ center, rotation, pointPlacement }) => {
-  const [zoom, setZoom] = useState(4);
+const Map = ({ center, rotation, zoom, pointCoordinates }) => {
+  const [zoomvalue, setZoomvalue] = useState(zoom);
   const [view, setView] = useState(null);
-  const [point, setPoint] = useState(null);
-  const [point2, setPoint2] = useState(null);
+  const [points, setPoints] = useState(null);
   const [layer, setLayer] = useState(null);
   const mapEl = useRef();
 
@@ -24,18 +24,6 @@ const Map = ({ center, rotation, pointPlacement }) => {
 
         map.add(graphicsLayer);
 
-        let aPoint = new Point({
-          type: "point",
-          longitude: pointPlacement[0],
-          latitude: pointPlacement[1],
-        });
-
-        let bPoint = new Point({
-          type: "point",
-          longitude: pointPlacement[0] + 0.1,
-          latitude: pointPlacement[1] + 0.1,
-        })
-
         const simpleMarkerSymbol = {
           type: "simple-marker",
           color: [226, 119, 40],  // Orange
@@ -45,39 +33,41 @@ const Map = ({ center, rotation, pointPlacement }) => {
           }
         };
 
-        let pointGraphicA = new Graphic({
-          geometry: aPoint,
-          symbol: simpleMarkerSymbol
+        let pointsArray = [] // init array to add points to
+
+        pointCoordinates.forEach(function (coord, i) {
+          // create a point
+          let point = new Point({
+            type: "point",
+            longitude: coord[0],
+            latitude: coord[1],
+          });
+          // create a graphic with the point
+          let pointGraphic = new Graphic({
+            geometry: point,
+            symbol: simpleMarkerSymbol
+          });
+
+          pointsArray.push(pointGraphic) // add graphic to array
         });
-
-        let pointGraphicB = new Graphic({
-          geometry: bPoint,
-          symbol: simpleMarkerSymbol
-        });
-
-        graphicsLayer.addMany(pointGraphicA, pointGraphicB);
-
-        // point.latitude = 59.41157469382408;
 
         let view = new MapView({
           container: mapEl.current,
           map: map,
-          zoom: zoom,
+          zoom: zoomvalue,
         });
 
         view.when(() => {
           setView(view);
-          setPoint(pointGraphicA);
-          setPoint2(pointGraphicB);
+          setPoints(pointsArray)
           setLayer(graphicsLayer);
         });
       })
 
     return () => {
       setView(null);
-      setPoint(null);
-      setPoint2(null)
-      setLayer(null)
+      setPoints(null);
+      setLayer(null);
     };
   }, []);
 
@@ -88,19 +78,19 @@ const Map = ({ center, rotation, pointPlacement }) => {
       view.rotation = rotation;
     }
 
-    if (point && pointPlacement) {
-      // console.log(point)
-      point.geometry.latitude = pointPlacement[1];
-      point.geometry.longitude = pointPlacement[0];
+    if (points && pointCoordinates) {
+      layer.removeAll(); // clear graphics
 
-      point2.geometry.latitude = pointPlacement[1] - 0.1;
-      point2.geometry.longitude = pointPlacement[0] - 0.1;
-      // layer.geometry = point;
-      layer.add(point)
-      layer.add(point2)
-
+      // clone and edit point for each coordinate
+      points.forEach(function (point, i) {
+        let tempPoint = point.clone();
+        tempPoint.geometry.longitude = pointCoordinates[i][0];
+        tempPoint.geometry.latitude = pointCoordinates[i][1];
+        layer.add(tempPoint) // add edited point to layer
+      })
     }
-  }, [center, rotation, pointPlacement]);
+
+  }, [center, rotation, pointCoordinates]);
 
   return (
     <div>
