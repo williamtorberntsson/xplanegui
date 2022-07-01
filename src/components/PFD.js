@@ -22,7 +22,7 @@ const PFD = ({lightTheme, useXplaneData, data}) => {
       setRoll(roll + 1);
       setPitch(pitch + 1);
       setAltitude((altitude + 1));
-      setSpeed((altitude + 0.1) % 900);
+      setSpeed((altitude + 0.1) % 463);
       setHeading((heading + 0.1) % 360)
     }, 20);
 
@@ -38,7 +38,7 @@ const PFD = ({lightTheme, useXplaneData, data}) => {
         PFD
       </div>
       <div className="mouseears">
-        <AirSpeed speed={data ? data.indicated_airspeed : speed} lightTheme={lightTheme} />
+        <AirSpeed speed={data ? data.true_airspeed : speed} lightTheme={lightTheme} />
         <Altimeter altitude={data ? data.altitude : altitude} pressure={5} lightTheme={lightTheme} />
       </div>
       <div className="mousehead">
