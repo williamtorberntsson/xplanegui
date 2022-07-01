@@ -6,11 +6,12 @@ app = Flask(__name__)
 
 # Members API Route
 
+
 @app.route("/plane")
 def plane():
     with xpc.XPlaneConnect() as client:
         while True:
-            posi = client.getPOSI();
+            posi = client.getPOSI()
 
             groundspeed_dref = "sim/flightmodel/position/groundspeed"
             indicated_airspeed_dref = "sim/flightmodel/position/indicated_airspeed"
@@ -21,22 +22,24 @@ def plane():
             (groundspeed[0], indicated_airspeed[0], heading[0])
 
             return {
-                "positions": [posi[1], posi[0]],
+                "longitude": posi[0],
+                "latitude": posi[1],
                 "groundspeed": groundspeed[0],
                 "indicated_airspeed": indicated_airspeed[0],
                 "heading": heading[0],
-                }
+            }
+
 
 @app.route("/env")
 def env():
     with xpc.XPlaneConnect() as client:
         while True:
-            ctrl = client.getCTRL();
+            ctrl = client.getCTRL()
 
             return {
                 "cltr": [ctrl[1], ctrl[0], ctrl[2]]
-                }
-    
-    
+            }
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5050', debug=True)

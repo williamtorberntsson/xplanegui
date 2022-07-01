@@ -3,9 +3,10 @@ import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 
 // Creates a map and adds points at {pointCoordinates} locations
-const Map = ({ center ,rotation, zoom, pointCoordinates }) => {
+const Map = ({ zoom, useXplaneData, myAirPlaneData, offlineData }) => {
   const [zoomvalue, setZoomvalue] = useState(zoom);
   const [view, setView] = useState(null);
+  const [myPoint, setMyPoint] = useState(null);
   const [points, setPoints] = useState(null);
   const [layer, setLayer] = useState(null);
   const mapEl = useRef();
@@ -23,9 +24,7 @@ const Map = ({ center ,rotation, zoom, pointCoordinates }) => {
         });
 
         const graphicsLayer = new GraphicsLayer();
-
         map.add(graphicsLayer);
-
 
         // Creating markers for different airplanes
         const myAirPlaneMarker = {
@@ -52,13 +51,24 @@ const Map = ({ center ,rotation, zoom, pointCoordinates }) => {
           height: "20px"
         };
 
+        // Add point for own airplane
+        let mypoint = new Point({
+          type: "point",
+          //longitude: coord.long,
+          //latitude: coord.lat,
+        });
+        let mypointGraphic = new Graphic({
+          geometry: mypoint,
+          symbol: myAirPlaneMarker
+        });
 
+
+        /*
         let pointsArray = [] // init array to add points (markings) to
 
         // Add points for all pointCoordinates
         pointCoordinates.forEach(function (coord, i) {
           // Create a point
-          console.log(coord.long, coord.lat, coord.type)
           let point = new Point({
             type: "point",
             longitude: coord.long,
@@ -88,48 +98,51 @@ const Map = ({ center ,rotation, zoom, pointCoordinates }) => {
 
           pointsArray.push(pointGraphic) // add graphic to array
         });
+        */
 
         // Create a view
         let view = new MapView({
           container: mapEl.current,
           map: map,
           zoom: zoomvalue,
-          ui: {
-            components: ["attribution"] // hides zoom buttons
-          }
+          ui: { components: ["attribution"] } // hides zoom buttons
         });
 
         // Update states when ready
         view.when(() => {
           setView(view);
-          setPoints(pointsArray)
+          setMyPoint(mypointGraphic)
+          //setPoints(pointsArray)
           setLayer(graphicsLayer);
         });
       })
 
     return () => {
       setView(null);
+      setMyPoint(null);
       setPoints(null);
       setLayer(null);
     };
   }, []);
 
-  // const distanceToCenter = 0.8
-  // const offset = [-1.6*distanceToCenter * Math.sin(mapRotation * Math.PI / 180), distanceToCenter * Math.cos(mapRotation * Math.PI / 180)];
-  // setMapCenter([pointCoords[0].long + offset[0], pointCoords[0].lat + offset[1]])
-
-  // updates the map and all points
+  // With xplane data: Updates the map and airplane positions 
   useEffect(() => {
-    if (view && center) {
-      console.log(view.center)
-      view.center = center;
-      view.rotation = rotation;
-    }
 
-    if (points && pointCoordinates) {
-      layer.removeAll(); // clear graphics
+    if (myAirPlaneData && useXplaneData) {
+      // Set rotation and position for camera
+      view.center = [myAirPlaneData.longitude, myAirPlaneData.latitude];
+      view.rotation = myAirPlaneData.heading;
 
-      // clone and edit point for each coordinate
+      layer.removeAll() // clear layer with markers
+
+      // Update own airplane position
+      let tempPoint = myPoint.clone();
+      tempPoint.geometry.longitude = myAirPlaneData.longitude;  // update longitude
+      tempPoint.geometry.latitude = myAirPlaneData.latitude;    // update latitude
+      tempPoint.geometry.angle = myAirPlaneData.heading;        // update angle
+      layer.add(tempPoint) // add updated point to layer
+
+      /* // Update other positions
       points.forEach(function (point, i) {
         let tempPoint = point.clone();
         tempPoint.geometry.longitude = pointCoordinates[i].long;  // update longitude
@@ -137,16 +150,35 @@ const Map = ({ center ,rotation, zoom, pointCoordinates }) => {
         tempPoint.geometry.angle = pointCoordinates[i].angle;     // update angle
         tempPoint.geometry.type = pointCoordinates[i].type;       // update type
         layer.add(tempPoint) // add edited point to layer
-      })
+      }) */
     }
+  }, [myAirPlaneData]);
 
-  }, [center, rotation, pointCoordinates]);
+
+  // With offline data: Updates the map and airplane positions 
+  useEffect(() => {
+    console.log("hej")
+    if (!useXplaneData && offlineData && view) {
+      console.log(offlineData.longitude)
+      // Set rotation and position for camera
+      view.center = [offlineData.longitude, offlineData.latitude];
+      view.rotation = offlineData.heading;
+
+      layer.removeAll() // clear layer with markers
+
+      // Update own airplane position
+      let tempPoint = myPoint.clone();
+      tempPoint.geometry.longitude = offlineData.longitude;  // update longitude
+      tempPoint.geometry.latitude = offlineData.latitude;    // update latitude
+      tempPoint.geometry.angle = offlineData.heading;        // update angle
+      layer.add(tempPoint) // add updated point to layer
+    }
+  }, [offlineData])
 
   return (
     <div>
       <div style={{ height: 900 }} ref={mapEl} />
     </div>
-
   );
 }
 
