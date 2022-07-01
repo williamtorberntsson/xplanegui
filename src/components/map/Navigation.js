@@ -2,8 +2,8 @@ import { React, useState, useEffect } from 'react';
 import ArcGisMap from './ArcGisMap';
 import UpdateOfflineData from './UpdateOfflineData';
 
-function Nav_map({ useXplaneData }) {
-  const [myAirPlaneData, setMyAirPlaneData] = useState([{}]);
+function Nav_map({ useXplaneData, parentCallback }) {
+  const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [offlineData, setOfflineData] = useState(null);
 
   // Use myAirPlaneData from xplane
@@ -14,6 +14,7 @@ function Nav_map({ useXplaneData }) {
       ).then(
         myAirPlaneData => {
           setMyAirPlaneData(myAirPlaneData)
+          parentCallback(myAirPlaneData)
         }
       )
     }

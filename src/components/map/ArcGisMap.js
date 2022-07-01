@@ -128,31 +128,34 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, offlineData }) => {
   // With xplane data: Updates the map and airplane positions 
   useEffect(() => {
 
-    if (myAirPlaneData && useXplaneData) {
+    if (useXplaneData && myAirPlaneData) {
       // Set rotation and position for camera
-      view.center = [myAirPlaneData.longitude, myAirPlaneData.latitude];
-      view.rotation = myAirPlaneData.heading;
+      try {
+        view.center = [myAirPlaneData.longitude, myAirPlaneData.latitude];
+        view.rotation = - myAirPlaneData.heading;
 
-      layer.removeAll() // clear layer with markers
+        layer.removeAll() // clear layer with markers
 
-      // Update own airplane position
-      let tempPoint = myPoint.clone();
-      tempPoint.geometry.longitude = myAirPlaneData.longitude;  // update longitude
-      tempPoint.geometry.latitude = myAirPlaneData.latitude;    // update latitude
-      tempPoint.geometry.angle = myAirPlaneData.heading;        // update angle
-      layer.add(tempPoint) // add updated point to layer
+        // Update own airplane position
+        let tempPoint = myPoint.clone();
+        tempPoint.geometry.longitude = myAirPlaneData.longitude;  // update longitude
+        tempPoint.geometry.latitude = myAirPlaneData.latitude;    // update latitude
+        layer.add(tempPoint) // add updated point to layer
 
-      /* // Update other positions
-      points.forEach(function (point, i) {
-        let tempPoint = point.clone();
-        tempPoint.geometry.longitude = pointCoordinates[i].long;  // update longitude
-        tempPoint.geometry.latitude = pointCoordinates[i].lat;    // update latitude
-        tempPoint.geometry.angle = pointCoordinates[i].angle;     // update angle
-        tempPoint.geometry.type = pointCoordinates[i].type;       // update type
-        layer.add(tempPoint) // add edited point to layer
-      }) */
+        /* // Update other positions
+        points.forEach(function (point, i) {
+          let tempPoint = point.clone();
+          tempPoint.geometry.longitude = pointCoordinates[i].long;  // update longitude
+          tempPoint.geometry.latitude = pointCoordinates[i].lat;    // update latitude
+          tempPoint.geometry.angle = pointCoordinates[i].angle;     // update angle
+          tempPoint.geometry.type = pointCoordinates[i].type;       // update type
+          layer.add(tempPoint) // add edited point to layer
+        }) */
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }, [myAirPlaneData]);
+  }, [myAirPlaneData, useXplaneData]);
 
 
   // With offline data: Updates the map and airplane positions 
