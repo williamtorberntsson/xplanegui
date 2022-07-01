@@ -20,6 +20,7 @@ def plane():
             # Own airplane airplane values
             groundspeed_dref = "sim/flightmodel/position/groundspeed"
             indicated_airspeed_dref = "sim/flightmodel/position/indicated_airspeed"
+            true_airspeed_dref = "sim/flightmodel/position/true_airspeed"
             heading_dref = "sim/flightmodel/position/true_psi"
             elevation_dref = "sim/flightmodel/position/elevation"
             thete_dref =  "sim/flightmodel/position/theta"
@@ -27,6 +28,7 @@ def plane():
 
             groundspeed = client.getDREF(groundspeed_dref)
             indicated_airspeed = client.getDREF(indicated_airspeed_dref)
+            true_airspeed = client.getDREF(true_airspeed_dref)
             heading = client.getDREF(heading_dref)
             elevation = client.getDREF(elevation_dref)
             theta = client.getDREF(thete_dref)
@@ -37,6 +39,7 @@ def plane():
                 "latitude": posi[0],
                 "groundspeed": groundspeed[0],
                 "indicated_airspeed": indicated_airspeed[0],
+                "true_airspeed": true_airspeed[0],
                 "heading": heading[0],
                 "altitude": elevation[0],
                 "pitch": theta[0],
