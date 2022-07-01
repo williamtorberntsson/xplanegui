@@ -160,7 +160,6 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, offlineData }) => {
 
   // With offline data: Updates the map and airplane positions 
   useEffect(() => {
-    console.log("hej")
     if (!useXplaneData && offlineData && view) {
       console.log(offlineData.longitude)
       // Set rotation and position for camera
