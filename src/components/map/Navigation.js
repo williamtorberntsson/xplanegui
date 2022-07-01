@@ -72,7 +72,7 @@ function Nav_map() {
   // })
 
   return (
-    <ArcGisMap center={data.positions} zoom={10} rotation={data.heading} pointCoordinates={pointCoords} />
+    <ArcGisMap center={data.positions} zoom={3} rotation={data.heading} pointCoordinates={pointCoords} />
   )
 }
 
