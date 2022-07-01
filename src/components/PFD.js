@@ -5,9 +5,8 @@ import AirSpeed from "./AirSpeed";
 import Altimeter from "./Altimeter";
 import Attitude from "./Attitude";
 import Heading from "./Heading";
-import NewHeading from "./Heading";
 
-const PFD = (props) => {
+const PFD = ({lightTheme, useXplaneData, data}) => {
 
   const [altitude, setAltitude] = useState(0)
   const [roll, setRoll] = useState(0);
@@ -16,7 +15,9 @@ const PFD = (props) => {
   const [heading, setHeading] = useState(0);
 
 
+  // Offline data: change values
   useEffect(() => {
+    if(!useXplaneData) {
     const interval = setInterval(() => {
       setRoll(roll + 1);
       setPitch(pitch + 1);
@@ -28,13 +29,8 @@ const PFD = (props) => {
     return () => {
       clearInterval(interval);
     };
+  }
   });
-
-
-  const data = { text: "Velocity", value: 100 };
-
-
-
 
   return (
     <div className="pfd">
@@ -42,13 +38,12 @@ const PFD = (props) => {
         PFD
       </div>
       <div className="mouseears">
-        <AirSpeed speed={speed} lightTheme={props.lightTheme} />
-        <Altimeter altitude={altitude} pressure={5} lightTheme={props.lightTheme} />
+        <AirSpeed speed={data ? data.indicated_airspeed : speed} lightTheme={lightTheme} />
+        <Altimeter altitude={data ? data.altitude : altitude} pressure={5} lightTheme={lightTheme} />
       </div>
       <div className="mousehead">
-        <Attitude roll={0} pitch={0} />
-        {/* <Heading heading={45} /> */}
-        <NewHeading heading={heading}/>
+        <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
+        <Heading heading={data ? data.heading : heading}/>
       </div>
 
       {/*<Variometer verticalSpeed={5} />*/}
