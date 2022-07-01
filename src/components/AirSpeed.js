@@ -13,8 +13,10 @@ const AirSpeed = (props) => {
 
   // console.log("Airspeed mode: ", props.lightTheme)
 
-  let speed = props.speed; // m/s
+  let speed = props.speed * 1.94384; // m/s to knots
   let speedRad = 0;
+  const mach = props.speed / 340.29;
+  
 
   // Limit speed between 0 and 800
   if (speed > constants.airspeed_limit_h) speed = constants.airspeed_limit_h;
@@ -43,7 +45,8 @@ const AirSpeed = (props) => {
           <img src={props.lightTheme ? VelocityPointerRed : VelocityPointerGrey} className="box" />
         </div>
         <div className="value" style={{color: props.lightTheme ? "white" : "black"}}>
-          <p>{speed.toFixed(0)}</p>
+          <p>M</p>
+          <p>{mach.toFixed(2)}</p>
         </div>
       </div>
     </span>
