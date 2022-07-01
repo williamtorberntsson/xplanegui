@@ -11,8 +11,8 @@ function App() {
 
   const [lightTheme, setLightTheme] = useState(0);
   const [collapse, setCollapse] = useState(true);
-  const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
-  const [useXplaneData, setUseXplaneData] = useState(false);
+  const [useXplaneData, setUseXplaneData] = useState(true);
+  const [planeData, setPlaneData] = useState();
 
   const changeLightTheme = (theme) => {
     setLightTheme(theme);
@@ -23,17 +23,13 @@ function App() {
     setCollapse(!collapse);
   }
 
-  const changeCenter = () => {
-    setMapCenter([mapCenter[0] + 0.001, mapCenter[1] + 0.001])
-  }
-
   return (
     <div style={{ padding: '10px' }}>
       <Grid container style={{ padding: '50px', height: "100vh" }}>
         <Grid container>
           <Grid container style={{ position: "relative", zIndex: '0' }}>
             <Grid item xs={12}>
-              <Nav_map useXplaneData={useXplaneData} />
+              <Nav_map useXplaneData={useXplaneData} parentCallback={setPlaneData} />
             </Grid>
           </Grid>
           <Grid container style={{ padding: '15px', height: "100%", position: "absolute", zIndex: '1' }}>
@@ -41,7 +37,7 @@ function App() {
               <Grid container direction="column" justifyContent="space-between" style={{ height: "100%" }}>
                 <Grid item xs={3} style={{ height: "30%" }}>
                   <Collapse in={collapse}>
-                    <PFD lightTheme={lightTheme} useXplaneData={useXplaneData} />
+                    <PFD lightTheme={lightTheme} useXplaneData={useXplaneData} data={planeData} />
                   </Collapse>
                 </Grid>
                 <Grid item xs={3} style={{ height: "30%", textAlign: "center" }}>
