@@ -19,7 +19,8 @@
 }
 
 .compass {
-    width: 200px;
-    height: 80px;
+    width: 220px;
+    height: 50px;
     object-fit: cover;
+    margin-top: 10px;
 }

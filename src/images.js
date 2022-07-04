@@ -4,6 +4,7 @@ import HorizonBack from "./assets/img/horizon_back.svg";
 import HorizonBall from "./assets/img/horizon_ball.svg";
 import HorizonCircle from "./assets/img/horizon_circle.svg";
 import HorizonMechanics from "./assets/img/horizon_mechanics.svg";
+import HorizonPitch from "./assets/img/pitch.svg"
 
 // Altitude meter
 import AltitudeMeterBlack from "./assets/img/altitude_meter_black.svg";
@@ -30,6 +31,7 @@ export {
   HorizonBack,
   HorizonBall,
   HorizonCircle,
+  HorizonPitch,
   AltitudeMeterBlack,
   AltitudeMeterWhite,
   AltitudePointerGrey,

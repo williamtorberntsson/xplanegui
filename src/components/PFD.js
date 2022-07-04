@@ -19,11 +19,11 @@ const PFD = ({lightTheme, useXplaneData, data}) => {
   useEffect(() => {
     if(!useXplaneData) {
     const interval = setInterval(() => {
-      setRoll(roll + 1);
-      setPitch(pitch + 1);
+      setRoll(roll);
+      setPitch((pitch + 0.1) % 90);
       setAltitude((altitude + 1));
       setSpeed((altitude + 0.1) % 463);
-      setHeading((heading + 0.1) % 360)
+      setHeading((heading + 0.1) % 360);
     }, 20);
 
     return () => {

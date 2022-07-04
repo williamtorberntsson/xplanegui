@@ -5,7 +5,7 @@ import "./Heading.css"
 const NewHeading = (props) => {
   const heading = props.heading;
 
-  const calc_heading = heading / 360 * 83.1 + 8.5; // calculate corresponding translation from heading
+  const calc_heading = heading * 86.3 / 360 + 6.9; // fit heading to svg
 
   return (
     <div className="compass_mask">
