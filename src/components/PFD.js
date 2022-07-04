@@ -6,7 +6,7 @@ import Altimeter from "./Altimeter";
 import Attitude from "./Attitude";
 import Heading from "./Heading";
 
-const PFD = ({lightTheme, useXplaneData, data}) => {
+const PFD = ({ lightTheme, useXplaneData, data }) => {
 
   const [altitude, setAltitude] = useState(0)
   const [roll, setRoll] = useState(0);
@@ -17,24 +17,24 @@ const PFD = ({lightTheme, useXplaneData, data}) => {
 
   // Offline data: change values
   useEffect(() => {
-    if(!useXplaneData) {
-    const interval = setInterval(() => {
-      setRoll(roll);
-      setPitch((pitch + 0.1) % 90);
-      setAltitude((altitude + 1));
-      setSpeed((altitude + 0.1) % 463);
-      setHeading((heading + 0.1) % 360);
-    }, 20);
+    if (!useXplaneData) {
+      const interval = setInterval(() => {
+        setRoll(roll);
+        setPitch((pitch + 0.1) % 90);
+        setAltitude((altitude + 1));
+        setSpeed((altitude + 0.1) % 463);
+        setHeading((heading + 0.1) % 360);
+      }, 20);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }
+      return () => {
+        clearInterval(interval);
+      };
+    }
   });
 
   return (
     <div className="pfd">
-      <div style={{textAlign: "center"}}>
+      <div style={{ textAlign: "center" }}>
         PFD
       </div>
       <div className="mouseears">
@@ -42,10 +42,15 @@ const PFD = ({lightTheme, useXplaneData, data}) => {
         <Altimeter altitude={data ? data.altitude : altitude} pressure={5} lightTheme={lightTheme} />
       </div>
       <div className="mousehead">
-        <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
-        <Heading heading={data ? data.heading : heading}/>
+        <div className="alpha">
+          <p>&alpha;</p>
+          <p>{data ? data.alpha : 0}</p>
+        </div>
+        <div className="heading-attitude">
+          <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
+          <Heading heading={data ? data.heading : heading} />
+        </div>
       </div>
-
       {/*<Variometer verticalSpeed={5} />*/}
     </div>
   );
