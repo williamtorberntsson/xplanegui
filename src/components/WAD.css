@@ -1,0 +1,120 @@
+.wad_frame {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(69, 69, 69);
+    box-shadow: rgb(23, 23, 23) 0px 0px 20px 10px inset;
+}
+
+.wad_content {
+    margin-top: 5vh;
+    margin-bottom: 7vh;
+    margin-right: 3vw;
+    margin-left: 3vw;
+    
+}
+
+/* .map_item {
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    margin-right: 2vw;
+    margin-left: 2vw;
+} */
+
+/* .map_container {
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    background-color: rgb(255, 232, 174);
+} */
+
+.overlay_container {
+    /* padding: 15px; */
+    height: 88vh;
+    max-width: 94vw;
+    display: inline-block;
+    position: absolute;
+    /* background-color: red; */
+    /* z-index: 1; */
+}
+
+.left_container{
+    height: 100%;
+    /* width: 100%; */
+    /* background-color: pink; */
+    justify-content: space-between;
+}
+
+.right_container{
+    height: 100%;
+    /* width: 100%; */
+    /* background-color: green; */
+    justify-content: space-between;
+}
+
+.widgetbox {
+    height: 20%;
+}
+
+#wb_one {
+    background-color: rgb(156, 156, 156, 0.5);
+}
+
+#wb_two {
+    background-color: rgb(156, 156, 156, 0.5);
+}
+
+#wb_three {
+    background-color: rgb(156, 156, 156, 0.5);
+}
+
+#wb_four {
+    background-color: rgb(156, 156, 156, 0.5);
+}
+
+/* CSS */
+.button-30 {
+    align-items: center;
+    appearance: none;
+    background-color: #9b9b9b;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#7b7b7b 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #bbbbbb;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 25px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+  }
+  
+  .button-30:focus {
+    box-shadow: #8d8d8d 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
+  }
+  
+  .button-30:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
+    /* transform: translateY(-2px); */
+  }
+  
+  .button-30:active {
+    box-shadow: #656565 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+  

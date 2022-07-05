@@ -171,7 +171,7 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nr
 
   return (
     <div>
-      <div style={{ height: 900 }} ref={mapEl} />
+      <div style={{ height: '88vh', padding: '0px', margin: '0px' }} ref={mapEl} />
     </div>
   );
 }
