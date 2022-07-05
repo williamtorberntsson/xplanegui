@@ -136,19 +136,19 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nr
         layer.add(tempPoint) // add updated point to layer
 
         // Update AI airplane positions
-        console.log(points)
         points.forEach(function (point, i) {
           let tempPoint = point.clone();
           tempPoint.geometry.longitude = aiPlaneData.planes[i].longitude;  // update longitude
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
-          tempPoint.geometry.angle = aiPlaneData.planes[i].heading;     // update angle
+          tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
           layer.add(tempPoint) // add edited point to layer
+       //   console.log( tempPoint.symbol.angle)
         })
       } catch (error) {
         console.log(error)
       }
     }
-  }, [myAirPlaneData, useXplaneData]);
+  }, [myAirPlaneData, useXplaneData, aiPlaneData]);
 
 
   // With offline data: Updates the map and airplane positions 

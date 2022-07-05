@@ -10,6 +10,9 @@ import Nav_map from './map/Navigation';
 
 function WAD() {
 
+    const [useXplaneData, setUseXplaneData] = useState(true);
+    const [planeData, setPlaneData] = useState();
+
     // const [lightTheme, setLightTheme] = useState(0);
     const [activeBox, setActiveBox] = useState(0);
     const [activeWidget, setActiveWidget] = useState("");
@@ -20,8 +23,7 @@ function WAD() {
     const [collapse, setCollapse] = useState(true);
     const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
     const [orientation, setOrientation] = useState(0);
-    const [useXplaneData, setUseXplaneData] = useState(false);
-    const [planeData, setPlaneData] = useState();
+    
 
     // const changeLightTheme = (theme) => {
     //     setLightTheme(theme);

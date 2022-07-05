@@ -17,6 +17,7 @@ const PFD = ({ lightTheme, useXplaneData, data }) => {
 
   // Offline data: change values
   useEffect(() => {
+    if(data) console.log(data)
     if (!useXplaneData) {
       const interval = setInterval(() => {
         setRoll(roll);
@@ -44,11 +45,11 @@ const PFD = ({ lightTheme, useXplaneData, data }) => {
       <div className="mousehead">
         <div className="alpha">
           <p>&alpha;</p>
-          <p>{data ? data.alpha : 0}</p>
+          <p>{data ? Math.abs(data.alpha).toFixed(0) : 0}</p>
         </div>
         <div className="heading-attitude">
           <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
-          <Heading heading={data ? data.heading : heading} />
+          <Heading heading={data ? data.true_heading : heading} />
         </div>
       </div>
       {/*<Variometer verticalSpeed={5} />*/}
