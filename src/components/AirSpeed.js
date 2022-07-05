@@ -11,8 +11,6 @@ const AirSpeed = (props) => {
     airspeed_limit_h: 900
   };
 
-  // console.log("Airspeed mode: ", props.lightTheme)
-
   let speed = props.speed * 1.94384; // m/s to knots
   let speedRad = 0;
   const mach = props.speed / 340.29;

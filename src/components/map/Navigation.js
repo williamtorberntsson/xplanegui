@@ -4,7 +4,9 @@ import UpdateOfflineData from './UpdateOfflineData';
 
 function Nav_map({ useXplaneData, parentCallback }) {
   const [myAirPlaneData, setMyAirPlaneData] = useState();
+  const [aiPlaneData, setAiPlaneData] = useState();
   const [offlineData, setOfflineData] = useState(null);
+  const nrAiPlanes = 5;
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
@@ -17,6 +19,15 @@ function Nav_map({ useXplaneData, parentCallback }) {
           parentCallback(myAirPlaneData)
         }
       )
+
+      // Xplane traffic
+      fetch("/env").then(
+        res => res.json()
+      ).then(
+        aiPlaneData => {
+          setAiPlaneData(aiPlaneData)
+        }
+      )
     }
   })
 
@@ -25,14 +36,13 @@ function Nav_map({ useXplaneData, parentCallback }) {
     if (!useXplaneData) {
       const interval = setInterval(() => {
         UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-        console.log(offlineData)
       }, 20); // update 20 times/s
 
       return () => clearInterval(interval); // Unmount function to prevent memory leaks.
     }
   })
 
-  return <ArcGisMap zoom={10} useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} offlineData={offlineData} />
+  return <ArcGisMap zoom={8} useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData = {aiPlaneData} nrAiPlanes={nrAiPlanes} offlineData={offlineData} />
 }
 
 export default Nav_map

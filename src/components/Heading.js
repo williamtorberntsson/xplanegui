@@ -10,7 +10,7 @@ const NewHeading = (props) => {
   return (
     <div className="compass_mask">
       <div className="compass_value_border">
-        <p className="compass_value">{heading.toFixed(0)}</p>
+        <p className="compass_value">{calc_heading.toFixed(0)}</p>
       </div>
       <img className="compass" style={{ objectPosition: `${calc_heading}% 0` }} src={Compass} />
     </div>

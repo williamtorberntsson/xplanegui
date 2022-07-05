@@ -43,7 +43,7 @@ const PFD = ({lightTheme, useXplaneData, data}) => {
       </div>
       <div className="mousehead">
         <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
-        <Heading heading={data ? data.heading : heading}/>
+        <Heading heading={data ? data.true_heading : heading}/>
       </div>
 
       {/*<Variometer verticalSpeed={5} />*/}

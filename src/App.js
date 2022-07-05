@@ -11,12 +11,11 @@ function App() {
 
   const [lightTheme, setLightTheme] = useState(0);
   const [collapse, setCollapse] = useState(true);
-  const [useXplaneData, setUseXplaneData] = useState(false);
+  const [useXplaneData, setUseXplaneData] = useState(true);
   const [planeData, setPlaneData] = useState();
 
   const changeLightTheme = (theme) => {
     setLightTheme(theme);
-    console.log("App mode: ", theme)
   }
 
   const changeViewMode = (mode) => {
