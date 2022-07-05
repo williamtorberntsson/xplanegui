@@ -1,0 +1,46 @@
+.attitude {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+  width: 220px;
+  margin: 5px 5px 0px 5px;
+}
+
+.horizonback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.horizoncircle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mechanics {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pitch_mask {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.pitch {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}

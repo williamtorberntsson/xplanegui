@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles/Altimeter.module.css";
 
 import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../images";
 
@@ -9,18 +10,16 @@ const Altimeter = (props) => {
   const alt_hundred = (altitude_feet % 1000).toFixed(0)
 
   return (
-    <span id="altimeter">
-      <div className="instrument altimeter" style={{ height: "200px", width: "200px" }}>
-        <img src={props.lightTheme ? AltitudeMeterWhite : AltitudeMeterBlack} className="box" />
-        <div className="needle box" style={{ transform: `translate(${50 * Math.cos((needle + 90) * (Math.PI / 180))}px, ${50 * Math.sin((needle + 90) * (Math.PI / 180))}px) rotate(${needle}deg) scale(0.4)` }}>
-          <img src={props.lightTheme ? AltitudePointerRed : AltitudePointerGrey} className="box" />
-        </div>
-        <div className="altitude" style={{ color: props.lightTheme ? "white" : "black" }}>
-          <span className="thousand" style={{ fontSize: "25px" }}>{alt_thousand}</span>
-          <span className="hundred">{('00' + alt_hundred).substring(alt_hundred.length + 2 - 3)}</span> {/*always display 3 numbers for hundred value*/}
-        </div>
+    <div className={styles.altimeter}>
+      <img className={styles.meter} src={AltitudeMeterBlack} />
+      <div className={styles.dial} style={{ transform: `translate(${50 * Math.cos((needle + 90) * (Math.PI / 180))}px, ${50 * Math.sin((needle + 90) * (Math.PI / 180))}px) rotate(${needle}deg) scale(0.4)` }}>
+        <img src={AltitudePointerGrey} />
       </div>
-    </span>
+      <div className={styles.value}>
+        <span className={styles.thousand}>{alt_thousand}</span>
+        <span className={styles.hundred}>{('00' + alt_hundred).substring(alt_hundred.length + 2 - 3)}</span> {/*always display 3 numbers for hundred value*/}
+      </div>
+    </div>
   );
 };
 

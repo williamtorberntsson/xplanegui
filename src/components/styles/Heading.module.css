@@ -1,7 +1,15 @@
+
 .compass_mask {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.compass {
+    width: 180px;
+    height: 40px;
+    object-fit: cover;
+    margin-top: 10px;
 }
 
 .compass_value_border {
@@ -16,11 +24,4 @@
 .compass_value {
     text-align: center;
     margin-top: 5px;
-}
-
-.compass {
-    width: 220px;
-    height: 50px;
-    object-fit: cover;
-    margin-top: 10px;
 }
