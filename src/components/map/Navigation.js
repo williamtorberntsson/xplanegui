@@ -42,7 +42,7 @@ function Nav_map({ useXplaneData, parentCallback }) {
     }
   })
 
-  return <ArcGisMap zoom={8} useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData = {aiPlaneData} nrAiPlanes={nrAiPlanes} offlineData={offlineData} />
+  return <ArcGisMap zoom={3} useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData = {aiPlaneData} nrAiPlanes={nrAiPlanes} offlineData={offlineData} />
 }
 
 export default Nav_map

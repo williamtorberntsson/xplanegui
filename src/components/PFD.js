@@ -34,9 +34,6 @@ const PFD = ({ lightTheme, useXplaneData, data }) => {
 
   return (
     <div className="pfd">
-      <div style={{ textAlign: "center" }}>
-        PFD
-      </div>
       <div className="mouseears">
         <AirSpeed speed={data ? data.true_airspeed : speed} lightTheme={lightTheme} />
         <Altimeter altitude={data ? data.altitude : altitude} pressure={5} lightTheme={lightTheme} />
