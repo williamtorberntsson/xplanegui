@@ -19,6 +19,7 @@ def plane():
         # Own airplane airplane values
         groundspeed_dref = "sim/flightmodel/position/groundspeed"
         true_airspeed_dref = "sim/flightmodel/position/true_airspeed"
+        alpha_dref = "sim/flightmodel/position/alpha"
         
         while True:
 
@@ -26,6 +27,7 @@ def plane():
             posi = client.getPOSI()
             groundspeed = client.getDREF(groundspeed_dref)
             true_airspeed = client.getDREF(true_airspeed_dref)
+            alpha = client.getDREF(alpha_dref)
 
             return {
                 "longitude": posi[1],
@@ -35,7 +37,8 @@ def plane():
                 "true_heading": posi[5],
                 "altitude": posi[2],
                 "pitch": posi[3],
-                "roll": posi[4]
+                "roll": posi[4],
+                "alpha": alpha[0]
             }
 
 @app.route("/env")
