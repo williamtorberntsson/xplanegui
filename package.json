@@ -5,7 +5,6 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "@esri/react-arcgis": "^5.2.0",
     "@mui/material": "^5.8.5",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -13,7 +12,6 @@
     "esri-loader": "^3.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-leaflet": "^4.0.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
