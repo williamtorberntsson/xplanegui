@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import PFD from './PFD';
 import Future from './Future';
-import { BoxButtons, WidgetButtons, ExtendableButtons } from './Buttons';
+import { BoxButtons, BoxButtonSide, WidgetButtons, ExtendableButtons } from './Buttons';
 import { Grid, Collapse, Box, Stack } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
 
@@ -10,16 +10,34 @@ import zIndex from '@mui/material/styles/zIndex';
 import Nav_map from './map/Navigation';
 import WidgetSelector from './WidgetSelector';
 
-function WAD() {
+function GridType({U, B, container}) {
 
+  if (U === 'L' && B === 'L'){
+    return(
+     <Grid container direction="column" className="left_container" id="wb_three">
+      </Grid>)
+  }
+
+  else{
+    return(
+      <Grid container direction="column" className={container}>
+         <Grid item className={U} id="wb_one">
+        </Grid>
+        <Grid item className={B} id="wb_two">
+        </Grid>
+      </Grid>)
+  }
+}
+
+function WAD() {
   // const [lightTheme, setLightTheme] = useState(0);
-  const [activeBox, setActiveBox] = useState(0);
+  const [UL, setUL] = useState('');
+  const [BL, setBL] = useState('');
+  const [UR, setUR] = useState('');
+  const [BR, setBR] = useState('');
   const [activeWidget, setActiveWidget] = useState("");
   const [showWidgets, setShowWidgets] = useState([]);
-  const [collapse, setCollapse] = useState(true);
-  const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
-  const [orientation, setOrientation] = useState(0);
-  const [useXplaneData, setUseXplaneData] = useState(true);
+  const [useXplaneData, setUseXplaneData] = useState(false);
   const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [aiPlaneData, setAiPlaneData] = useState();
   const [offlineData, setOfflineData] = useState();
@@ -39,8 +57,6 @@ function WAD() {
     setShowWidgets(newWidgets);
   }
 
-  // console.log("Active widgets: ", showWidgets)
-  // console.log("Active Box: ", activeBox, "Active Widget: ", activeWidget)
 
   const changeViewMode = (box) => {
 
@@ -90,52 +106,30 @@ function WAD() {
   return (
     <Grid container className="wad_frame">
       <Grid container className="wad_content">
-        {/* <Grid container className="map_container"> */}
         <Grid item className="map_item" xs={12}>
           <Nav_map useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
-        {/* </Grid> */}
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <Grid container direction="column" className="left_container">
-              <Grid item className="widgetbox" id="wb_one">
-                {/* <Collapse in={collapse}>
-                                    <PFD/>
-                                </Collapse> */}
-                {/* <WidgetSelector widget={"PFD"} size={"m"} data={{useXplaneData: useXplaneData, myAirPlaneData: myAirPlaneData, offlineData: offlineData }}/> */}
-                {/* <WidgetSelector widget={"PlaneStatus"} size={"m"} data={myAirPlaneData ? myAirPlaneData.weight : null} /> */}
-                <WidgetSelector widget={"Warnings"} size={"m"} data={myAirPlaneData ? myAirPlaneData.warnings : null} />
-                <WidgetSelector widget={"Status"} size={"m"} data={myAirPlaneData ? myAirPlaneData.status : null} />
-
-              </Grid>
-              <Grid item className="widgetbox" id="wb_two">
-                {showWidgets[1]}
-              </Grid>
-            </Grid>
+            <GridType U={UL} B={BL} container={'left_container'} />
           </Grid>
           <Grid item xs={6}>
-
           </Grid>
           <Grid item xs={3}>
-            <Grid container direction="column" className="right_container">
-              <Grid item className="widgetbox" id="wb_three">
-                <Future />
-                {showWidgets[2]}
-              </Grid>
-              <Grid item className="widgetbox" id="wb_four">
-                {showWidgets[3]}
-              </Grid>
-            </Grid>
+          <GridType  U={UR} B={BR} container={'right_container'} />
           </Grid>
         </Grid>
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
-        <Grid item position="absolute" bottom={'0'} left={'0'} style={{ zIndex: '3' }}>
-          <BoxButtons activeBox={changeViewMode} />
-        </Grid>
-        <Grid item position="absolute" bottom={'0'} right={'0'} style={{ zIndex: '3' }}>
+        <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3'}}>
           <WidgetButtons activeWidget={updateWidget} />
+        </Grid>
+        <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
+          <BoxButtons U={setUL} B={setBL}/>
+        </Grid>
+        <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
+          <BoxButtons U={setUR} B={setBR}/>
         </Grid>
       </Grid>
     </Grid>

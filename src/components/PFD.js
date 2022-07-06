@@ -10,6 +10,8 @@ import G from "./G";
 
 const PFD = ({ lightTheme, data, size }) => {
 
+  const [inData, setInData] = useState();
+
   if (!data) {
     data = {
       "longitude": 15.680926012604708,

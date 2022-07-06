@@ -43,33 +43,43 @@
     /* width: 100%; */
     /* background-color: pink; */
     justify-content: space-between;
+    align-items:flex-start;
+    /* align-content: flex-start; */
 }
 
 .right_container{
     height: 100%;
-    /* width: 100%; */
+    width: 100%;
     /* background-color: green; */
     justify-content: space-between;
+    align-items:flex-end;
+    
 }
 
-.widgetbox {
+.s {
     height: 20%;
+    width: 50%;
+}
+
+.m {
+    height: 50%;
+    width: 100%
 }
 
 #wb_one {
-    background-color: rgb(156, 156, 156, 0.5);
+    background-color: rgba(214, 21, 21, 0.5);
 }
 
 #wb_two {
-    background-color: rgb(156, 156, 156, 0.5);
+    background-color: rgba(31, 74, 229, 0.5);
 }
 
 #wb_three {
-    background-color: rgb(156, 156, 156, 0.5);
+    background-color: rgba(91, 180, 85, 0.5);
 }
 
 #wb_four {
-    background-color: rgb(156, 156, 156, 0.5);
+    /* background-color: rgb(156, 156, 156, 0.5); */
 }
 
 /* CSS */
@@ -117,4 +127,51 @@
     box-shadow: #656565 0 3px 7px inset;
     transform: translateY(2px);
   }
+
+  /* CSS */
+.button-40 {
+    align-items: center;
+    appearance: none;
+    background-color: #9b9b9b;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#7b7b7b 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #bbbbbb;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 45px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    margin-left: 7px;
+    margin-right: 7px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+  }
+  
+  .button-40:focus {
+    box-shadow: #8d8d8d 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
+  }
+  
+  .button-40:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
+    /* transform: translateY(-2px); */
+  }
+  
+  .button-40:active {
+    box-shadow: #656565 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+  
   
