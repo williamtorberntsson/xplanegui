@@ -17,7 +17,7 @@ const Attitude = (props) => {
   pitch = - 60.8 / 90 * pitch + 50; // fit values to svg
 
   return (
-    <div className={styles.attitude} style={{ transform: `rotate(${roll}deg)` }}>
+    <div className={styles.attitude} style={{width: props.width, height: props.height, transform: `rotate(${roll}deg)` }}>
         <img className={styles.horizonback} src={HorizonBack} />
 
         <div className={styles.pitch_mask}>

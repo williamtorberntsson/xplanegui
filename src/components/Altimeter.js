@@ -10,9 +10,11 @@ const Altimeter = (props) => {
   const alt_hundred = (altitude_feet % 1000).toFixed(0)
 
   return (
-    <div className={styles.altimeter}>
+    <div className={styles.altimeter} style={{width: props.width, height: props.height}}>
       <img className={styles.meter} src={AltitudeMeterBlack} />
-      <div className={styles.dial} style={{ transform: `translate(${50 * Math.cos((needle + 90) * (Math.PI / 180))}px, ${50 * Math.sin((needle + 90) * (Math.PI / 180))}px) rotate(${needle}deg) scale(0.4)` }}>
+      <div className={styles.dial} style={{
+          transform: `translate(${35 * Math.cos((needle + 90) * (Math.PI / 180))}%,
+          ${35 * Math.sin((needle + 90) * (Math.PI / 180))}%) rotate(${needle}deg) scale(0.4)` }}> {/* translate and rotate needle in a circle */} 
         <img src={AltitudePointerGrey} />
       </div>
       <div className={styles.value}>

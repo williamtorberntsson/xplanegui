@@ -8,7 +8,7 @@ import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
 
-const PFD = ({ lightTheme, data }) => {
+const PFD = ({ lightTheme, data, size }) => {
 
   if (!data) {
     data = {
@@ -24,24 +24,33 @@ const PFD = ({ lightTheme, data }) => {
     }
   }
 
-  return (
-    <div className={styles.pfd}>
+  if (size === "m") {
+    return (
+      <div className={styles.pfd}>
+        <div className={styles.mouseears}>
+          <AirSpeed speed={data.true_airspeed} lightTheme={lightTheme} />
+          <Altimeter altitude={data.altitude} pressure={5} lightTheme={lightTheme} />
+        </div>
+        <div className={styles.mousehead}>
+          <div className={styles.side_values}>
+            <Alpha alpha={5} />
+            <G ax={1} ay={1} az={0.5} />
+          </div>
+          <div className={styles.heading_attitude}>
+            <Attitude roll={data.roll} pitch={data.pitch} />
+            <Heading heading={data.true_heading} />
+          </div>
+        </div>
+      </div>
+    );
+  } else if (size === "s") {
+    return (
       <div className={styles.mouseears}>
-        <AirSpeed speed={data.true_airspeed} lightTheme={lightTheme} />
-        <Altimeter altitude={data.altitude} pressure={5} lightTheme={lightTheme} />
+        <Attitude roll={data.roll} pitch={data.pitch} width="200px" height="200px"/>
+        <Altimeter altitude={data.altitude} width="200px" height="200px"/>
       </div>
-      <div className={styles.mousehead}>
-        <div className={styles.side_values}>
-          <Alpha alpha={5} />
-          <G ax={1} ay={1} az={0.5} />
-        </div>
-        <div className={styles.heading_attitude}>
-          <Attitude roll={data.roll} pitch={data.pitch} />
-          <Heading heading={data.true_heading} />
-        </div>
-      </div>
-    </div>
-  );
+    )
+  }
 }
 
 export default PFD;

@@ -8,6 +8,7 @@ import UpdateOfflineData from './map/UpdateOfflineData';
 import './WAD.css';
 import zIndex from '@mui/material/styles/zIndex';
 import Nav_map from './map/Navigation';
+import WidgetSelector from './WidgetSelector';
 
 function WAD() {
 
@@ -18,7 +19,7 @@ function WAD() {
   const [collapse, setCollapse] = useState(true);
   const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
   const [orientation, setOrientation] = useState(0);
-  const [useXplaneData, setUseXplaneData] = useState(false);
+  const [useXplaneData, setUseXplaneData] = useState(true);
   const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [aiPlaneData, setAiPlaneData] = useState();
   const [offlineData, setOfflineData] = useState();
@@ -101,8 +102,11 @@ function WAD() {
                 {/* <Collapse in={collapse}>
                                     <PFD/>
                                 </Collapse> */}
-                <PFD data={useXplaneData ? myAirPlaneData : offlineData} />
-                {showWidgets[0]}
+                {/* <WidgetSelector widget={"PFD"} size={"m"} data={{useXplaneData: useXplaneData, myAirPlaneData: myAirPlaneData, offlineData: offlineData }}/> */}
+                {/* <WidgetSelector widget={"PlaneStatus"} size={"m"} data={myAirPlaneData ? myAirPlaneData.weight : null} /> */}
+                <WidgetSelector widget={"Warnings"} size={"m"} data={myAirPlaneData ? myAirPlaneData.warnings : null} />
+                <WidgetSelector widget={"Status"} size={"m"} data={myAirPlaneData ? myAirPlaneData.status : null} />
+
               </Grid>
               <Grid item className="widgetbox" id="wb_two">
                 {showWidgets[1]}
