@@ -76,7 +76,7 @@ function WAD() {
           <Grid item xs={3}>
             <Grid container direction="column" className="right_container">
               <Grid item className="widgetbox" id="wb_three">
-                <Future />
+                {/* <Future /> */}
                 {showWidgets[2]}
               </Grid>
               <Grid item className="widgetbox" id="wb_four">

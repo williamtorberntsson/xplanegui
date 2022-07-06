@@ -1,7 +1,7 @@
 .pfd {
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: rgba(182, 182, 182, 0.8);
 }
 
 .mouseears {
@@ -13,6 +13,7 @@
 .mousehead {
     display: flex;
     justify-content: center;
+    align-content: center;
     flex-direction: row;
 }
 
