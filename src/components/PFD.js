@@ -8,38 +8,27 @@ import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
 
-const PFD = ({ lightTheme, useXplaneData, data }) => {
+const PFD = ({ lightTheme, data }) => {
 
-  const [altitude, setAltitude] = useState(0)
-  const [roll, setRoll] = useState(0);
-  const [pitch, setPitch] = useState(0);
-  const [speed, setSpeed] = useState(0);
-  const [heading, setHeading] = useState(0);
-
-
-  // Offline data: change values
-  useEffect(() => {
-    if(data) console.log(data)
-    if (!useXplaneData) {
-      const interval = setInterval(() => {
-        setRoll(roll);
-        setPitch((pitch + 0.1) % 90);
-        setAltitude((altitude + 1));
-        setSpeed((altitude + 0.1) % 463);
-        setHeading((heading + 0.1) % 360);
-      }, 20);
-
-      return () => {
-        clearInterval(interval);
-      };
+  if (!data) {
+    data = {
+      "longitude": 15.680926012604708,
+      "latitude": 58.41157469382408,
+      "groundspeed": 0,
+      "true_airspeed": 0,
+      "true_heading": 0,
+      "altitude": 0,
+      "pitch": 0,
+      "roll": 0,
+      "alpha": 0
     }
-  });
+  }
 
   return (
     <div className={styles.pfd}>
       <div className={styles.mouseears}>
-        <AirSpeed speed={data ? data.true_airspeed : speed} lightTheme={lightTheme} />
-        <Altimeter altitude={data ? data.altitude : altitude} pressure={5} lightTheme={lightTheme} />
+        <AirSpeed speed={data.true_airspeed} lightTheme={lightTheme} />
+        <Altimeter altitude={data.altitude} pressure={5} lightTheme={lightTheme} />
       </div>
       <div className={styles.mousehead}>
         <div className={styles.side_values}>
@@ -47,8 +36,8 @@ const PFD = ({ lightTheme, useXplaneData, data }) => {
           <G ax={1} ay={1} az={0.5} />
         </div>
         <div className={styles.heading_attitude}>
-          <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
-          <Heading heading={data ? data.true_heading : heading} />
+          <Attitude roll={data.roll} pitch={data.pitch} />
+          <Heading heading={data.true_heading} />
         </div>
       </div>
     </div>

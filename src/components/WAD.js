@@ -45,9 +45,8 @@ function WAD() {
 
     let index = box - 1;
     switch (activeWidget) {
-      case "PFD": return handleUpdate(index, <PFD useXplaneData={useXplaneData} data={myAirPlaneData} />);
+      case "PFD": return handleUpdate(index, <PFD data={useXplaneData ? myAirPlaneData : offlineData} />);
       case "None": return handleUpdate(index, null);
-
     }
   }
 
@@ -80,13 +79,11 @@ function WAD() {
 
   // Use offline data
   useEffect(() => {
-    if (!useXplaneData) {
-      const interval = setInterval(() => {
-        UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-      }, 20); // update 20 times/s
+    const interval = setInterval(() => {
+      UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
+    }, 20); // update 20 times/s
 
-      return () => clearInterval(interval); // Unmount function to prevent memory leaks.
-    }
+    return () => clearInterval(interval); // Unmount function to prevent memory leaks.
   })
 
   return (
@@ -104,6 +101,7 @@ function WAD() {
                 {/* <Collapse in={collapse}>
                                     <PFD/>
                                 </Collapse> */}
+                <PFD data={useXplaneData ? myAirPlaneData : offlineData} />
                 {showWidgets[0]}
               </Grid>
               <Grid item className="widgetbox" id="wb_two">
