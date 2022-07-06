@@ -3,6 +3,7 @@ import PFD from './PFD';
 import Future from './Future';
 import { BoxButtons, WidgetButtons, ExtendableButtons } from './Buttons';
 import { Grid, Collapse, Box, Stack } from '@mui/material';
+import UpdateOfflineData from './map/UpdateOfflineData';
 
 import './WAD.css';
 import zIndex from '@mui/material/styles/zIndex';
@@ -18,7 +19,9 @@ function WAD() {
   const [mapCenter, setMapCenter] = useState([15.580926012604708, 58.41157469382408]);
   const [orientation, setOrientation] = useState(0);
   const [useXplaneData, setUseXplaneData] = useState(false);
-  const [planeData, setPlaneData] = useState();
+  const [myAirPlaneData, setMyAirPlaneData] = useState();
+  const [aiPlaneData, setAiPlaneData] = useState();
+  const [offlineData, setOfflineData] = useState();
 
   // const changeLightTheme = (theme) => {
   //     setLightTheme(theme);
@@ -42,18 +45,56 @@ function WAD() {
 
     let index = box - 1;
     switch (activeWidget) {
-      case "PFD": return handleUpdate(index, <PFD useXplaneData={useXplaneData} data={planeData} />);
+      case "PFD": return handleUpdate(index, <PFD useXplaneData={useXplaneData} data={myAirPlaneData} />);
       case "None": return handleUpdate(index, null);
 
     }
   }
+
+  // Use myAirPlaneData from xplane
+  useEffect(() => {
+    if (useXplaneData) {
+      // console.timeEnd("between")
+      // console.time("fetch")
+
+      fetch("/plane").then(
+        res => res.json()
+      ).then(
+        data => {
+          setMyAirPlaneData(data)
+        }
+      )
+
+      // Xplane traffic
+      fetch("/env").then(
+        res => res.json()
+      ).then(
+        data => {
+          setAiPlaneData(data)
+        }
+      )
+      // console.timeEnd("fetch")
+      // console.time("between")
+    }
+  })
+
+  // Use offline data
+  useEffect(() => {
+    if (!useXplaneData) {
+      const interval = setInterval(() => {
+        UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
+      }, 20); // update 20 times/s
+
+      return () => clearInterval(interval); // Unmount function to prevent memory leaks.
+    }
+  })
 
   return (
     <Grid container className="wad_frame">
       <Grid container className="wad_content">
         {/* <Grid container className="map_container"> */}
         <Grid item className="map_item" xs={12}>
-          <Nav_map useXplaneData={useXplaneData} parentCallback={setPlaneData} />
+          <Nav_map useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
         {/* </Grid> */}
         <Grid container className="overlay_container">
