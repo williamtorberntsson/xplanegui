@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles/Attitude.module.css";
 import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch } from "../images";
 
 const Attitude = (props) => {
@@ -16,24 +17,15 @@ const Attitude = (props) => {
   pitch = - 60.8 / 90 * pitch + 50; // fit values to svg
 
   return (
-    <div>
-      <div className="attitude instrument">
+    <div className={styles.attitude} style={{ transform: `rotate(${roll}deg)` }}>
+        <img className={styles.horizonback} src={HorizonBack} />
 
-        <div className="box" style={{ transform: `rotate(${roll}deg)` }}>
-          <img src={HorizonBack} className="horizonback" />
-
-          <div className="pitch-mask">
-            <img src={HorizonPitch} className="pitch" style={{ objectPosition: `0 ${pitch}%` }} />
-          </div>
-
-          <img src={HorizonCircle} className="horizoncircle" />
+        <div className={styles.pitch_mask}>
+          <img className={styles.pitch} src={HorizonPitch} style={{ objectPosition: `0 ${pitch}%` }} />
         </div>
-
-        <div className="mechanics box">
-          <img src={HorizonMechanics} className="box" />
-        </div>
+        <img className={styles.horizoncircle} src={HorizonCircle} />
+        <img className={styles.mechanics} src={HorizonMechanics} />
       </div>
-    </div>
   );
 };
 export default Attitude;

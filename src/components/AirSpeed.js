@@ -1,7 +1,7 @@
 import React from "react";
+import styles from "./styles/AirSpeed.module.css";
 
-import {VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../images";
-import "../assets/css/flightindicators.css"
+import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../images";
 
 const AirSpeed = (props) => {
   let constants = {
@@ -14,7 +14,7 @@ const AirSpeed = (props) => {
   let speed = props.speed * 1.94384; // m/s to knots
   let speedRad = 0;
   const mach = props.speed / 340.29;
-  
+
 
   // Limit speed between 0 and 800
   if (speed > constants.airspeed_limit_h) speed = constants.airspeed_limit_h;
@@ -36,18 +36,16 @@ const AirSpeed = (props) => {
   }
 
   return (
-    <span id="airspeed">
-      <div className="instrument airspeed" style={{ height: "200px", width: "200px" }}>
-        <img src={props.lightTheme ? VelocityMeterWhite : VelocityMeterBlack} className="box" />
-        <div className="speed box" style={{ transform: `rotate(${speedRad}rad)` }}>
-          <img src={props.lightTheme ? VelocityPointerRed : VelocityPointerGrey} className="box" />
-        </div>
-        <div className="value" style={{color: props.lightTheme ? "white" : "black"}}>
-          <p>M</p>
-          <p>{mach.toFixed(2)}</p>
-        </div>
+    <div className={styles.airspeed}>
+      <img className={styles.meter} src={VelocityMeterBlack} />
+      <div className={styles.dial} style={{ transform: `rotate(${speedRad}rad)` }}>
+        <img src={VelocityPointerGrey} />
       </div>
-    </span>
+      <div className={styles.value}>
+        <p>M</p>
+        <p>{mach.toFixed(2)}</p>
+      </div>
+    </div>
   );
 };
 

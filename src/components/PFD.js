@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./PFD.css"
+import styles from "./styles/PFD.module.css"
 import AirSpeed from "./AirSpeed";
 import Altimeter from "./Altimeter";
 import Attitude from "./Attitude";
 import Heading from "./Heading";
+import Alpha from "./Alpha";
+import G from "./G";
 
 const PFD = ({ lightTheme, useXplaneData, data }) => {
 
@@ -17,6 +19,7 @@ const PFD = ({ lightTheme, useXplaneData, data }) => {
 
   // Offline data: change values
   useEffect(() => {
+    if(data) console.log(data)
     if (!useXplaneData) {
       const interval = setInterval(() => {
         setRoll(roll);
@@ -33,22 +36,21 @@ const PFD = ({ lightTheme, useXplaneData, data }) => {
   });
 
   return (
-    <div className="pfd">
-      <div className="mouseears">
+    <div className={styles.pfd}>
+      <div className={styles.mouseears}>
         <AirSpeed speed={data ? data.true_airspeed : speed} lightTheme={lightTheme} />
         <Altimeter altitude={data ? data.altitude : altitude} pressure={5} lightTheme={lightTheme} />
       </div>
-      <div className="mousehead">
-        <div className="alpha">
-          <p>&alpha;</p>
-          <p>{data ? data.alpha : 0}</p>
+      <div className={styles.mousehead}>
+        <div className={styles.side_values}>
+          <Alpha alpha={5} />
+          <G ax={1} ay={1} az={0.5} />
         </div>
-        <div className="heading-attitude">
+        <div className={styles.heading_attitude}>
           <Attitude roll={data ? data.roll : roll} pitch={data ? data.pitch : pitch} />
-          <Heading heading={data ? data.heading : heading} />
+          <Heading heading={data ? data.true_heading : heading} />
         </div>
       </div>
-      {/*<Variometer verticalSpeed={5} />*/}
     </div>
   );
 }

@@ -10,25 +10,30 @@ function Nav_map({ useXplaneData, parentCallback }) {
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
-    if (useXplaneData) {
-      fetch("/plane").then(
-        res => res.json()
-      ).then(
-        myAirPlaneData => {
-          setMyAirPlaneData(myAirPlaneData)
-          parentCallback(myAirPlaneData)
-        }
-      )
+      if (useXplaneData) {
+        // console.timeEnd("between")
+        // console.time("fetch")
 
-      // Xplane traffic
-      fetch("/env").then(
-        res => res.json()
-      ).then(
-        aiPlaneData => {
-          setAiPlaneData(aiPlaneData)
-        }
-      )
-    }
+        fetch("/plane").then(
+          res => res.json()
+        ).then(
+          myAirPlaneData => {
+            setMyAirPlaneData(myAirPlaneData)
+            parentCallback(myAirPlaneData)
+          }
+        )
+
+        // Xplane traffic
+        fetch("/env").then(
+          res => res.json()
+        ).then(
+          aiPlaneData => {
+            setAiPlaneData(aiPlaneData)
+          }
+        )
+        // console.timeEnd("fetch")
+        // console.time("between")
+      }
   })
 
   // Use offline data
@@ -42,7 +47,7 @@ function Nav_map({ useXplaneData, parentCallback }) {
     }
   })
 
-  return <ArcGisMap zoom={3} useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData = {aiPlaneData} nrAiPlanes={nrAiPlanes} offlineData={offlineData} />
+  return <ArcGisMap zoom={8} useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} nrAiPlanes={nrAiPlanes} offlineData={offlineData} />
 }
 
 export default Nav_map

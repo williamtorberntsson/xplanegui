@@ -1,9 +1,7 @@
 .pfd {
     display: flex;
     flex-direction: column;
-    background-color: rgba(182, 182, 182, 0.8);
 }
-
 .mouseears {
     display: flex;
     flex-direction: row;
@@ -17,17 +15,14 @@
     flex-direction: row;
 }
 
-.heading-attitude {
+.side_values {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading_attitude {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-}
-.alpha {
-    margin-top: 22%;
-}
-
-.alpha p {
-    margin: 0 10px 0 0;
-    font-size: 20px;
 }
