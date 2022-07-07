@@ -1,3 +1,4 @@
+import { position_init_data, pfd_init_data } from "../constants";
 
 const UpdateOfflineData = (data, updateData) => {
   // simple example
@@ -16,17 +17,7 @@ const UpdateOfflineData = (data, updateData) => {
     })
 
   } else { // no data
-    updateData({
-      "longitude": 15.680926012604708,
-      "latitude": 58.41157469382408,
-      "groundspeed": 0,
-      "true_airspeed": 0,
-      "true_heading": 0,
-      "altitude": 0,
-      "pitch": 0,
-      "roll": 0,
-      "alpha": 0
-    })
+    updateData(Object.assign({}, position_init_data, pfd_init_data)) // merge two dict
   }
 }
 

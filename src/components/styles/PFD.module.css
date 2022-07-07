@@ -1,6 +1,8 @@
 .pfd {
     display: flex;
     flex-direction: column;
+    background-color: rgba(182, 182, 182, 0.8);
+    height: 100%;
 }
 .mouseears {
     display: flex;
@@ -11,8 +13,9 @@
 .mousehead {
     display: flex;
     justify-content: center;
+    align-content: center;
     flex-direction: row;
-}
+}s
 
 .side_values {
     display: flex;

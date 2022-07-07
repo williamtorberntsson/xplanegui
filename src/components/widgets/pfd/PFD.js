@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styles from "./styles/PFD.module.css"
+import styles from "../../styles/PFD.module.css"
 import AirSpeed from "./AirSpeed";
 import Altimeter from "./Altimeter";
 import Attitude from "./Attitude";
@@ -9,6 +9,8 @@ import Alpha from "./Alpha";
 import G from "./G";
 
 const PFD = ({ lightTheme, data, size }) => {
+
+  const [inData, setInData] = useState();
 
   if (!data) {
     data = {

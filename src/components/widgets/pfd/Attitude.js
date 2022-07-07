@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./styles/Attitude.module.css";
-import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch } from "../images";
+import styles from "../../styles/Attitude.module.css";
+import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch } from "../../../images";
 
 const Attitude = (props) => {
   let constants = {

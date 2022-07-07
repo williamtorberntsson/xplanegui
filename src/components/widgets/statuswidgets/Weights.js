@@ -3,6 +3,7 @@ import React from "react";
 const Weights = ({size, data}) => {
 
   if(data) {
+    console.log(data)
     return (
       <div>
         <p>Fuel 1 {data.fuel1.toFixed(0)} KG</p>

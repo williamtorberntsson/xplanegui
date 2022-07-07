@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Xplane GUI
+This project creates a flask-server that connects to X-plane and sends data from/to xplane with a react frontend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Run and install
 
-## Available Scripts
+### Install
+Install flask for python.
+Run `npm install`
 
-In the project directory, you can run:
+### How to run
+Start up X-plane together with front-end and back-end on the same computer.
 
-### `npm start`
+#### Back-end
+Start the python server `server.py`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Front-end
+Run `npm start` and the app can be seen in your browser at http://localhost:3000
+You might have to refresh the webpage.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Structure Front-end
+In the middle of the screen there is a WAD (wide area display) and buttons around for configuring
+the WAD. The whole WAD is covered by a map that shows your own plane (orange) and other airplanes (green/red).
+There are widgets that you can place at the different locations on the WAD with different buttons.
 
-### `npm test`
+### Buttons
+The buttons at the left and right side decides how the widgets will be placed on the screen. The buttons
+on the left side correspond to the left area of the screen and the same for the right side, the sides are independant.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The button in the middle will make the entire side to one widget that will take up the whole side (size L).
+Byt using the buttons at the top/bottom and the buttons between the middle button will devide the side into two widget positions.
+The buttons at the top/bottom will make the corresponding widget small (size S). And the button in between the top/bottom and middle button
+will make the widget medium sized (size M).
 
-### `npm run build`
+The buttons at the bottom select what widget should be placed at the recently select position.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Structure Back-end
+The server gets data from X-plane and sends it to the Front-end. What data is send or recieved to/from Xplane
+is decided with a reference to a specific data with the help of a plugin, [XPlaneConnect](https://github.com/nasa/XPlaneConnect).
+The plugin has a gigantic data reference page for all data that can be send and recieved.

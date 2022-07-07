@@ -3,29 +3,13 @@ import { useState } from "react";
 
 const BoxButtons = (props) => {
 
-  // const [box, setBox] = useState(0);
-
-  // const handleClick = (mode) => {
-  //   props.lightTheme(mode);
-  //   setMode(mode);
-  // }
-
-   const handleClick = (box) => {
-    props.activeBox(box);
-    // props.activeBox(box)
-    // setBox(box);
-  }
-
-  // const changeView = (view) => {
-  //   props.viewMode(view);
-  // }
-
   return (
-    <div style={{display: 'flex', justifyContent: 'space-evenly', width: '35vw', paddingBottom: '1.5vh'}}>
-      <button className="button-30" onClick={() => { handleClick(1) }} role="button">UL</button>
-      <button className="button-30" onClick={() => { handleClick(2) }} role="button">BL</button>
-      <button className="button-30" onClick={() => { handleClick(3) }} role="button">UR</button>
-      <button className="button-30" onClick={() => { handleClick(4) }} role="button">BR</button>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
+      <button className="button-40" onClick={() => { props.Usize('s') }} role="button"></button>
+      <button className="button-40" onClick={() => { props.Usize('m') }} role="button"></button>
+      <button className="button-40" onClick={() => { props.Usize('L'); props.Bsize('L') }} role="button"></button>
+      <button className="button-40" onClick={() => { props.Bsize('m') }} role="button"></button>
+      <button className="button-40" onClick={() => { props.Bsize('s') }} role="button"></button>
     </div>
   )
 };
@@ -33,31 +17,13 @@ const BoxButtons = (props) => {
 
 const WidgetButtons = (props) => {
 
-  // const [mode, setMode] = useState(0);
-  // const [widgetType, setWidgetType] = useState('')
-
-  // const handleClick = (mode) => {
-  //   props.lightTheme(mode);
-  //   setMode(mode);
-  // }
-
-  const handleClick = (widgetType) => {
-    props.activeWidget(widgetType);
-    // setWidgetType(widgetType)
-  }
-
-  // const changeView = (view) => {
-  //   props.viewMode(view);
-  // }
+  const handleClick = (widgetName) => props.activeWidget(widgetName);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'space-evenly', width: '40vw', paddingBottom: '1.5vh'}}>
-      {/* <Button onClick={() => { handleClick(0) }} variant="contained">Light mode</Button>
-      <Button onClick={() => { handleClick(1) }} variant="contained">Dark mode</Button>
-      <Button onClick={() => { changeView(1) }} variant="contained">Change View</Button> */}
-      <button className="button-30" onClick={() => { handleClick('PFD') }} role="button">PFD</button>
-      <button className="button-30" onClick={() => { handleClick('COMP') }} role="button">COMP</button>
-      <button className="button-30" onClick={() => { handleClick('EFIS') }} role="button">EFIS</button>
+    <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '30vw', paddingBottom: '1.5vh' }}>
+      <button className="button-30" onClick={() => { handleClick('pfd') }} role="button">PFD</button>
+      <button className="button-30" onClick={() => { handleClick('weights') }} role="button">Weights</button>
+      <button className="button-30" onClick={() => { handleClick('warnings') }} role="button">Warnings</button>
       <button className="button-30" onClick={() => { handleClick('None') }} role="button">None</button>
     </div>
   )
@@ -65,12 +31,8 @@ const WidgetButtons = (props) => {
 
 const ExtendableButtons = () => {
 
-
   return (
-    <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100vw', paddingTop: '1.3vh'}}>
-      {/* <Button onClick={() => { handleClick(0) }} variant="contained">Light mode</Button>
-      <Button onClick={() => { handleClick(1) }} variant="contained">Dark mode</Button>
-      <Button onClick={() => { changeView(1) }} variant="contained">Change View</Button> */}
+    <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '100vw', paddingTop: '1.3vh' }}>
       <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>
@@ -90,4 +52,4 @@ const ExtendableButtons = () => {
   )
 };
 
-export {BoxButtons, WidgetButtons, ExtendableButtons};
+export { BoxButtons, WidgetButtons, ExtendableButtons };

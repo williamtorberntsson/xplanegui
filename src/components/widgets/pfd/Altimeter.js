@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./styles/Altimeter.module.css";
+import styles from "../../styles/Altimeter.module.css";
 
-import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../images";
+import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../../../images";
 
 const Altimeter = (props) => {
   const altitude_feet = props.altitude * 3.2808399; // m to feet

@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./styles/AirSpeed.module.css";
+import styles from "../../styles/AirSpeed.module.css";
 
-import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../images";
+import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../../../images";
 
 const AirSpeed = (props) => {
   let constants = {
