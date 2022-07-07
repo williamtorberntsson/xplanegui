@@ -4,6 +4,7 @@ import { BoxButtons, BoxButtonSide, WidgetButtons, ExtendableButtons } from './B
 import { Grid, Collapse, Box, Stack } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
 import { useXplaneData } from './constants';
+import axios from 'axios';
 
 import './WAD.css';
 import zIndex from '@mui/material/styles/zIndex';
@@ -67,30 +68,38 @@ function WAD() {
     setShowWidgets(newWidgets);
   }
 
+
+  const changeViewMode = (box) => {
+
+    let index = box - 1;
+    switch (activeWidget) {
+      case "PFD": return handleUpdate(index, <PFD data={useXplaneData ? myAirPlaneData : offlineData} />);
+      case "None": return handleUpdate(index, null);
+    }
+  }
+
+
+  const getDataPlane = () => {
+      axios.get('/plane')
+      .then(res => setMyAirPlaneData(res.data))
+      .catch((error) => console.log(error.message))
+  }
+
+  const getDataEnv = () => {
+    axios.get('/env')
+    .then(res => setAiPlaneData(res.data))
+    .catch((error) => console.log(error.message))
+}
+
   // Use myAirPlaneData from xplane
   useEffect(() => {
-    if (useXplaneData) {
-      // console.timeEnd("between")
-      // console.time("fetch")
+    const interval = setInterval(() => {
+      getDataEnv()
+      getDataPlane()
+    }, 500);
+    return () => clearInterval(interval);
 
-      fetch("/plane").then(
-        res => res.json()
-      ).then(
-        data => {
-          setMyAirPlaneData(data)
-        }
-      )
-
-      // Xplane traffic
-      fetch("/env").then(
-        res => res.json()
-      ).then(
-        data => {
-          setAiPlaneData(data)
-        }
-      )
-    }
-  })
+  },[])
 
   // Use offline data
   useEffect(() => {

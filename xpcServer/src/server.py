@@ -1,7 +1,11 @@
 from distutils.log import warn
 from turtle import pos
 from flask import Flask
+import json
 import xpc
+from time import perf_counter
+
+
 
 app = Flask(__name__)
 
@@ -28,7 +32,11 @@ def plane():
         outside_air_temp_dref = "sim/cockpit2/temperature/outside_air_temp_degc"
         speedbrake_dref = "sim/cockpit2/annunciators/speedbrake"
 
+        start_time = perf_counter()
         while True:
+            print("My program took", perf_counter()/1000 - start_time, "to run")
+            start_time = perf_counter()/1000
+            
 
             # Own airplane airplane values
             posi = client.getPOSI()
