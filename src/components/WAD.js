@@ -9,7 +9,7 @@ import './WAD.css';
 import zIndex from '@mui/material/styles/zIndex';
 import Nav_map from './map/Navigation';
 
-function GridType({U, B, container}) {
+function GridType({U, B, container, widget, data}) {
 
   if (U === 'L' && B === 'L'){
     return(
@@ -21,6 +21,7 @@ function GridType({U, B, container}) {
     return(
       <Grid container direction="column" className={container}>
          <Grid item className={U} id="wb_one">
+          <WidgetSelector widget={widget} size={U} data={data} />
         </Grid>
         <Grid item className={B} id="wb_two">
         </Grid>
@@ -36,7 +37,7 @@ function WAD() {
   const [BR, setBR] = useState('');
   const [activeWidget, setActiveWidget] = useState("");
   const [showWidgets, setShowWidgets] = useState([]);
-  const [useXplaneData, setUseXplaneData] = useState(false);
+  const [useXplaneData, setUseXplaneData] = useState(true);
   const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [aiPlaneData, setAiPlaneData] = useState();
   const [offlineData, setOfflineData] = useState();
@@ -78,7 +79,7 @@ function WAD() {
         data => {
           setMyAirPlaneData(data)
         }
-      )
+      ).catch(console.log)
 
       // Xplane traffic
       fetch("/env").then(
@@ -87,7 +88,7 @@ function WAD() {
         data => {
           setAiPlaneData(data)
         }
-      )
+      ).catch(console.log)
       // console.timeEnd("fetch")
       // console.time("between")
     }
@@ -110,12 +111,12 @@ function WAD() {
         </Grid>
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <GridType U={UL} B={BL} container={'left_container'} />
+            <GridType U={UL} B={BL} container={'left_container'} widget={"Warnings"} data={myAirPlaneData}/>
           </Grid>
           <Grid item xs={6}>
           </Grid>
           <Grid item xs={3}>
-          <GridType  U={UR} B={BR} container={'right_container'} />
+          <GridType  U={UR} B={BR} container={'right_container'} widget={"Status"} data={myAirPlaneData} />
           </Grid>
         </Grid>
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
