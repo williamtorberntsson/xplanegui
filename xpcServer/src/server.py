@@ -2,6 +2,9 @@ from turtle import pos
 from flask import Flask
 import json
 import xpc
+from time import perf_counter
+
+
 
 app = Flask(__name__)
 
@@ -21,14 +24,18 @@ def plane():
         groundspeed_dref = "sim/flightmodel/position/groundspeed"
         true_airspeed_dref = "sim/flightmodel/position/true_airspeed"
         alpha_dref = "sim/flightmodel/position/alpha"
-        
+        start_time = perf_counter()
         while True:
+            print("My program took", perf_counter()/1000 - start_time, "to run")
+            start_time = perf_counter()/1000
+            
 
             # Own airplane airplane values
             posi = client.getPOSI()
             groundspeed = client.getDREF(groundspeed_dref)
             true_airspeed = client.getDREF(true_airspeed_dref)
             alpha = client.getDREF(alpha_dref)
+            
 
             return {
                 "longitude": posi[1],
