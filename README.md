@@ -1,5 +1,5 @@
 # Xplane GUI
-This project creates a flask-server that connects to X-plane and sends data from/to xplane with a react frontend.
+This project creates a flask-server that connects to X-Plane and sends data from/to X-Plane with a react frontend.
 
 ## Run and install
 
