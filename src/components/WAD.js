@@ -10,6 +10,16 @@ import zIndex from '@mui/material/styles/zIndex';
 import Nav_map from './map/Navigation';
 import WidgetSelector from './WidgetSelector';
 
+
+/**
+ * Component for selecting widget, its position and size.
+ * @component 
+ * @param {string} Usize size of upper widget (S/M/L)
+ * @param {string} Bsize size of bottom widget (S/M/L)
+ * @param {string} container left or right side container
+ * @param {string} widgetName name of the widget
+ * @returns one widget that covers the entire side or two widgets (top and bottom)
+ */
 function GridType({ Usize, Bsize, container, widgetName }) {
 
   if (Usize === 'L' && Bsize === 'L') {
@@ -31,15 +41,20 @@ function GridType({ Usize, Bsize, container, widgetName }) {
       </Grid>)
   }
 }
-
+/**
+   * Component for creating the WAD.
+   * @component
+   */
 function WAD() {
-  // const [lightTheme, setLightTheme] = useState(0);
+  // States to keep track of layout.
   const [UL, setUL] = useState('');
   const [BL, setBL] = useState('');
   const [UR, setUR] = useState('');
   const [BR, setBR] = useState('');
   const [activeWidget, setActiveWidget] = useState("");
   const [showWidgets, setShowWidgets] = useState([]);
+  
+  // States to manage data with/without X-Plane
   const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [aiPlaneData, setAiPlaneData] = useState();
   const [offlineData, setOfflineData] = useState();
@@ -74,8 +89,6 @@ function WAD() {
           setAiPlaneData(data)
         }
       )
-      // console.timeEnd("fetch")
-      // console.time("between")
     }
   })
 

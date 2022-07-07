@@ -8,7 +8,14 @@ import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
 
-const PFD = ({ lightTheme, data, size }) => {
+/**
+ * Creates a PFD (primary flight display) with the help of smaller instruments
+ * @component
+ * @param {dictinary} data data for widget
+ * @param {string} size size for widget
+ * @returns pfd
+ */
+const PFD = ({ data, size }) => {
 
   const [inData, setInData] = useState();
 
@@ -26,12 +33,13 @@ const PFD = ({ lightTheme, data, size }) => {
     }
   }
 
-  if (size === "m") {
+  // Medium size widget
+  if (size === "M") {
     return (
       <div className={styles.pfd}>
         <div className={styles.mouseears}>
-          <AirSpeed speed={data.true_airspeed} lightTheme={lightTheme} />
-          <Altimeter altitude={data.altitude} pressure={5} lightTheme={lightTheme} />
+          <AirSpeed speed={data.true_airspeed} />
+          <Altimeter altitude={data.altitude} />
         </div>
         <div className={styles.mousehead}>
           <div className={styles.side_values}>
@@ -45,7 +53,7 @@ const PFD = ({ lightTheme, data, size }) => {
         </div>
       </div>
     );
-  } else if (size === "s") {
+  } else if (size === "S") { // small size widget
     return (
       <div className={styles.mouseears}>
         <Attitude roll={data.roll} pitch={data.pitch} width="200px" height="200px"/>

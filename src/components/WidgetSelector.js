@@ -7,6 +7,13 @@ import { useXplaneData } from "./constants";
 import UpdateOfflineData from "./map/UpdateOfflineData";
 import { pfd_init_data } from "./constants";
 
+/**
+ * Component for returning widget from a name and giving the widget the right data
+ * @component
+ * @param {string} widget widget name
+ * @param {size} size size of widget
+ * @returns widget
+ */
 const WidgetSelector = ({ widget, size }) => {
 
   const [data, setData] = useState();

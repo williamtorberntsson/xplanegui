@@ -3,6 +3,13 @@ import styles from "../../styles/AirSpeed.module.css";
 
 import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../../../images";
 
+/**
+ * A widget that shows the airspeed in both knots and mach (speedometer)
+ * @component
+ * @param {float} props.speed speed in m/s
+ * @todo rewrite props to variables 
+ * @returns a airspeed widget
+ */
 const AirSpeed = (props) => {
   let constants = {
     airspeed_limit_l: 0,

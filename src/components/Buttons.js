@@ -1,6 +1,12 @@
-import { Grid, Button } from '@mui/material';
-import { useState } from "react";
 
+/**
+ * The buttons for WAD
+ * @component
+ * @param {function} props.Usize function to set size for upper widget
+ * @param {function} props.Bsize function to set size for bottom widget
+ * @param {function} props.activeWidget function to set the active widget
+ * @returns button layout for WAD
+ */
 const BoxButtons = (props) => {
 
   return (

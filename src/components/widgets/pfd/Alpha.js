@@ -1,6 +1,12 @@
 import React from "react";
 import styles from "../../styles/Alpha.module.css";
 
+/**
+ * A widget that displays the current angle of attack (AOT)
+ * @component
+ * @param {float} alpha alpha (AOT angle) 
+ * @returns a alpha widget
+ */
 const Alpha = ({alpha}) => {
   return (
     <div className={styles.alpha}>
