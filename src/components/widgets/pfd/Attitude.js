@@ -1,7 +1,15 @@
 import React from "react";
-import styles from "./styles/Attitude.module.css";
-import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch } from "../images";
+import styles from "../../styles/Attitude.module.css";
+import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch } from "../../../images";
 
+/**
+ * A widget that shows the current attitude
+ * @component
+ * @param {props} props 
+ * @todo rewrite props to variables
+ * @todo remove width/height as paramater
+ * @returns a attitude widget
+ */
 const Attitude = (props) => {
   let constants = {
     pitch_bound: 90,

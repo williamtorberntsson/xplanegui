@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * A widget that shows statuses for airplane
+ * @component
+ * @param {string} size size of widget
+ * @todo add support for multiple sizes
+ * @todo add more/other info  
+ * @returns widget that show airplane statuses 
+ */
 const Status = ({ size, data }) => {
 
   if (data) {

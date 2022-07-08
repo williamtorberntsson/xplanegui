@@ -1,8 +1,15 @@
 import React from "react";
-import styles from "./styles/Altimeter.module.css";
+import styles from "../../styles/Altimeter.module.css";
 
-import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../images";
+import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../../../images";
 
+/**
+ * A widget that shows the current altitude
+ * @component
+ * @param {*} props
+ * @todo remove width/height as paramater
+ * @returns a altimeter widget
+ */
 const Altimeter = (props) => {
   const altitude_feet = props.altitude * 3.2808399; // m to feet
   const needle = 180 + ((altitude_feet % 1000) * 360) / 1000;
