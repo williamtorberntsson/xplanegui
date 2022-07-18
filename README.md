@@ -1,6 +1,9 @@
 # Xplane GUI
 This project creates a flask-server that connects to X-Plane and sends data from/to X-Plane with a react frontend.
 
+### Generate documenation website with JSdoc
+Run `npm run jdoc` and then `npm run open-docs`
+
 ## Run and install
 
 ### Install

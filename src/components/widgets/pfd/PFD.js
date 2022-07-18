@@ -7,31 +7,18 @@ import Attitude from "./Attitude";
 import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
+import { useXplaneData, pfd_init_data } from "../../constants";
 
 /**
  * Creates a PFD (primary flight display) with the help of smaller instruments
  * @component
- * @param {dictinary} data data for widget
- * @param {string} size size for widget
+ * @prop {dictinary} data data for widget
+ * @prop {string} size size for widget
  * @returns pfd
  */
 const PFD = ({ data, size }) => {
 
-  const [inData, setInData] = useState();
-
-  if (!data) {
-    data = {
-      "longitude": 15.680926012604708,
-      "latitude": 58.41157469382408,
-      "groundspeed": 0,
-      "true_airspeed": 0,
-      "true_heading": 0,
-      "altitude": 0,
-      "pitch": 0,
-      "roll": 0,
-      "alpha": 0
-    }
-  }
+  if(!useXplaneData) data = pfd_init_data;
 
   // Medium size widget
   if (size === "M") {

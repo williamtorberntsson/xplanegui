@@ -7,30 +7,28 @@
  * @param {function} props.activeWidget function to set the active widget
  * @returns button layout for WAD
  */
-const BoxButtons = (props) => {
+const BoxButtons = ({ activeArea, Usize, Bsize, side }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
-      <button className="button-40" onClick={() => { props.Usize('s') }} role="button"></button>
-      <button className="button-40" onClick={() => { props.Usize('m') }} role="button"></button>
-      <button className="button-40" onClick={() => { props.Usize('L'); props.Bsize('L') }} role="button"></button>
-      <button className="button-40" onClick={() => { props.Bsize('m') }} role="button"></button>
-      <button className="button-40" onClick={() => { props.Bsize('s') }} role="button"></button>
+      <button className="button-40" onClick={() => { Usize('S'); activeArea("U" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Usize('M'); activeArea("U" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Usize('L'); Bsize('L'); activeArea("M" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Bsize('M'); activeArea("B" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Bsize('S'); activeArea("B" + side) }} role="button"></button>
     </div>
   )
 };
 
 
-const WidgetButtons = (props) => {
-
-  const handleClick = (widgetName) => props.activeWidget(widgetName);
+const WidgetButtons = ({ activeWidget }) => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '30vw', paddingBottom: '1.5vh' }}>
-      <button className="button-30" onClick={() => { handleClick('pfd') }} role="button">PFD</button>
-      <button className="button-30" onClick={() => { handleClick('weights') }} role="button">Weights</button>
-      <button className="button-30" onClick={() => { handleClick('warnings') }} role="button">Warnings</button>
-      <button className="button-30" onClick={() => { handleClick('None') }} role="button">None</button>
+      <button className="button-30" onClick={() => { activeWidget('pfd') }} role="button">PFD</button>
+      <button className="button-30" onClick={() => { activeWidget('weights') }} role="button">Weights</button>
+      <button className="button-30" onClick={() => { activeWidget('warnings') }} role="button">Warnings</button>
+      <button className="button-30" onClick={() => { activeWidget('none') }} role="button">None</button>
     </div>
   )
 };

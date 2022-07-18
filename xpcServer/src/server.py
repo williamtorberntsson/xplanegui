@@ -96,16 +96,6 @@ def pfd():
             alpha = client.getDREF(alpha_dref)
 
             return {
-                "groundspeed": 10,
-                "true_airspeed": 5,
-                "true_heading": 1,
-                "altitude": 2,
-                "pitch": 10,
-                "roll": 5,
-                "alpha": 3
-            }
-            """
-            return {
                 "groundspeed": groundspeed[0],
                 "true_airspeed": true_airspeed[0],
                 "true_heading": posi[5],
@@ -114,7 +104,6 @@ def pfd():
                 "roll": posi[4],
                 "alpha": alpha[0],
             }
-            """
 
 
 @app.route("/weights")
@@ -128,16 +117,8 @@ def weights():
         while True:
 
             # Own airplane airplane values
-            warnings = client.getDREFs(weight_drefs)
+            weights = client.getDREFs(weight_drefs)
 
-            return {
-                "fuel1": 10,
-                "fuel2": 10,
-                "total_fuel": 5,
-                "payload": 10,
-                "total": 5
-            }
-            """
             return {
                 "fuel1": weights[0][0],
                 "fuel2": weights[1][0],
@@ -145,7 +126,6 @@ def weights():
                 "payload": weights[3][0],
                 "total": weights[4][0]
             }
-            """
 
 
 @app.route("/env")

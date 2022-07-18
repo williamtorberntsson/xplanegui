@@ -1,4 +1,4 @@
-export const useXplaneData = false;
+export const useXplaneData = true;
 export const position_init_data = {
     "longitude": 15.680926012604708,
     "latitude": 58.41157469382408,
@@ -12,4 +12,11 @@ export const pfd_init_data = {
     "pitch": 0,
     "roll": 0,
     "alpha": 0
+}
+export const weights_init_data = {
+    "fuel1": 0,
+    "fuel2": 0,
+    "total_fuel": 0,
+    "payload": 0,
+    "total": 0
 }

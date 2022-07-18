@@ -1,32 +1,32 @@
 import { React, useState, useEffect } from 'react';
-import PFD from "./widgets/pfd/PFD"
 import { BoxButtons, BoxButtonSide, WidgetButtons, ExtendableButtons } from './Buttons';
 import { Grid, Collapse, Box, Stack } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
 import { useXplaneData } from './constants';
-import axios from 'axios';
 
 import './WAD.css';
 import zIndex from '@mui/material/styles/zIndex';
 import Nav_map from './map/Navigation';
 import WidgetSelector from './WidgetSelector';
+import { fetchData, fetchWidgetData } from './fetchData';
 
 
 /**
  * Component for selecting widget, its position and size.
  * @component 
- * @param {string} Usize size of upper widget (S/M/L)
- * @param {string} Bsize size of bottom widget (S/M/L)
- * @param {string} container left or right side container
- * @param {string} widgetName name of the widget
+ * @prop {string} Usize size of upper widget (S/M/L)
+ * @prop {string} Bsize size of bottom widget (S/M/L)
+ * @prop {string} container left or right side container
+ * @prop {dict}
+ * @prop {string} widgetName name of the widget
  * @returns one widget that covers the entire side or two widgets (top and bottom)
  */
-function GridType({ Usize, Bsize, container, widgetName }) {
+function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
 
   if (Usize === 'L' && Bsize === 'L') {
     return (
       <Grid container direction="column" className="left_container" id="wb_three">
-        <WidgetSelector widget={widgetName} size={'L'} useXplaneData={useXplaneData} />
+        <WidgetSelector widget={widgetPositions[`M${side}`]} size={'L'} data={data} />
       </Grid>)
   }
 
@@ -34,10 +34,10 @@ function GridType({ Usize, Bsize, container, widgetName }) {
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_one">
-          <WidgetSelector widget={widgetName} size={Usize} />
+          <WidgetSelector widget={widgetPositions[`U${side}`]} size={Usize} data={data} />
         </Grid>
         <Grid item className={Bsize} id="wb_two">
-          <WidgetSelector widget={widgetName} size={Bsize} />
+          <WidgetSelector widget={widgetPositions[`B${side}`]} size={Bsize} data={data} />
         </Grid>
       </Grid>)
   }
@@ -53,53 +53,41 @@ function WAD() {
   const [UR, setUR] = useState('');
   const [BR, setBR] = useState('');
   const [activeWidget, setActiveWidget] = useState("");
-  const [showWidgets, setShowWidgets] = useState([]);
-  
+  const [activeWidgetArea, setActiveWidgetArea] = useState("")
+  const [widgetPositions, setWidgetPositions] = useState({ UL: null, ML: null, BL: null, UR: null, MR: null, BR: null });
+
   // States to manage data with/without X-Plane
   const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [aiPlaneData, setAiPlaneData] = useState();
+  const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
 
-  const updateWidget = (widget) => setActiveWidget(widget);
 
-  const handleUpdate = (index, widget) => {
-    const newWidgets = [...showWidgets];
-    newWidgets[index] = widget;
-    setShowWidgets(newWidgets);
-  }
+  /**
+   * Function to update widget's position
+   * @function
+   * @param {string} widget name of widget
+   * @param {string} position UL/ML/BL/UR/MR/BR UpperLeft/MiddleLeft/BottomLeft....
+   */
+  const updateWidgetPosition = (widget, pos) => setWidgetPositions({ ...widgetPositions, [pos]: widget })
 
-
-  const changeViewMode = (box) => {
-
-    let index = box - 1;
-    switch (activeWidget) {
-      case "PFD": return handleUpdate(index, <PFD data={useXplaneData ? myAirPlaneData : offlineData} />);
-      case "None": return handleUpdate(index, null);
-    }
-  }
-
-
-  const getDataPlane = () => {
-      axios.get('/plane')
-      .then(res => setMyAirPlaneData(res.data))
-      .catch((error) => console.log(error.message))
-  }
-
-  const getDataEnv = () => {
-    axios.get('/env')
-    .then(res => setAiPlaneData(res.data))
-    .catch((error) => console.log(error.message))
-}
+  // Update postions for widgets on change
+  useEffect(() => {
+    updateWidgetPosition(activeWidget, activeWidgetArea)
+    console.log("update pos", activeWidgetArea)
+  }, [activeWidgetArea])
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
     const interval = setInterval(() => {
-      getDataEnv()
-      getDataPlane()
+      fetchData("env", setAiPlaneData)
+      fetchData("plane", setMyAirPlaneData)
+      fetchWidgetData("pfd", setWidgetData, widgetData)
+      fetchWidgetData("weights", setWidgetData, widgetData)
     }, 500);
     return () => clearInterval(interval);
 
-  },[])
+  }, [])
 
   // Use offline data
   useEffect(() => {
@@ -118,25 +106,25 @@ function WAD() {
         </Grid>
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <GridType Usize={UL} Bsize={BL} container={'left_container'} widgetName={activeWidget} />
+            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} />
           </Grid>
           <Grid item xs={6}>
           </Grid>
           <Grid item xs={3}>
-            <GridType Usize={UR} Bsize={BR} container={'right_container'} widgetName={activeWidget} />
+            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositions} />
           </Grid>
         </Grid>
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
         <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3' }}>
-          <WidgetButtons activeWidget={updateWidget} />
+          <WidgetButtons activeWidget={setActiveWidget} />
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUL} Bsize={setBL} />
+          <BoxButtons Usize={setUL} Bsize={setBL} activeArea={setActiveWidgetArea} side={"L"} />
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUR} Bsize={setBR} />
+          <BoxButtons Usize={setUR} Bsize={setBR} activeArea={setActiveWidgetArea} side={"R"} />
         </Grid>
       </Grid>
     </Grid>

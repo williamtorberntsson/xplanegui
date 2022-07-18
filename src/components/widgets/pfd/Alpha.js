@@ -4,8 +4,8 @@ import styles from "../../styles/Alpha.module.css";
 /**
  * A widget that displays the current angle of attack (AOT)
  * @component
- * @param {float} alpha alpha (AOT angle) 
- * @returns a alpha widget
+ * @prop {float} alpha alpha (AOT angle) 
+ * @returns alpha widget
  */
 const Alpha = ({alpha}) => {
   return (

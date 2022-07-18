@@ -5,7 +5,7 @@ import styles from "../../styles/Heading.module.css"
 /**
  * A tape compass widget 
  * @component
- * @param {heading} heading direction in degrees
+ * @prop {heading} heading direction in degrees
  * @returns heading widget
  */
 const Heading = ({heading}) => {

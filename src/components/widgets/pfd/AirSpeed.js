@@ -6,9 +6,9 @@ import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPo
 /**
  * A widget that shows the airspeed in both knots and mach (speedometer)
  * @component
- * @param {float} props.speed speed in m/s
+ * @prop {float} props.speed speed in m/s
  * @todo rewrite props to variables 
- * @returns a airspeed widget
+ * @returns airspeed widget
  */
 const AirSpeed = (props) => {
   let constants = {

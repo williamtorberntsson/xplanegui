@@ -5,10 +5,10 @@ import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch
 /**
  * A widget that shows the current attitude
  * @component
- * @param {props} props 
+ * @prop {props} props 
  * @todo rewrite props to variables
  * @todo remove width/height as paramater
- * @returns a attitude widget
+ * @returns attitude widget
  */
 const Attitude = (props) => {
   let constants = {

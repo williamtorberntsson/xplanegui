@@ -6,9 +6,9 @@ import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePo
 /**
  * A widget that shows the current altitude
  * @component
- * @param {*} props
+ * @prop {props} props
  * @todo remove width/height as paramater
- * @returns a altimeter widget
+ * @returns altimeter widget
  */
 const Altimeter = (props) => {
   const altitude_feet = props.altitude * 3.2808399; // m to feet
