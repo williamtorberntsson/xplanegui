@@ -10,8 +10,7 @@ It also contains findings about XPlane and other software that might be interest
 - Cannot get information when locked on from XPlaneConnect.
 
 ## Code
-For installation see README. 
-To see all documented implementations run `npm run jsdoc` and then `npm run open-docs`.
+For installation and how to use: see README.md (in source code) 
 
 ### Map
 The map is loaded using ArcGis maps. Esri-loader is used to load the map. Markers are used to mark own
@@ -21,3 +20,10 @@ therefor the markers has be hardcoded. The markers can be designed and use own s
 ### Data
 fetchData.js is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
 The constants.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
+
+### WAD (Wide Area Display)
+The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section).
+Each position has a size (S/M/L) that can be managed with corresponding state **UL**/**ML**/**BL**/**UR**/**MR**/**BR**.
+Widgets can be placed at positions by managing the **widgetPositions** state which holds a name for a widget at each position.
+The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with
+**updateWidgetPosition()**.

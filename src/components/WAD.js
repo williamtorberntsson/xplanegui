@@ -44,15 +44,18 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
   }
 }
 /**
-   * Component for creating the WAD.
-   * @component
-   */
+  * Component for creating the WAD.
+  * @component
+  * @return WAD
+  */
 function WAD() {
-  // States to keep track of layout.
+  // States to keep track of widget sizes
   const [UL, setUL] = useState('');
   const [BL, setBL] = useState('');
   const [UR, setUR] = useState('');
   const [BR, setBR] = useState('');
+
+  // States to keep track of layout.
   const [activeWidget, setActiveWidget] = useState("");
   const [activeWidgetArea, setActiveWidgetArea] = useState("")
   const [widgetPositions, setWidgetPositions] = useState({ UL: null, ML: null, BL: null, UR: null, MR: null, BR: null });

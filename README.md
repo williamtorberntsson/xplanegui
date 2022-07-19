@@ -2,7 +2,7 @@
 This project creates a flask-server that connects to X-Plane and sends data from/to X-Plane with a react frontend.
 
 ### Generate documenation website with JSdoc
-Run `npm run jsdoc` and then `npm run open-docs`
+To see all documented implementations run `npm run jsdoc` and then `npm run open-docs`.
 
 ## Run and install
 

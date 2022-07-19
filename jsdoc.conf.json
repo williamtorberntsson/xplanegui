@@ -27,7 +27,7 @@
   "opts": {
     "destination": "docs",
     "recurse": true,
-    "readme": "README.md",
+    "readme": "Documentation.md",
     "template": "node_modules/better-docs"
   }
 }
