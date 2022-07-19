@@ -60,7 +60,7 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nr
           symbol: myAirPlaneMarker
         });
 
-        
+
         // Add points for all pointCoordinates
         let pointsArray = [] // init array to add points (markings) to
         for (let i = 0; i < nrAiPlanes; i++) {
@@ -142,7 +142,7 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nr
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
           layer.add(tempPoint) // add edited point to layer
-       //   console.log( tempPoint.symbol.angle)
+          //   console.log( tempPoint.symbol.angle)
         })
       } catch (error) {
         console.log(error)
@@ -156,7 +156,7 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nr
     if (!useXplaneData && offlineData && view) {
       // Set rotation and position for camera
       view.center = [offlineData.longitude, offlineData.latitude];
-      view.rotation = offlineData.heading;
+      view.rotation = offlineData.true_heading;
 
       layer.removeAll() // clear layer with markers
 
@@ -166,6 +166,17 @@ const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nr
       tempPoint.geometry.latitude = offlineData.latitude;    // update latitude
       tempPoint.geometry.angle = offlineData.heading;        // update angle
       layer.add(tempPoint) // add updated point to layer
+
+      // // Update AI airplane positions
+      // points.forEach(function (point, i) {
+      //   let tempPoint = point.clone();
+      //   tempPoint.geometry.longitude = offlineData.planes_data.longitude;  // update longitude
+      //   tempPoint.geometry.latitude = offlineData.planes_data.latitude;    // update latitude
+      //   tempPoint.symbol.angle = offlineData.planes_data.true_heading - offlineData.true_heading;     // update angle
+      //   layer.add(tempPoint) // add edited point to layer
+      //   //   console.log( tempPoint.symbol.angle)
+      // })
+
     }
   }, [offlineData])
 
