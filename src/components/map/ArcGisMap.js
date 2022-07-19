@@ -7,9 +7,9 @@ import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
 
 /**
  * Creates a map and adds points at {pointCoordinates} locations
- * @component 
- * @param {*} param0 
- * @returns 
+ * @component
+ * @param {*} param0
+ * @returns map
  */
 const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   const [zoomvalue, setZoomvalue] = useState(mapZoom);
