@@ -13,7 +13,7 @@ const fetchData = (path, updateStateFunc) => {
 }
 
 /**
- * Function to fetch data, also needs prev state
+ * Function to fetch data, updates prev state
  * @param {string} path 
  * @param {function} updateStateFunc 
  * @param {state} state

@@ -1,8 +1,12 @@
-import { React, useState, useEffect } from 'react';
+import React from 'react';
 import WAD from './components/WAD'
 
 import './App.css';
 
+/**
+ * Head app function
+ * @returns WAD
+ */
 function App() {
 
   return (

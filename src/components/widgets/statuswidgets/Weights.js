@@ -1,5 +1,5 @@
 import React from "react";
-import { useXplaneData, weights_init_data } from "../../constants";
+import { useXplaneData, weights_init_data } from "../../../constants";
 
 /**
  * A widget that shows weights for airplane

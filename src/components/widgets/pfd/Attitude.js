@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/Attitude.module.css";
-import { HorizonBack, HorizonBall, HorizonCircle, HorizonMechanics, HorizonPitch } from "../../../images";
+import { HorizonBack, HorizonCircle, HorizonMechanics, HorizonPitch } from "../../../images";
 
 /**
  * A widget that shows the current attitude
@@ -26,13 +26,13 @@ const Attitude = (props) => {
 
   return (
     <div className={styles.attitude} style={{width: props.width, height: props.height, transform: `rotate(${roll}deg)` }}>
-        <img className={styles.horizonback} src={HorizonBack} />
+        <img className={styles.horizonback} src={HorizonBack} alt=""/>
 
         <div className={styles.pitch_mask}>
-          <img className={styles.pitch} src={HorizonPitch} style={{ objectPosition: `0 ${pitch}%` }} />
+          <img className={styles.pitch} src={HorizonPitch} style={{ objectPosition: `0 ${pitch}%` }} alt="" />
         </div>
-        <img className={styles.horizoncircle} src={HorizonCircle} />
-        <img className={styles.mechanics} src={HorizonMechanics} />
+        <img className={styles.horizoncircle} src={HorizonCircle} alt="" />
+        <img className={styles.mechanics} src={HorizonMechanics} alt="" />
       </div>
   );
 };

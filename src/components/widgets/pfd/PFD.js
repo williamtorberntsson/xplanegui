@@ -7,7 +7,7 @@ import Attitude from "./Attitude";
 import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
-import { useXplaneData, pfd_init_data } from "../../constants";
+import { useXplaneData, pfd_init_data } from "../../../constants";
 
 /**
  * Creates a PFD (primary flight display) with the help of smaller instruments

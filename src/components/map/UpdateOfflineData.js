@@ -1,4 +1,4 @@
-import { position_init_data, pfd_init_data } from "../constants";
+import { position_init_data, pfd_init_data } from "../../constants";
 
 const UpdateOfflineData = (data, updateData) => {
   // simple example

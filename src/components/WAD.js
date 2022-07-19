@@ -1,13 +1,11 @@
 import { React, useState, useEffect } from 'react';
-import { BoxButtons, BoxButtonSide, WidgetButtons, ExtendableButtons } from './Buttons';
-import { Grid, Collapse, Box, Stack } from '@mui/material';
+import { BoxButtons, WidgetButtons, ExtendableButtons } from './Buttons';
+import { Grid } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
-import { useXplaneData } from './constants';
 
 import './WAD.css';
-import zIndex from '@mui/material/styles/zIndex';
-import Nav_map from './map/Navigation';
 import WidgetSelector from './WidgetSelector';
+import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
 
 
@@ -102,7 +100,7 @@ function WAD() {
     <Grid container className="wad_frame">
       <Grid container className="wad_content">
         <Grid item className="map_item" xs={12}>
-          <Nav_map useXplaneData={useXplaneData} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
+          <ArcGisMap zoom={8} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
         <Grid container className="overlay_container">
           <Grid item xs={3}>

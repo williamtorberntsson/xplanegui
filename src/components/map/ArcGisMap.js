@@ -1,10 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
+import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
 
-// Creates a map and adds points at {pointCoordinates} locations
-const Map = ({ zoom, useXplaneData, myAirPlaneData, aiPlaneData, offlineData, nrAiPlanes }) => {
-  const [zoomvalue, setZoomvalue] = useState(zoom);
+//
+
+/**
+ * Creates a map and adds points at {pointCoordinates} locations
+ * @component 
+ * @param {*} param0 
+ * @returns 
+ */
+const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
+  const [zoomvalue, setZoomvalue] = useState(mapZoom);
   const [view, setView] = useState(null);
   const [myPoint, setMyPoint] = useState(null);
   const [points, setPoints] = useState(null);
