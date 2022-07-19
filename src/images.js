@@ -1,7 +1,6 @@
 
 // Attitude meter
 import HorizonBack from "./assets/img/horizon_back.svg";
-import HorizonBall from "./assets/img/horizon_ball.svg";
 import HorizonCircle from "./assets/img/horizon_circle.svg";
 import HorizonMechanics from "./assets/img/horizon_mechanics.svg";
 import HorizonPitch from "./assets/img/pitch.svg"
@@ -27,20 +26,20 @@ import enemyAirPlaneSvg from "./assets/img/mapIcons/enemyairplane.svg";
 import friendlyAirPlaneSvg from "./assets/img/mapIcons/friendlyairplane.svg";
 
 export {
-  HorizonMechanics,
-  HorizonBack,
-  HorizonBall,
-  HorizonCircle,
-  HorizonPitch,
+  
   AltitudeMeterBlack,
   AltitudeMeterWhite,
   AltitudePointerGrey,
   AltitudePointerRed,
+  Compass,
+  HorizonBack,
+  HorizonCircle,
+  HorizonMechanics,
+  HorizonPitch,
   VelocityMeterBlack,
   VelocityMeterWhite,
   VelocityPointerGrey,
   VelocityPointerRed,
-  Compass,
   myAirPlaneSvg,
   enemyAirPlaneSvg,
   friendlyAirPlaneSvg

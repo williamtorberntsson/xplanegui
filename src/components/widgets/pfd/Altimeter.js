@@ -1,8 +1,15 @@
 import React from "react";
-import styles from "./styles/Altimeter.module.css";
+import styles from "../../styles/Altimeter.module.css";
 
-import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../images";
+import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePointerRed } from "../../../images";
 
+/**
+ * A widget that shows the current altitude
+ * @component
+ * @prop {props} props
+ * @todo remove width/height as paramater
+ * @returns altimeter widget
+ */
 const Altimeter = (props) => {
   const altitude_feet = props.altitude * 3.2808399; // m to feet
   const needle = 180 + ((altitude_feet % 1000) * 360) / 1000;
@@ -10,9 +17,11 @@ const Altimeter = (props) => {
   const alt_hundred = (altitude_feet % 1000).toFixed(0)
 
   return (
-    <div className={styles.altimeter}>
+    <div className={styles.altimeter} style={{width: props.width, height: props.height}}>
       <img className={styles.meter} src={AltitudeMeterBlack} />
-      <div className={styles.dial} style={{ transform: `translate(${50 * Math.cos((needle + 90) * (Math.PI / 180))}px, ${50 * Math.sin((needle + 90) * (Math.PI / 180))}px) rotate(${needle}deg) scale(0.4)` }}>
+      <div className={styles.dial} style={{
+          transform: `translate(${35 * Math.cos((needle + 90) * (Math.PI / 180))}%,
+          ${35 * Math.sin((needle + 90) * (Math.PI / 180))}%) rotate(${needle}deg) scale(0.4)` }}> {/* translate and rotate needle in a circle */} 
         <img src={AltitudePointerGrey} />
       </div>
       <div className={styles.value}>
