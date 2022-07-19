@@ -6,18 +6,21 @@ import { AltitudeMeterBlack, AltitudeMeterWhite, AltitudePointerGrey, AltitudePo
 /**
  * A widget that shows the current altitude
  * @component
- * @prop {props} props
- * @todo remove width/height as paramater
+ * @category Widget
+ * @subcategory PFD
+ * @prop {float} altitude altitude in meter
+ * @prop {number} width width in pixels
+ * @prop {number} height height in pixels
  * @returns altimeter widget
  */
-const Altimeter = (props) => {
-  const altitude_feet = props.altitude * 3.2808399; // m to feet
+const Altimeter = ({altitude, width, height}) => {
+  const altitude_feet = altitude * 3.2808399; // m to feet
   const needle = 180 + ((altitude_feet % 1000) * 360) / 1000;
   const alt_thousand = (Math.floor(altitude_feet / 1000)).toFixed(0)
   const alt_hundred = (altitude_feet % 1000).toFixed(0)
 
   return (
-    <div className={styles.altimeter} style={{width: props.width, height: props.height}}>
+    <div className={styles.altimeter} style={{width: width, height: height}}>
       <img className={styles.meter} src={AltitudeMeterBlack} />
       <div className={styles.dial} style={{
           transform: `translate(${35 * Math.cos((needle + 90) * (Math.PI / 180))}%,

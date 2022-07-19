@@ -8,6 +8,7 @@ import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
 /**
  * Creates a map and adds points at {pointCoordinates} locations
  * @component
+ * @category Map
  * @param {*} param0
  * @returns map
  */

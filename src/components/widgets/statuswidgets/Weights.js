@@ -4,6 +4,8 @@ import { useXplaneData, weights_init_data } from "../../../constants";
 /**
  * A widget that shows weights for airplane
  * @component
+ * @category Widget
+ * @subcategory Status Widget
  * @prop {string} size size of widget
  * @prop {dictionary} data data for widget
  * @todo add support for multiple sizes

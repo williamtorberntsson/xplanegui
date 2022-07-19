@@ -4,6 +4,8 @@ import React from "react";
  * A widget that shows warnings for airplane for every active warning.
  * If no warnings are active this shows nothing.
  * @component
+ * @category Widget
+ * @subcategory Status Widget
  * @prop {string} size size of widget
  * @prop {dictionary} data data for widget
  * @todo add support for multiple sizes

@@ -5,8 +5,13 @@ import { HorizonBack, HorizonCircle, HorizonMechanics, HorizonPitch } from "../.
 /**
  * A widget that shows the current attitude
  * @component
- * @prop {props} props 
- * @todo rewrite props to variables
+ * @category Widget
+ * @subcategory PFD
+ * @prop {object} props properties for attitude widget
+ * @prop {float} props.roll roll of airplane in degrees
+ * @prop {float} props.pitch pitch of airplane in degrees
+ * @prop {number} props.width width in pixels
+ * @prop {number} props.height height in pixels
  * @todo remove width/height as paramater
  * @returns attitude widget
  */

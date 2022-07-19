@@ -6,6 +6,8 @@ import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPo
 /**
  * A widget that shows the airspeed in both knots and mach (speedometer)
  * @component
+ * @category Widget
+ * @subcategory PFD
  * @prop {float} props.speed speed in m/s
  * @todo rewrite props to variables 
  * @returns airspeed widget

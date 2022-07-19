@@ -5,6 +5,8 @@ import styles from "../../styles/Heading.module.css"
 /**
  * A tape compass widget 
  * @component
+ * @category Widget
+ * @subcategory PFD
  * @prop {heading} heading direction in degrees
  * @returns heading widget
  */

@@ -7,8 +7,10 @@ It also contains findings about XPlane and other software that might be interest
 - How often XPlane send data can be toggled, needs a deeper look.
 - It is possible to change difficulty of CGF but not advanced behavior.
 - Cannot get information about which CGF is friendly or not.
+- Cannot get information when locked on from XPlaneConnect.
 
 ## Code
+For installation see README. 
 To see all documented implementations run `npm run jsdoc` and then `npm run open-docs`.
 
 ### Map

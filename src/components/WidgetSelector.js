@@ -7,6 +7,7 @@ import Status from "./widgets/statuswidgets/Status";
 /**
  * Component for returning widget from a name and giving the widget the right data
  * @component
+ * @category Widget
  * @prop {string} widget widget name
  * @prop {size} size size of widget
  * @returns widget

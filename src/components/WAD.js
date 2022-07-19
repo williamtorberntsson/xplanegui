@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from 'react';
-import { BoxButtons, WidgetButtons, ExtendableButtons } from './Buttons';
+import BoxButtons from './buttons/BoxButtons';
+import ExtendableButtons from './buttons/ExtendableButtons';
+import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
 
@@ -11,7 +13,8 @@ import { fetchData, fetchWidgetData } from './fetchData';
 
 /**
  * Component for selecting widget, its position and size.
- * @component 
+ * @component
+ * @category WAD
  * @prop {string} Usize size of upper widget (S/M/L)
  * @prop {string} Bsize size of bottom widget (S/M/L)
  * @prop {string} container left or right side container

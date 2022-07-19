@@ -12,6 +12,8 @@ import { useXplaneData, pfd_init_data } from "../../../constants";
 /**
  * Creates a PFD (primary flight display) with the help of smaller instruments
  * @component
+ * @category Widget
+ * @subcategory PFD
  * @prop {dictinary} data data for widget
  * @prop {string} size size for widget
  * @returns pfd
