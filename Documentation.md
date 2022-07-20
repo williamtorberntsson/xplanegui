@@ -3,7 +3,7 @@ This document describes how different parts of this code works together to make 
 It also contains findings about XPlane and other software that might be interesting.
 
 ### XPlane
-- XPlane **do** support missile lock/target sounds but **airplanes with FMOD breakes** that feature as of 2022/07.
+- XPlane **do** support missile lock/target sounds but **airplanes with FMOD soundengine** does not support that sound as of 2022/07.
 - How often XPlane send data can be toggled, needs a deeper look.
 - It is possible to change difficulty of CGF but not advanced behavior.
 - Cannot get information about which CGF is friendly or not.
@@ -13,12 +13,14 @@ It also contains findings about XPlane and other software that might be interest
 For installation and how to use: see README.md (in source code) 
 
 ### Map
-The map is loaded using ArcGis maps. Esri-loader is used to load the map. Markers are used to mark own
-airplane and other airplanes. If CGF are friendly or not has to be toggled in XPlane game itself and
-therefor the markers has be hardcoded. The markers can be designed and use own svg.
+The map is loaded using **[ArcGis](https://developers.arcgis.com/javascript/latest/api-reference/)**. **[Esri-loader](https://github.com/Esri/esri-loader)** is used to load the map. Markers are used to mark own
+airplane and other airplanes. If CGF are friendly or not has to be toggled in the XPlane game itself and
+therefor the markers has be hardcoded. The markers can be designed and use your own svg.
+To create a marker you need a GraphicsLayer, a Point and a Graphic.
+An enemy, friendly and own airplane-markers have been created as examples in the **Map.js** component.
 
 ### Data
-fetchData.js is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
+**fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
 The constants.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
 
 ### WAD (Wide Area Display)
