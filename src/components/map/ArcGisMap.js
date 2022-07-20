@@ -25,81 +25,12 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
       "esri/Graphic",
       "esri/layers/GraphicsLayer",
       "esri/geometry/Point",
-      "esri/symbols/PictureMarkerSymbol"]).then(([Map, MapView, Graphic, GraphicsLayer, Point, PictureMarkerSymbol]) => {
+      "esri/symbols/PictureMarkerSymbol",
+      "esri/PopupTemplate"]).then(([Map, MapView, Graphic, GraphicsLayer, Point, PictureMarkerSymbol, PopupTemplate]) => {
 
         const map = new Map({
           basemap: 'gray-vector'
         });
-
-        const graphicsLayer = new GraphicsLayer();
-        map.add(graphicsLayer);
-
-        // Creating markers for different airplanes
-        const myAirPlaneMarker = {
-          type: "picture-marker",
-          url: myAirPlaneSvg,
-          angle: 0,
-          width: "20px",
-          height: "20px"
-        };
-
-        const enemyAirPlaneMarker = {
-          type: "picture-marker",
-          url: enemyAirPlaneSvg,
-          angle: 0,
-          width: "20px",
-          height: "20px"
-        };
-
-        const friendlyAirPlaneMarker = {
-          type: "picture-marker",
-          url: friendlyAirPlaneSvg,
-          angle: 0,
-          width: "20px",
-          height: "20px"
-        };
-
-        // Add point for own airplane
-        let mypoint = new Point({
-          type: "point"
-        });
-        let mypointGraphic = new Graphic({
-          geometry: mypoint,
-          symbol: myAirPlaneMarker
-        });
-
-
-        // Add points for all pointCoordinates
-        let pointsArray = [] // init array to add points (markings) to
-        for (let i = 0; i < nrAiPlanes; i++) {
-          // Create a point
-          let point = new Point({
-            type: "point"
-          });
-
-          // Select symbol depending on type
-          let symboltype;
-          switch ("enemy" /*aiPlaneType....?*/) { // not implemented
-            case "me":
-              symboltype = myAirPlaneMarker
-              break;
-            case "friendly":
-              symboltype = friendlyAirPlaneMarker
-              break;
-            case "enemy":
-              symboltype = enemyAirPlaneMarker
-              break;
-            default:
-              symboltype = enemyAirPlaneMarker
-          }
-          // create a graphic with the point
-          let pointGraphic = new Graphic({
-            geometry: point,
-            symbol: symboltype
-          });
-
-          pointsArray.push(pointGraphic) // add graphic to array
-        }
 
         // Create a view
         let view = new MapView({
@@ -107,7 +38,89 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           map: map,
           zoom: zoomvalue,
           ui: { components: ["attribution"] } // hides default zoom buttons
-        });
+        })
+
+        const graphicsLayer = new GraphicsLayer();
+          map.add(graphicsLayer);
+
+          // Creating markers for different airplanes
+          const myAirPlaneMarker = {
+            type: "picture-marker",
+            url: myAirPlaneSvg,
+            angle: 0,
+            width: "20px",
+            height: "20px"
+          };
+
+          const enemyAirPlaneMarker = {
+            type: "picture-marker",
+            url: enemyAirPlaneSvg,
+            angle: 0,
+            width: "20px",
+            height: "20px",
+          };
+
+          const friendlyAirPlaneMarker = {
+            type: "picture-marker",
+            url: friendlyAirPlaneSvg,
+            angle: 0,
+            width: "20px",
+            height: "20px"
+          };
+
+          // Add point for own airplane
+          let mypoint = new Point({
+            type: "point"
+          });
+
+          let mypointGraphic = new Graphic({
+            geometry: mypoint,
+            symbol: myAirPlaneMarker,
+          });
+
+
+          // Add points for all pointCoordinates
+          let pointsArray = [] // init array to add points (markings) to
+          for (let i = 0; i < nrAiPlanes; i++) {
+            // Create a point
+            // console.log(pointsArray)
+
+            var point = new Point({
+              type: "point",
+            });
+
+            // Select symbol depending on type
+            let symboltype;
+            switch ("enemy" /*aiPlaneType....?*/) { // not implemented
+              case "me":
+                symboltype = myAirPlaneMarker
+                break;
+              case "friendly":
+                symboltype = friendlyAirPlaneMarker
+                break;
+              case "enemy":
+                symboltype = enemyAirPlaneMarker
+                break;
+              default:
+                symboltype = enemyAirPlaneMarker
+            }
+
+            // var template = new PopupTemplate({
+            //   title: "New Title",
+            //   content: "New Content"
+            // });
+
+            // create a graphic with the point
+            var pointGraphic = new Graphic({
+              geometry: point,
+              symbol: symboltype,
+              popupTemplate: {
+                title: "New Title",
+                content: "New Content",
+              }
+            });
+            pointsArray.push(pointGraphic) // add graphic to array
+          }
 
         // Update states when ready
         view.when(() => {
@@ -116,6 +129,29 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           setPoints(pointsArray)      // add all other airplane graphics to state
           setLayer(graphicsLayer);
         });
+
+        view.on("click", function(event) {
+          event.stopPropagation();
+      
+          // Get the coordinates of the click on the view
+          // around the decimals to 3 decimals
+      
+          view.popup.open({
+              // Set the popup's title to the coordinates of the clicked location
+              features: pointsArray,
+              // location: upper, // Set the location of the popup to the clicked location
+          });
+      });
+
+
+        // view.on("click", function(event){
+        //   console.log('klick')
+        //   view.popup.open({
+        //    location: event.mapPoint,  // location of the click on the view
+        //    title: "You clicked here",  // title displayed in the popup
+        //    content: "This is a point of interest"  // content displayed in the popup
+        //   });
+        // });
       })
 
     return () => {
@@ -150,7 +186,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
           layer.add(tempPoint) // add edited point to layer
-          //   console.log( tempPoint.symbol.angle)
+            console.log( tempPoint.symbol.angle)
         })
       } catch (error) {
         console.log(error)
@@ -171,19 +207,24 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
       // Update own airplane position
       let tempPoint = myPoint.clone();
       tempPoint.geometry.longitude = offlineData.longitude;  // update longitude
-      tempPoint.geometry.latitude = offlineData.latitude;    // update latitude
+      tempPoint.geometry.latitude = offlineData.latitude;  // update latitude
+      // tempPoint.popupTemplate.location = {latitude: 34.0571, longitude: -117.1968};
       tempPoint.geometry.angle = offlineData.heading;        // update angle
       layer.add(tempPoint) // add updated point to layer
 
-      // // Update AI airplane positions
-      // points.forEach(function (point, i) {
-      //   let tempPoint = point.clone();
-      //   tempPoint.geometry.longitude = offlineData.planes_data.longitude;  // update longitude
-      //   tempPoint.geometry.latitude = offlineData.planes_data.latitude;    // update latitude
-      //   tempPoint.symbol.angle = offlineData.planes_data.true_heading - offlineData.true_heading;     // update angle
-      //   layer.add(tempPoint) // add edited point to layer
-      //   //   console.log( tempPoint.symbol.angle)
-      // })
+      // Update AI airplane positions
+      points.forEach(function (point, i) {
+        // console.log(point)
+        let tempPoint = point.clone();
+        tempPoint.geometry.longitude = offlineData[i].longitude;  // update longitude
+        tempPoint.geometry.latitude = offlineData[i].latitude;    // update latitude
+        // console.log(tempPoint.popupTemplate)
+        tempPoint.symbol.angle = offlineData[i].true_heading - offlineData.true_heading;     // update angle
+        view.popup.location = {longitude: offlineData[i].longitude, latitude: offlineData[i].latitude}
+        layer.add(tempPoint) // add edited point to layer
+        // console.log(offlineData.ai_longitude)
+
+      })
 
     }
   }, [offlineData])

@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
     "esri-loader": "^3.5.0",
+    "http-proxy-middleware": "^2.0.6",
     "jsdoc": "^3.6.10",
     "open-cli": "^7.0.1",
     "react": "^18.2.0",

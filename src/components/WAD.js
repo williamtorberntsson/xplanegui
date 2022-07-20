@@ -7,6 +7,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
+import { useXplaneData } from '../constants';
 
 
 /**
@@ -72,11 +73,12 @@ function WAD() {
   // Update postions for widgets on change
   useEffect(() => {
     updateWidgetPosition(activeWidget, activeWidgetArea)
-    console.log("update pos", activeWidgetArea)
+    // console.log("update pos", activeWidgetArea)
   }, [activeWidgetArea])
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
+    if (useXplaneData) {
     const interval = setInterval(() => {
       fetchData("env", setAiPlaneData)
       fetchData("plane", setMyAirPlaneData)
@@ -84,6 +86,7 @@ function WAD() {
       fetchWidgetData("weights", setWidgetData, widgetData)
     }, 500);
     return () => clearInterval(interval);
+    }
 
   }, [])
 
@@ -102,7 +105,7 @@ function WAD() {
         <Grid item className="map_item" xs={12}>
           <ArcGisMap zoom={8} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
-        <Grid container className="overlay_container">
+        {/* <Grid container className="overlay_container">
           <Grid item xs={3}>
             <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} />
           </Grid>
@@ -123,7 +126,7 @@ function WAD() {
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
           <BoxButtons Usize={setUR} Bsize={setBR} activeArea={setActiveWidgetArea} side={"R"} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Grid>
   );

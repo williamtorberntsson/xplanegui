@@ -1,10 +1,13 @@
-import { position_init_data, pfd_init_data } from "../../constants";
+import { position_init_data, pfd_init_data, planes_init_data } from "../../constants";
 
 const UpdateOfflineData = (data, updateData) => {
   // simple example
+  // console.log(data)
   if (data) {
     updateData({
       ...data,
+      0:{longitude: data[0].longitude + 0.0001, latitude: data[0].latitude + 0.0001, true_heading: (data[0].true_heading + 0.01) % 360},
+      1:{longitude: data[1].longitude - 0.002, latitude: data[1].latitude + 0.0001, true_heading: (data[1].true_heading + 0.9) % 360},
       longitude: data.longitude + 0.0001,
       latitude: data.latitude + 0.0001,
       groundspeed: data.groundspeed + 1,
@@ -14,24 +17,10 @@ const UpdateOfflineData = (data, updateData) => {
       pitch: (data.pitch + 0.1) % 90,
       roll: data.roll,
       alpha: data.alpha,
-      planes_data: [{longitude: data.longitude + 0.0003, latitude: data.latitude + 0.0001, true_heading: (data.true_heading + 0.01) % 360}],
-
-
-    //   nr_of_planes: 5,
-    //   planes_data: [0] * nr_of_planes,
-
-
-    //   for i = range(len(planes_data))
-    //   temp = client.getPOSI(i + 1)
-    //           planes_data[i] = {
-    //     "longitude": temp[1],
-    //     "latitude": temp[0],
-    //     "true_heading": temp[5]
-    //   },
     })
 
   } else { // no data
-    updateData(Object.assign({}, position_init_data, pfd_init_data)) // merge two dict
+    updateData(Object.assign({}, position_init_data, pfd_init_data, planes_init_data)) // merge two dict
   }
 }
 
