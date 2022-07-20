@@ -8,15 +8,15 @@
  * @param {function} props.activeWidget function to set the active widget
  * @returns array of buttons
  */
-const BoxButtons = ({ activeArea, Usize, Bsize, side }) => {
+const BoxButtons = ({ Usize, Bsize, selectedPos, side }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
-      <button className="button-40" onClick={() => { Usize('S'); activeArea("U" + side) }} role="button"></button>
-      <button className="button-40" onClick={() => { Usize('M'); activeArea("U" + side) }} role="button"></button>
-      <button className="button-40" onClick={() => { Usize('L'); Bsize('L'); activeArea("M" + side) }} role="button"></button>
-      <button className="button-40" onClick={() => { Bsize('M'); activeArea("B" + side) }} role="button"></button>
-      <button className="button-40" onClick={() => { Bsize('S'); activeArea("B" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Usize('S'); selectedPos("U" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Usize('M'); selectedPos("U" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Usize('L'); Bsize('L'); selectedPos("M" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Bsize('M'); selectedPos("B" + side) }} role="button"></button>
+      <button className="button-40" onClick={() => { Bsize('S'); selectedPos("B" + side) }} role="button"></button>
     </div>
   )
 };
