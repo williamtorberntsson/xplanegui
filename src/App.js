@@ -1,6 +1,4 @@
-import React from 'react';
 import WAD from './components/WAD'
-
 import './App.css';
 
 /**

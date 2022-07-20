@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "../../styles/Alpha.module.css";
 
 /**
@@ -9,7 +8,7 @@ import styles from "../../styles/Alpha.module.css";
  * @prop {float} alpha alpha (AOT angle) 
  * @returns alpha widget
  */
-const Alpha = ({alpha}) => {
+const Alpha = ({ alpha }) => {
   return (
     <div className={styles.alpha}>
       <span>&alpha;</span>

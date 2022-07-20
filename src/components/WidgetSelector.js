@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import PFD from "./widgets/pfd/PFD";
 import Weights from "./widgets/statuswidgets/Weights";
 import Warnings from "./widgets/statuswidgets/Warnings";

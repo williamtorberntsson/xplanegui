@@ -8,7 +8,7 @@ To see all documented implementations run `npm run jsdoc` and then `npm run open
 
 ### Installation
 - Install flask (python)
-- Run `npm install`
+- Run `npm install` (might have to use ``--legacy-peer-deps`)
 
 ### How to run
 Start up X-plane together with front-end and back-end on the same computer.

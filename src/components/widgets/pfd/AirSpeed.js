@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "../../styles/AirSpeed.module.css";
 
-import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../../../images";
+import { VelocityMeterBlack, VelocityPointerGrey } from "../../../images";
 
 /**
  * A widget that shows the airspeed in both knots and mach (speedometer)
@@ -12,10 +11,10 @@ import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPo
  * @returns airspeed widget
  * @example
  * return (
- *   <div> HEJ </div>
+ *   <AirSpeed speed={150} />
  * )
  */
-const AirSpeed = ({speed}) => {
+const AirSpeed = ({ speed }) => {
   let constants = {
     airspeed_limit_l: 0,
     airspeed_0_to_1: 100,

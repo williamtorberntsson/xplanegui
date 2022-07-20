@@ -1,4 +1,3 @@
-import React from "react";
 import { useXplaneData, weights_init_data } from "../../../constants";
 
 /**

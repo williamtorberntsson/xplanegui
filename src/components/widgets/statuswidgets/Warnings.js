@@ -1,4 +1,3 @@
-import React from "react";
 
 /**
  * A widget that shows warnings for airplane for every active warning.
@@ -24,8 +23,8 @@ const Warnings = ({ size, data }) => {
     return (
       <div>
         <p>Warnings: </p>
-        {Object.keys(data).map(function(key, index) {
-          if(data[key] == 1) return <p id={index}>{Messages[key]}</p>
+        {Object.keys(data).map(function (key, index) {
+          if (data[key] == 1) return <p id={index}>{Messages[key]}</p>
         })}
       </div>
     )

@@ -1,5 +1,3 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import styles from "../../styles/PFD.module.css"
 import AirSpeed from "./AirSpeed";
 import Altimeter from "./Altimeter";
@@ -20,7 +18,7 @@ import { useXplaneData, pfd_init_data } from "../../../constants";
  */
 const PFD = ({ data, size }) => {
 
-  if(!useXplaneData) data = pfd_init_data;
+  if (!useXplaneData) data = pfd_init_data;
 
   // Medium size widget
   if (size === "M") {
@@ -45,8 +43,8 @@ const PFD = ({ data, size }) => {
   } else if (size === "S") { // small size widget
     return (
       <div className={styles.mouseears}>
-        <Attitude roll={data.roll} pitch={data.pitch} width="200px" height="200px"/>
-        <Altimeter altitude={data.altitude} width="200px" height="200px"/>
+        <Attitude roll={data.roll} pitch={data.pitch} width="200px" height="200px" />
+        <Altimeter altitude={data.altitude} width="200px" height="200px" />
       </div>
     )
   }

@@ -1,4 +1,3 @@
-import React from "react";
 import { Compass } from "../../../images";
 import styles from "../../styles/Heading.module.css"
 
@@ -10,8 +9,8 @@ import styles from "../../styles/Heading.module.css"
  * @prop {heading} heading direction in degrees
  * @returns heading widget
  */
-const Heading = ({heading}) => {
-  const calc_heading = heading * (93.3-6.7) / 360 + 6.7; // fit heading to svg
+const Heading = ({ heading }) => {
+  const calc_heading = heading * (93.3 - 6.7) / 360 + 6.7; // fit heading to svg
 
   return (
     <div className={styles.compass_mask}>
