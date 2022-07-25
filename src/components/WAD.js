@@ -94,7 +94,7 @@ function WAD() {
   useEffect(() => {
     const interval = setInterval(() => {
       UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-    }, 20); // update 20 times/s
+    }, 200); // update 20 times/s
 
     return () => clearInterval(interval); // Unmount function to prevent memory leaks.
   })
@@ -105,7 +105,10 @@ function WAD() {
         <Grid item className="map_item" xs={12}>
           <ArcGisMap zoom={8} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
-        {/* <Grid container className="overlay_container">
+
+
+
+        <Grid container className="overlay_container">
           <Grid item xs={3}>
             <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} />
           </Grid>
@@ -115,6 +118,9 @@ function WAD() {
             <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositions} />
           </Grid>
         </Grid>
+
+
+
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
@@ -126,7 +132,7 @@ function WAD() {
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
           <BoxButtons Usize={setUR} Bsize={setBR} activeArea={setActiveWidgetArea} side={"R"} />
-        </Grid> */}
+        </Grid>
       </Grid>
     </Grid>
   );

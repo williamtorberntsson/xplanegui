@@ -7,7 +7,7 @@ const UpdateOfflineData = (data, updateData) => {
     updateData({
       ...data,
       0:{longitude: data[0].longitude + 0.0001, latitude: data[0].latitude + 0.0001, true_heading: (data[0].true_heading + 0.01) % 360},
-      1:{longitude: data[1].longitude - 0.002, latitude: data[1].latitude + 0.0001, true_heading: (data[1].true_heading + 0.9) % 360},
+      1:{longitude: data[1].longitude - 0.0001, latitude: data[1].latitude + 0.0001, true_heading: (data[1].true_heading + 0.1) % 360},
       longitude: data.longitude + 0.0001,
       latitude: data.latitude + 0.0001,
       groundspeed: data.groundspeed + 1,

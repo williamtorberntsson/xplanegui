@@ -36,6 +36,7 @@
     position: absolute;
     /* background-color: red; */
     /* z-index: 1; */
+    pointer-events: none;
 }
 
 .left_container{

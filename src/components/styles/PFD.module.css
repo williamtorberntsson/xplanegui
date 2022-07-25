@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: rgba(182, 182, 182, 0.8);
     height: 100%;
+    pointer-events: all;
 }
 .mouseears {
     display: flex;
