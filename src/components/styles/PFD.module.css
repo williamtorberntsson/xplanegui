@@ -31,7 +31,7 @@
 }
 
 .expanded {
-    padding: 4em;
+    padding-left: 7em;
     /* justify-content:space-around; */
     display: flex;
     flex-direction: column;

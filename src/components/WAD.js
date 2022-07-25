@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import BoxButtons from './buttons/BoxButtons';
+import { BoxButtonsL, BoxButtonsR } from './buttons/BoxButtons';
+import ResetButton from './buttons/ResetButtons';
 import ExtendableButtons from './buttons/ExtendableButtons';
 import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
@@ -27,9 +28,9 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
 
   if (Usize === 'L' && Bsize === 'L') {
 
-    console.log('upper size: ' + Usize +' ,bottom size: ' + Bsize )
+    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
-      <Grid container direction="column" className="left_container" id="wb_three">
+      <Grid container direction="column" className={container} id="wb_three">
         <WidgetSelector widget={widgetPositions[`M${side}`]} size={'L'} data={data} />
       </Grid>)
   }
@@ -38,10 +39,10 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
     if (Usize == 'L') {
       Usize = ''
     }
-    else if (Bsize == 'L'){
+    else if (Bsize == 'L') {
       Bsize = ''
     }
-    console.log('upper size: ' + Usize +' ,bottom size: ' + Bsize )
+    console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_one">
@@ -54,6 +55,7 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
   }
 
 }
+
 /**
   * Component for creating the WAD.
   * @component
@@ -78,6 +80,32 @@ function WAD() {
   const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
 
+  function cleanUp(side) {
+    console.log('clean')
+    // var elements = document.getElementsByClassName('button-40');
+
+    if (side == 'left') {
+      // setUL('')
+      // setBL('')
+      setWidgetPositions({...widgetPositions, UL: null, ML: null, BL: null })
+      setWidgetData('')
+    
+      // for (var i = 0; i < elements.length/2; i++) {
+      //   elements[i].style.backgroundColor = "#9b9b9b";
+      // }
+    }
+    else if (side == 'right') {
+      // setUR('')
+      // setBR('')
+      setWidgetPositions({...widgetPositions, UR: null, MR: null, BR: null })
+      setWidgetData('')
+
+      // for (var i = 5; i < elements.length; i++) {
+      //   elements[i].style.backgroundColor = "#9b9b9b";
+      // }
+    }
+  }
+
 
   /**
    * Function to update widget's position
@@ -92,13 +120,13 @@ function WAD() {
   // Use myAirPlaneData from xplane
   useEffect(() => {
     if (useXplaneData) {
-    const interval = setInterval(() => {
-      fetchData("env", setAiPlaneData)
-      fetchData("plane", setMyAirPlaneData)
-      fetchWidgetData("pfd", setWidgetData, widgetData)
-      fetchWidgetData("weights", setWidgetData, widgetData)
-    }, 500);
-    return () => clearInterval(interval);
+      const interval = setInterval(() => {
+        fetchData("env", setAiPlaneData)
+        fetchData("plane", setMyAirPlaneData)
+        fetchWidgetData("pfd", setWidgetData, widgetData)
+        fetchWidgetData("weights", setWidgetData, widgetData)
+      }, 500);
+      return () => clearInterval(interval);
     }
 
   }, [])
@@ -137,14 +165,16 @@ function WAD() {
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
-        <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3' }}>
+        <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between' }}>
+          <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button>
           <WidgetButtons update={updateWidgetPos} />
+          <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button>
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} />
+          <BoxButtonsL Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} />
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} />
+          <BoxButtonsR Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} arrow={'<'} />
         </Grid>
       </Grid>
     </Grid>

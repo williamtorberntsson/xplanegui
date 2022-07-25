@@ -30,7 +30,7 @@ const PFD = ({ data, size }) => {
         </div>
         <div className={styles.mousehead}>
           <div className={styles.side_values}>
-            <Alpha alpha={5} />
+            <Alpha alpha={data.alpha} />
             <G ax={1} ay={1} az={0.5} />
           </div>
           <div className={styles.heading_attitude}>
