@@ -2,12 +2,28 @@
 This document describes how different parts of this code works together to make it easier to extend.
 It also contains findings about XPlane and other software that might be interesting.
 
-### XPlane
+## XPlane
 - XPlane **do** support missile lock/target sounds but **airplanes with FMOD soundengine** does not support that sound as of 2022/07.
 - How often XPlane send data can be toggled, needs a deeper look.
 - It is possible to change difficulty of CGF but not advanced behavior.
 - Cannot get information about which CGF is friendly or not.
 - Cannot get information when locked on from XPlaneConnect.
+
+### Modify planes
+There are multiple ways airplanes can be modified with in several ways.
+
+## Plane Maker
+Airplanes can be modified with **[Plane Maker](https://developer.x-plane.com/manuals/planemaker/)**. In Plane Maker it is possible to
+edit/create anything from wingsize to creating a hud or another instrument panel. There are already lots of already working instruments
+that can be added with a simple drag and drop and it works without need to write any code.
+
+Instruments can also be created with own png and animations they are called generic instruments. But it seems like the generic instruments are not possible to be in the hud.
+
+With Plane Maker the HUD can be modified to a certain degree. There are predefined elements
+that can be moved and added/removed but the elements themselves are unchangeable.
+
+## FlyWithLua
+The plugin **[FlyWithLua](https://github.com/X-Friese/FlyWithLua)** makes it possible to make scripts. It is possible to make simple clickable HUD elements that can display numbers and text but they are more of a element on screen than a HUD in the actual airplane.
 
 ## Code
 For installation and how to use: see README.md (in source code) 
