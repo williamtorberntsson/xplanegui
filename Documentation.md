@@ -6,7 +6,6 @@ It also contains findings about XPlane and other software that might be interest
 - XPlane **do** support missile lock/target sounds but **airplanes with FMOD soundengine** does not support that sound as of 2022/07.
 - How often XPlane send data can be toggled, needs a deeper look.
 - It is possible to change difficulty of CGF but not advanced behavior.
-- Cannot get information about which CGF is friendly or not.
 - Cannot get information when locked on from XPlaneConnect.
 
 ## JoyToKey
