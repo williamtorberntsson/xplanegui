@@ -1,16 +1,20 @@
-import React from "react";
 import styles from "../../styles/AirSpeed.module.css";
 
-import { VelocityMeterBlack, VelocityMeterWhite, VelocityPointerGrey, VelocityPointerRed } from "../../../images";
+import { VelocityMeterBlack, VelocityPointerGrey } from "../../../images";
 
 /**
  * A widget that shows the airspeed in both knots and mach (speedometer)
  * @component
- * @prop {float} props.speed speed in m/s
- * @todo rewrite props to variables 
+ * @category Widget
+ * @subcategory PFD
+ * @prop {float} speed speed in m/s
  * @returns airspeed widget
+ * @example
+ * return (
+ *   <AirSpeed speed={150} />
+ * )
  */
-const AirSpeed = (props) => {
+const AirSpeed = ({ speed }) => {
   let constants = {
     airspeed_limit_l: 0,
     airspeed_0_to_1: 100,
@@ -18,9 +22,9 @@ const AirSpeed = (props) => {
     airspeed_limit_h: 900
   };
 
-  let speed = props.speed * 1.94384; // m/s to knots
+  speed = speed * 1.94384; // m/s to knots
   let speedRad = 0;
-  const mach = props.speed / 340.29;
+  const mach = speed / 340.29;
 
 
   // Limit speed between 0 and 800

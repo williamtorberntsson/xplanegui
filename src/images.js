@@ -1,4 +1,3 @@
-
 // Attitude meter
 import HorizonBack from "./assets/img/horizon_back.svg";
 import HorizonCircle from "./assets/img/horizon_circle.svg";
@@ -25,8 +24,11 @@ import myAirPlaneSvg from "./assets/img/mapIcons/myairplane.svg";
 import enemyAirPlaneSvg from "./assets/img/mapIcons/enemyairplane.svg";
 import friendlyAirPlaneSvg from "./assets/img/mapIcons/friendlyairplane.svg";
 
+/**
+ * Importing all images
+ */
+
 export {
-  
   AltitudeMeterBlack,
   AltitudeMeterWhite,
   AltitudePointerGrey,

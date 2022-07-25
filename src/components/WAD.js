@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from 'react';
-import { BoxButtons, WidgetButtons, ExtendableButtons } from './Buttons';
+import BoxButtons from './buttons/BoxButtons';
+import ExtendableButtons from './buttons/ExtendableButtons';
+import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
 
@@ -12,7 +14,8 @@ import { useXplaneData } from '../constants';
 
 /**
  * Component for selecting widget, its position and size.
- * @component 
+ * @component
+ * @category WAD
  * @prop {string} Usize size of upper widget (S/M/L)
  * @prop {string} Bsize size of bottom widget (S/M/L)
  * @prop {string} container left or right side container
@@ -23,6 +26,8 @@ import { useXplaneData } from '../constants';
 function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
 
   if (Usize === 'L' && Bsize === 'L') {
+
+    console.log('upper size: ' + Usize +' ,bottom size: ' + Bsize )
     return (
       <Grid container direction="column" className="left_container" id="wb_three">
         <WidgetSelector widget={widgetPositions[`M${side}`]} size={'L'} data={data} />
@@ -30,6 +35,13 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
   }
 
   else {
+    if (Usize == 'L') {
+      Usize = ''
+    }
+    else if (Bsize == 'L'){
+      Bsize = ''
+    }
+    console.log('upper size: ' + Usize +' ,bottom size: ' + Bsize )
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_one">
@@ -40,19 +52,24 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
         </Grid>
       </Grid>)
   }
+
 }
 /**
-   * Component for creating the WAD.
-   * @component
-   */
+  * Component for creating the WAD.
+  * @component
+  * @category WAD
+  * @return WAD
+  */
 function WAD() {
-  // States to keep track of layout.
+  // States to keep track of widget sizes
   const [UL, setUL] = useState('');
   const [BL, setBL] = useState('');
   const [UR, setUR] = useState('');
   const [BR, setBR] = useState('');
-  const [activeWidget, setActiveWidget] = useState("");
-  const [activeWidgetArea, setActiveWidgetArea] = useState("")
+
+  // States to keep track of layout.
+  const [selectedWidget, setSelectedWidget] = useState("");
+  const [selectedWidgetPos, setSelectedWidgetPos] = useState("")
   const [widgetPositions, setWidgetPositions] = useState({ UL: null, ML: null, BL: null, UR: null, MR: null, BR: null });
 
   // States to manage data with/without X-Plane
@@ -66,15 +83,11 @@ function WAD() {
    * Function to update widget's position
    * @function
    * @param {string} widget name of widget
-   * @param {string} position UL/ML/BL/UR/MR/BR UpperLeft/MiddleLeft/BottomLeft....
    */
-  const updateWidgetPosition = (widget, pos) => setWidgetPositions({ ...widgetPositions, [pos]: widget })
-
-  // Update postions for widgets on change
-  useEffect(() => {
-    updateWidgetPosition(activeWidget, activeWidgetArea)
-    // console.log("update pos", activeWidgetArea)
-  }, [activeWidgetArea])
+  const updateWidgetPos = (widget) => {
+    setSelectedWidget(widget) // update selected widget
+    setWidgetPositions({ ...widgetPositions, [selectedWidgetPos]: widget }) // use param (widget) instead of state as it may not be updated
+  }
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
@@ -125,13 +138,13 @@ function WAD() {
           <ExtendableButtons />
         </Grid>
         <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3' }}>
-          <WidgetButtons activeWidget={setActiveWidget} />
+          <WidgetButtons update={updateWidgetPos} />
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUL} Bsize={setBL} activeArea={setActiveWidgetArea} side={"L"} />
+          <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} />
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUR} Bsize={setBR} activeArea={setActiveWidgetArea} side={"R"} />
+          <BoxButtons Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} />
         </Grid>
       </Grid>
     </Grid>

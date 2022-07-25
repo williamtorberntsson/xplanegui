@@ -1,9 +1,10 @@
-import React from "react";
 import styles from "../../styles/G.module.css";
 
 /**
  * A widget that shows the current total acceleration (g-forces)
  * @component
+ * @category Widget
+ * @subcategory PFD
  * @prop {float} ax acceleration for x-axis
  * @prop {float} ay acceleration for y-axis
  * @prop {float} az acceleration for z-axis

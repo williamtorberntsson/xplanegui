@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import PFD from "./widgets/pfd/PFD";
 import Weights from "./widgets/statuswidgets/Weights";
 import Warnings from "./widgets/statuswidgets/Warnings";
@@ -7,6 +6,7 @@ import Status from "./widgets/statuswidgets/Status";
 /**
  * Component for returning widget from a name and giving the widget the right data
  * @component
+ * @category Widget
  * @prop {string} widget widget name
  * @prop {size} size size of widget
  * @returns widget
