@@ -18,8 +18,6 @@
     document.getElementById(id).style.backgroundColor = "#8bb08f";
   }
 
-  
-
 const BoxButtonsL = ({ Usize, Bsize, selectedPos, side, arrow }) => {
 
   return (

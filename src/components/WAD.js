@@ -42,7 +42,7 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
     else if (Bsize == 'L') {
       Bsize = ''
     }
-    console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
+    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_one">
@@ -80,29 +80,22 @@ function WAD() {
   const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
 
+
+  /**
+   * Function to clean widgets on each side
+   * @function
+   * @param {string} side side to reset
+   */
   function cleanUp(side) {
     console.log('clean')
-    // var elements = document.getElementsByClassName('button-40');
 
     if (side == 'left') {
-      // setUL('')
-      // setBL('')
       setWidgetPositions({...widgetPositions, UL: null, ML: null, BL: null })
       setWidgetData('')
-    
-      // for (var i = 0; i < elements.length/2; i++) {
-      //   elements[i].style.backgroundColor = "#9b9b9b";
-      // }
     }
     else if (side == 'right') {
-      // setUR('')
-      // setBR('')
       setWidgetPositions({...widgetPositions, UR: null, MR: null, BR: null })
       setWidgetData('')
-
-      // for (var i = 5; i < elements.length; i++) {
-      //   elements[i].style.backgroundColor = "#9b9b9b";
-      // }
     }
   }
 
