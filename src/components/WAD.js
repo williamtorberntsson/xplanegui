@@ -160,7 +160,7 @@ function WAD() {
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
-        <Grid item position="absolute" bottom={'0'} left={'10vw'} right={'10vw'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between', justifyContent: 'center' }}>
+        <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between', justifyContent: 'center' }}>
           <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button>
           <WidgetButtons update={updateWidgetPos} />
           <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button>

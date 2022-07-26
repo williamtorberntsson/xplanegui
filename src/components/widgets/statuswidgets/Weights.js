@@ -17,7 +17,7 @@ const Weights = ({ size, data }) => {
   if (!useXplaneData) data = weights_init_data;
 
   return (
-    <div className={styles.small}>
+    <div className={styles.S}>
       <p>Fuel 1: {data.fuel1.toFixed(0)} KG</p>
       <p>Fuel 2: {data.fuel2.toFixed(0)} KG</p>
       <p>Total fuel: {data.total_fuel.toFixed(0)} KG</p>

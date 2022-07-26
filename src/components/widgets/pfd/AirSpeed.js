@@ -14,7 +14,7 @@ import { VelocityMeterBlack, VelocityPointerGrey } from "../../../images";
  *   <AirSpeed speed={150} />
  * )
  */
-const AirSpeed = ({ speed }) => {
+const AirSpeed = ({ speed, width, height }) => {
   let constants = {
     airspeed_limit_l: 0,
     airspeed_0_to_1: 100,
@@ -47,7 +47,7 @@ const AirSpeed = ({ speed }) => {
   }
 
   return (
-    <div className={styles.airspeed}>
+    <div className={styles.airspeed} style={{ width: width, height: height}}>
       <img className={styles.meter} src={VelocityMeterBlack} />
       <div className={styles.dial} style={{ transform: `rotate(${speedRad}rad)` }}>
         <img src={VelocityPointerGrey} />
