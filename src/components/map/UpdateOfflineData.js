@@ -6,8 +6,8 @@ const UpdateOfflineData = (data, updateData) => {
   if (data) {
     updateData({
       ...data,
-      0:{longitude: data[0].longitude + 0.0001, latitude: data[0].latitude + 0.0001, true_heading: (data[0].true_heading + 0.01) % 360},
-      1:{longitude: data[1].longitude - 0.0001, latitude: data[1].latitude + 0.0001, true_heading: (data[1].true_heading + 0.1) % 360},
+      0:{longitude: data[0].longitude + 0.0001, latitude: data[0].latitude + 0.0001, true_heading: (data[0].true_heading + 0.01) % 360, team_status: 0},
+      1:{longitude: data[1].longitude - 0.0001, latitude: data[1].latitude + 0.0001, true_heading: (data[1].true_heading + 0.1) % 360, team_status: 1},
       longitude: data.longitude + 0.0001,
       latitude: data.latitude + 0.0001,
       groundspeed: data.groundspeed + 1,

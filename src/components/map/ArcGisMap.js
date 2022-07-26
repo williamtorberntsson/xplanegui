@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
-import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
+import { myAirPlaneSvg, neutralAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
 import haversine from "../haversine";
 import AirSpeed from '../widgets/pfd/AirSpeed';
@@ -217,7 +217,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           let tempPoint = point.clone();
           tempPoint.geometry.longitude = aiPlaneData.planes[i].longitude;  // update longitude
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
-          tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
 
           // Set correct symbol type
           switch (aiPlaneData.planes[i].team_status) {
@@ -233,7 +232,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
             default:
               tempPoint.symbol = neutralAirPlaneMarker;
           }
-
+          tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
 
           tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
           if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
@@ -242,8 +241,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           }
 
           const distance = haversine(myAirPlaneData.latitude, myAirPlaneData.longitude, aiPlaneData.planes[i].latitude, aiPlaneData.planes[i].longitude)
-
-
 
           tempPoint.popupTemplate.content = (
             "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed(0) + " feet" + "</li>" +
@@ -264,31 +261,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   // With offline data: Updates the map and airplane positions 
   useEffect(() => {
 
-    // Creating markers for different airplanes
-    const myAirPlaneMarker = {
-      type: "picture-marker",
-      url: myAirPlaneSvg,
-      angle: 0,
-      width: "20px",
-      height: "20px"
-    };
-
-    const enemyAirPlaneMarker = {
-      type: "picture-marker",
-      url: enemyAirPlaneSvg,
-      angle: 0,
-      width: "20px",
-      height: "20px",
-    };
-
-    const friendlyAirPlaneMarker = {
-      type: "picture-marker",
-      url: friendlyAirPlaneSvg,
-      angle: 0,
-      width: "20px",
-      height: "20px"
-    };
-
     if (!useXplaneData && offlineData && view) {
       // Set rotation and position for camera
       view.center = [offlineData.longitude, offlineData.latitude];
@@ -308,33 +280,38 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         let tempPoint = point.clone();
         tempPoint.geometry.longitude = offlineData[i].longitude;  // update longitude
         tempPoint.geometry.latitude = offlineData[i].latitude;    // update latitude
-        tempPoint.symbol.angle = offlineData[i].true_heading - offlineData.true_heading;     // update angle
 
         tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
-        if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
+        if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Some attribute that is unique for every pop-up/plane
           let j = i;
           view.popup.location = { longitude: offlineData[j].longitude, latitude: offlineData[j].latitude };
-
         }
 
-        tempPoint.symbol = friendlyAirPlaneMarker;
+        // Set correct symbol type and heading (angle)
+        switch (offlineData[i].team_status) {
+          case 0:
+            tempPoint.symbol = neutralAirPlaneMarker;
+            break;
+          case 1:
+            tempPoint.symbol = friendlyAirPlaneMarker;
+            break;
+          case 2:
+            tempPoint.symbol = enemyAirPlaneMarker;
+            break;
+          default:
+            tempPoint.symbol = neutralAirPlaneMarker;
+        }
+        tempPoint.symbol.angle = offlineData[i].true_heading - offlineData.true_heading;     // update angle
 
         const distance = haversine(offlineData.latitude, offlineData.longitude, offlineData[i].latitude, offlineData[i].longitude)
-
         tempPoint.popupTemplate.content = (
           "<ul><li> ALTITUDE: " + offlineData[i].longitude.toFixed(0) + " feet" + "</li>" +
           "<li>DISTANCE:" + distance + " m" + "</li>" +
           "<li>SOMETHING: </li><ul>")
 
-
-
         view.popup.visibleElements.featureNavigation = false;
-
         tempPoint.geometry.angle = offlineData.heading;
-
         layer.add(tempPoint) // add edited point to layer
-
-
       })
 
     }

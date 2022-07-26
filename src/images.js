@@ -21,6 +21,7 @@ import Compass from "./assets/img/compass.svg";
 
 // Airplanes
 import myAirPlaneSvg from "./assets/img/mapIcons/myairplane.svg";
+import neutralAirPlaneSvg from "./assets/img/mapIcons/neutralairplane.svg";
 import enemyAirPlaneSvg from "./assets/img/mapIcons/enemyairplane.svg";
 import friendlyAirPlaneSvg from "./assets/img/mapIcons/friendlyairplane.svg";
 
@@ -43,6 +44,7 @@ export {
   VelocityPointerGrey,
   VelocityPointerRed,
   myAirPlaneSvg,
+  neutralAirPlaneSvg,
   enemyAirPlaneSvg,
   friendlyAirPlaneSvg
 };
