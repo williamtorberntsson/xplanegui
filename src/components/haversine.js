@@ -7,6 +7,7 @@
  * @param {float} lon1 longitude travel from
  * @param {float} lat2 latitude travel to
  * @param {float} lon2 longitude travel to
+ * @returns {float} distance to other point in meters
  */
 function haversine(lat1, lon1, lat2, lon2) {
     const R = 6371e3; // metres
@@ -22,7 +23,8 @@ function haversine(lat1, lon1, lat2, lon2) {
 
     const d = R * c; // in metres
 
-    return d
+    console.log("distance: ", d)
+    return d.toFixed(0)
 }
 
 export default haversine;

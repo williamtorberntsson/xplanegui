@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
+import haversine from "../haversine";
 
 //
 
@@ -182,6 +183,22 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           tempPoint.geometry.longitude = aiPlaneData.planes[i].longitude;  // update longitude
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
+
+          tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
+          if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
+            let j = i;
+            view.popup.location = { longitude: aiPlaneData.planes[i].longitude, latitude: aiPlaneData.planes[i].latitude };
+          }
+
+          const distance = haversine(myAirPlaneData.latitude, myAirPlaneData.longitude, aiPlaneData.planes[i].latitude, aiPlaneData.planes[i].longitude)
+
+          tempPoint.popupTemplate.content = (
+            "<ul><li> ALTITUDE: " + aiPlaneData.planes[i].altitude.toFixed(0) + " feet" + "</li>" +
+            "<li>DISTANCE:" + distance + " m" + "</li>" +
+            "<li>SOMETHING: </li><ul>")
+
+          view.popup.visibleElements.featureNavigation = false;
+
           layer.add(tempPoint) // add edited point to layer
           console.log(tempPoint.symbol.angle)
         })
@@ -219,12 +236,14 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
           let j = i;
           view.popup.location = { longitude: offlineData[j].longitude, latitude: offlineData[j].latitude };
-          
+
         }
 
-        tempPoint.popupTemplate.content=(
-          "<ul><li> ALTITUDE: " + offlineData[i].longitude + "</li>" +
-          "<li>DISTANCE:" + "</li>" +
+        const distance = haversine(offlineData.latitude, offlineData.longitude, offlineData[i].latitude, offlineData[i].longitude)
+
+        tempPoint.popupTemplate.content = (
+          "<ul><li> ALTITUDE: " + offlineData[i].longitude.toFixed(0) + " feet" + "</li>" +
+          "<li>DISTANCE:" + distance + " m" + "</li>" +
           "<li>SOMETHING: </li><ul>")
 
 
