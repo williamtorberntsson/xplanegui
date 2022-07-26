@@ -30,7 +30,7 @@ const PFD = ({ data, size }) => {
         </div>
         <div className={styles.mousehead}>
           <div className={styles.side_values}>
-            <Alpha alpha={5} />
+            <Alpha alpha={data.alpha} />
             <G ax={data.g_side} ay={data.g_axil} az={data.g_nrml} />
           </div>
           <div className={styles.heading_attitude}>
@@ -43,9 +43,26 @@ const PFD = ({ data, size }) => {
   } else if (size === "S") { // small size widget
     return (
       <div className={styles.mouseears}>
-        <Attitude roll={data.roll} pitch={data.pitch} width="200px" height="200px" />
-        <Altimeter altitude={data.altitude} width="200px" height="200px" />
+        <Attitude roll={data.roll} pitch={data.pitch} />
+        <Altimeter altitude={data.altitude} />
       </div>
+    )
+  }
+  else if (size === "L") {
+    return (
+    <div className={styles.expanded}>
+      <Attitude roll={data.roll} pitch={data.pitch} />
+      <br></br>
+      <Altimeter altitude={data.altitude}/>
+      <br></br>
+      <AirSpeed speed={data.true_airspeed} />
+      <br></br>
+      <Heading heading={data.true_heading} />
+      <br></br>
+      <Alpha alpha={5} />
+      <br></br>
+      <G ax={1} ay={1} az={0.5} />
+    </div>
     )
   }
 }

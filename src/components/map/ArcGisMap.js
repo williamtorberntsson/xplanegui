@@ -18,6 +18,9 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   const [myPoint, setMyPoint] = useState(null);
   const [points, setPoints] = useState(null);
   const [layer, setLayer] = useState(null);
+  const [popup, setPopup] = useState('');
+  const [content1, setContent1] = useState('');
+  const [content2, setContent2] = useState('');
   const mapEl = useRef();
 
   useEffect(() => {
@@ -26,11 +29,21 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
       "esri/Graphic",
       "esri/layers/GraphicsLayer",
       "esri/geometry/Point",
-      "esri/symbols/PictureMarkerSymbol"]).then(([Map, MapView, Graphic, GraphicsLayer, Point, PictureMarkerSymbol]) => {
+      "esri/symbols/PictureMarkerSymbol",
+      "esri/PopupTemplate",
+      "esri/popup/FieldInfo"]).then(([Map, MapView, Graphic, GraphicsLayer, Point, PictureMarkerSymbol, PopupTemplate, FieldInfo]) => {
 
         const map = new Map({
           basemap: 'gray-vector'
         });
+
+        // Create a view
+        let view = new MapView({
+          container: mapEl.current,
+          map: map,
+          zoom: zoomvalue,
+          ui: { components: ["attribution"] } // hides default zoom buttons
+        })
 
         const graphicsLayer = new GraphicsLayer();
         map.add(graphicsLayer);
@@ -49,7 +62,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           url: enemyAirPlaneSvg,
           angle: 0,
           width: "20px",
-          height: "20px"
+          height: "20px",
         };
 
         const friendlyAirPlaneMarker = {
@@ -64,18 +77,21 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         let mypoint = new Point({
           type: "point"
         });
+
         let mypointGraphic = new Graphic({
           geometry: mypoint,
-          symbol: myAirPlaneMarker
+          symbol: myAirPlaneMarker,
         });
 
-        
+
         // Add points for all pointCoordinates
         let pointsArray = [] // init array to add points (markings) to
         for (let i = 0; i < nrAiPlanes; i++) {
           // Create a point
-          let point = new Point({
-            type: "point"
+          // console.log(pointsArray)
+
+          var point = new Point({
+            type: "point",
           });
 
           // Select symbol depending on type
@@ -93,22 +109,29 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
             default:
               symboltype = enemyAirPlaneMarker
           }
-          // create a graphic with the point
-          let pointGraphic = new Graphic({
-            geometry: point,
-            symbol: symboltype
+
+          // let fieldInfo = new FieldInfo({
+          //       // fieldName: "NAME",
+          //       label: "Name",
+          //       visible: true,
+          // });
+
+
+          var template = new PopupTemplate({
+            declaredClass: JSON.stringify(i),
+            title: "Name not found",
+            content: "Content not found",
+            overwriteActions: true,
           });
 
+          // create a graphic with the point
+          var pointGraphic = new Graphic({
+            geometry: point,
+            symbol: symboltype,
+            popupTemplate: template
+          });
           pointsArray.push(pointGraphic) // add graphic to array
         }
-
-        // Create a view
-        let view = new MapView({
-          container: mapEl.current,
-          map: map,
-          zoom: zoomvalue,
-          ui: { components: ["attribution"] } // hides default zoom buttons
-        });
 
         // Update states when ready
         view.when(() => {
@@ -117,6 +140,15 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           setPoints(pointsArray)      // add all other airplane graphics to state
           setLayer(graphicsLayer);
         });
+
+        // view.on("click", function(event){
+        //   console.log('klick')
+        //   view.popup.open({
+        //    location: event.mapPoint,  // location of the click on the view
+        //    title: "You clicked here",  // title displayed in the popup
+        //    content: "This is a point of interest"  // content displayed in the popup
+        //   });
+        // });
       })
 
     return () => {
@@ -151,7 +183,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
           layer.add(tempPoint) // add edited point to layer
-       //   console.log( tempPoint.symbol.angle)
+          console.log(tempPoint.symbol.angle)
         })
       } catch (error) {
         console.log(error)
@@ -165,18 +197,50 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
     if (!useXplaneData && offlineData && view) {
       // Set rotation and position for camera
       view.center = [offlineData.longitude, offlineData.latitude];
-      view.rotation = offlineData.heading;
+      view.rotation = offlineData.true_heading;
 
       layer.removeAll() // clear layer with markers
 
       // Update own airplane position
       let tempPoint = myPoint.clone();
       tempPoint.geometry.longitude = offlineData.longitude;  // update longitude
-      tempPoint.geometry.latitude = offlineData.latitude;    // update latitude
-      tempPoint.geometry.angle = offlineData.heading;        // update angle
+      tempPoint.geometry.latitude = offlineData.latitude;  // update latitude
+      // update angle
       layer.add(tempPoint) // add updated point to layer
+
+      // Update AI airplane positions
+      points.forEach(function (point, i) {
+        let tempPoint = point.clone();
+        tempPoint.geometry.longitude = offlineData[i].longitude;  // update longitude
+        tempPoint.geometry.latitude = offlineData[i].latitude;    // update latitude
+        tempPoint.symbol.angle = offlineData[i].true_heading - offlineData.true_heading;     // update angle
+
+        tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
+        if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
+          let j = i;
+          view.popup.location = { longitude: offlineData[j].longitude, latitude: offlineData[j].latitude };
+          
+        }
+
+        tempPoint.popupTemplate.content=(
+          "<ul><li> ALTITUDE: " + offlineData[i].longitude + "</li>" +
+          "<li>DISTANCE:" + "</li>" +
+          "<li>SOMETHING: </li><ul>")
+
+
+
+        view.popup.visibleElements.featureNavigation = false;
+
+        tempPoint.geometry.angle = offlineData.heading;
+
+        layer.add(tempPoint) // add edited point to layer
+
+
+      })
+
     }
   }, [offlineData])
+  const [counter, setCounter] = useState(0);
 
   return (
     <div>

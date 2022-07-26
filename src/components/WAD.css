@@ -36,6 +36,7 @@
     position: absolute;
     /* background-color: red; */
     /* z-index: 1; */
+    pointer-events: none;
 }
 
 .left_container{
@@ -114,9 +115,9 @@
     font-size: 18px;
   }
   
-  .button-30:focus {
+  /* .button-30:focus {
     box-shadow: #8d8d8d 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
-  }
+  } */
   
   .button-30:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
@@ -160,17 +161,18 @@
     font-size: 18px;
   }
   
-  .button-40:focus {
-    box-shadow: #8d8d8d 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
-  }
+  /* .button-40:focus {
+    background-color: #8bb08f;
+    box-shadow: #68796a 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3e4f40 0 -3px 0 inset;
+  } */
   
   .button-40:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
+    box-shadow: rgba(35, 66, 41, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #656565 0 -3px 0 inset;
     /* transform: translateY(-2px); */
   }
   
   .button-40:active {
-    box-shadow: #656565 0 3px 7px inset;
+    /* box-shadow: #4f7718 0 3px 7px inset; */
     transform: translateY(2px);
   }
   

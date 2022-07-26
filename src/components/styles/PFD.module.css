@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: rgba(182, 182, 182, 0.8);
     height: 100%;
+    pointer-events: all;
 }
 .mouseears {
     display: flex;
@@ -27,4 +28,13 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+}
+
+.expanded {
+    padding-left: 7em;
+    /* justify-content:space-around; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }

@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import BoxButtons from './buttons/BoxButtons';
+import { BoxButtonsL, BoxButtonsR } from './buttons/BoxButtons';
+import ResetButton from './buttons/ResetButtons';
 import ExtendableButtons from './buttons/ExtendableButtons';
 import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
@@ -9,6 +10,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
+import { useXplaneData } from '../constants';
 
 
 /**
@@ -25,13 +27,22 @@ import { fetchData, fetchWidgetData } from './fetchData';
 function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
 
   if (Usize === 'L' && Bsize === 'L') {
+
+    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
-      <Grid container direction="column" className="left_container" id="wb_three">
+      <Grid container direction="column" className={container} id="wb_three">
         <WidgetSelector widget={widgetPositions[`M${side}`]} size={'L'} data={data} />
       </Grid>)
   }
 
   else {
+    if (Usize == 'L') {
+      Usize = ''
+    }
+    else if (Bsize == 'L') {
+      Bsize = ''
+    }
+    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_one">
@@ -42,7 +53,9 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
         </Grid>
       </Grid>)
   }
+
 }
+
 /**
   * Component for creating the WAD.
   * @component
@@ -69,6 +82,25 @@ function WAD() {
 
 
   /**
+   * Function to clean widgets on each side
+   * @function
+   * @param {string} side side to reset
+   */
+  function cleanUp(side) {
+    console.log('clean')
+
+    if (side == 'left') {
+      setWidgetPositions({...widgetPositions, UL: null, ML: null, BL: null })
+      setWidgetData('')
+    }
+    else if (side == 'right') {
+      setWidgetPositions({...widgetPositions, UR: null, MR: null, BR: null })
+      setWidgetData('')
+    }
+  }
+
+
+  /**
    * Function to update widget's position
    * @function
    * @param {string} widget name of widget
@@ -80,13 +112,15 @@ function WAD() {
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
-    const interval = setInterval(() => {
-      fetchData("env", setAiPlaneData)
-      fetchData("plane", setMyAirPlaneData)
-      fetchWidgetData("pfd", setWidgetData, widgetData)
-      fetchWidgetData("weights", setWidgetData, widgetData)
-    }, 500);
-    return () => clearInterval(interval);
+    if (useXplaneData) {
+      const interval = setInterval(() => {
+        fetchData("env", setAiPlaneData)
+        fetchData("plane", setMyAirPlaneData)
+        fetchWidgetData("pfd", setWidgetData, widgetData)
+        fetchWidgetData("weights", setWidgetData, widgetData)
+      }, 500);
+      return () => clearInterval(interval);
+    }
 
   }, [])
 
@@ -94,7 +128,7 @@ function WAD() {
   useEffect(() => {
     const interval = setInterval(() => {
       UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-    }, 20); // update 20 times/s
+    }, 200); // update 20 times/s
 
     return () => clearInterval(interval); // Unmount function to prevent memory leaks.
   })
@@ -105,6 +139,9 @@ function WAD() {
         <Grid item className="map_item" xs={12}>
           <ArcGisMap zoom={8} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
+
+
+
         <Grid container className="overlay_container">
           <Grid item xs={3}>
             <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} />
@@ -115,17 +152,22 @@ function WAD() {
             <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositions} />
           </Grid>
         </Grid>
+
+
+
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
-        <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3' }}>
+        <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between' }}>
+          <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button>
           <WidgetButtons update={updateWidgetPos} />
+          <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button>
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} />
+          <BoxButtonsL Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} />
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtons Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} />
+          <BoxButtonsR Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} arrow={'<'} />
         </Grid>
       </Grid>
     </Grid>
