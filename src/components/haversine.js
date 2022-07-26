@@ -23,7 +23,6 @@ function haversine(lat1, lon1, lat2, lon2) {
 
     const d = R * c; // in metres
 
-    console.log("distance: ", d)
     return d.toFixed(0)
 }
 
