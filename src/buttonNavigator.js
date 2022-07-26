@@ -9,11 +9,10 @@
  * @param {function} updateSelecterMode function to update selecter mode
  */
 const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, updateSelecterMode) => {
-  console.log(keyCode)
   switch (keyCode) {
     case 37: // left
       switch (selecterMode) {
-        case "side":
+        case "sidebuttons":
           if ((Number(selecter) + 5) % 10 == 0) updateSelecter((10).toString())
           else updateSelecter(((Number(selecter) + 5) % 10).toString())
           break;
@@ -21,7 +20,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
       break;
     case 38: // up
       switch (selecterMode) {
-        case "side":
+        case "sidebuttons":
           if (Number(selecter <= 5)) {
             if ((Number(selecter) - 1) == 0) updateSelecter((5).toString())
             else updateSelecter(((Number(selecter) - 1)).toString())
@@ -34,7 +33,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
       break;
     case 39: // right
       switch (selecterMode) {
-        case "side":
+        case "sidebuttons":
           if ((Number(selecter) + 5) % 10 == 0) updateSelecter((1).toString())
           else updateSelecter(((Number(selecter) + 5) % 10).toString())
           break;
@@ -42,7 +41,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
       break;
     case 40: // down
       switch (selecterMode) {
-        case "side":
+        case "sidebuttons":
           if (Number(selecter) <= 5) {
             if ((Number(selecter) + 1) == 6) updateSelecter((1).toString())
             else updateSelecter(((Number(selecter) + 1)).toString())
@@ -52,8 +51,6 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
           }
           break;
       }
-      break;
-    case 77: // m (mode)
       break;
   }
 }

@@ -85,9 +85,9 @@ function WAD() {
 
   // States for navigating buttons with throttle
   const [activeBtn, setActiveBtn] = useState('1');
-  const [selecterMode, _setSelecterMode] = useState("side");
+  const [selecterMode, _setSelecterMode] = useState("sidebuttons");
   const [selecter, _setSelecter] = useState('1');
-  
+
   const selecterRef = useRef(selecter)
   const setSelecter = state => {
     selecterRef.current = state;
@@ -102,7 +102,11 @@ function WAD() {
 
   function handleKeyDown(e) {
     console.log("key pressed: ", e.keyCode);
-    buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode)
+    console.log(selecterRef.current.toString())
+    console.log(activeBtn)
+
+    if (e.keyCode == 80) setActiveBtn(selecterRef.current.toString());
+    else buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode);
   }
 
   useEffect(() => {
