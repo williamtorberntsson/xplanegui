@@ -6,7 +6,7 @@
  * @type {boolean}
  * @default
 */
-export const useXplaneData = false;
+export const useXplaneData = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -14,7 +14,7 @@ export const useXplaneData = false;
  * @type {number}
  * @default
 */
-export const nrAiPlanes = 2;
+export const nrAiPlanes = 5;
 
 /** 
  * Zoom level for map

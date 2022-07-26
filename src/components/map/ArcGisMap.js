@@ -234,6 +234,24 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           }
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
 
+
+          // Update team_status of airplane
+          switch (aiPlaneData.planes[i].team_status) {
+            case 0: // neutral
+              tempPoint.symbol.url = myAirPlaneSvg
+              break;
+            case 1: // friendly
+              tempPoint.symbol.url = friendlyAirPlaneSvg
+              break;
+            case 2: // enemy
+              tempPoint.symbol.url = enemyAirPlaneSvg
+              break;
+            default:
+              tempPoint.symbol.url = enemyAirPlaneSvg
+          }
+
+
+
           tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
           if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
             let j = i;
@@ -243,7 +261,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           const distance = haversine(myAirPlaneData.latitude, myAirPlaneData.longitude, aiPlaneData.planes[i].latitude, aiPlaneData.planes[i].longitude)
 
           tempPoint.popupTemplate.content = (
-            "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed(0) + " feet" + "</li>" +
+            "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed() + " feet" + "</li>" +
             "<li>DISTANCE:" + distance + " m" + "</li>" +
             "<li>SOMETHING: </li><ul>")
 
