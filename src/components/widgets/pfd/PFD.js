@@ -31,7 +31,7 @@ const PFD = ({ data, size }) => {
         <div className={styles.mousehead}>
           <div className={styles.side_values}>
             <Alpha alpha={5} />
-            <G ax={1} ay={1} az={0.5} />
+            <G ax={data.g_side} ay={data.g_axil} az={data.g_nrml} />
           </div>
           <div className={styles.heading_attitude}>
             <Attitude roll={data.roll} pitch={data.pitch} />
