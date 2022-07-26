@@ -14,7 +14,9 @@ import styles from "../../styles/Status.module.css"
  * @returns airplane warnings widget
  */
 const Warnings = ({ size, data }) => {
-
+  data.ice = 1;
+  data.speedbrake = 1;
+  data.transonic = 1;
   if (data) {
     // corresponding messages to values
     const Messages = {
@@ -22,14 +24,34 @@ const Warnings = ({ size, data }) => {
       ice: "Ice DETECTED",
       transonic: "APPROACHING TRANSONIC"
     }
-    return (
-      <div className={styles.small}>
-        <p>Warnings: </p>
+
+    if (size === 'L') {
+      return (<div className={styles.L}>
+        <p>WARNING: </p>
         {Object.keys(data).map(function (key, index) {
-          if (data[key] == 1) return <p id={index}>{Messages[key]}</p>
+          if (data[key] == 1) return <p className={styles.warning} id={index}>{Messages[key]}</p>
         })}
-      </div>
-    )
+      </div>)
+    }
+    else if (size === 'M') {
+      return (<div className={styles.M}>
+        <p>WARNING: </p>
+        {Object.keys(data).map(function (key, index) {
+          if (data[key] == 1) return <p className={styles.warning} id={index}>{Messages[key]}</p>
+        })}
+      </div>)
+    }
+
+    else if (size === 'S') {
+      return (
+        <div className={styles.S}>
+          <p>WARNING: </p>
+          {Object.keys(data).map(function (key, index) {
+            if (data[key] == 1) return <p className={styles.warning} id={index}>{Messages[key]}</p>
+          })}
+        </div>
+      )
+    }
   } else {
     return <h1>Loading...</h1>
   }

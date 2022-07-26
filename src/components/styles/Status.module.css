@@ -1,3 +1,32 @@
-.small{
-    padding: 1em;
+.S{
+    background-color: rgba(185, 184, 182, 0.8);
+    height: 100%;
+    padding-left: 1.5em; 
+    overflow: auto;
+    pointer-events: all;
+}
+
+.M{
+    /* padding: 1em; */
+    background-color: rgba(185, 184, 182, 0.8);
+    height: 100%;
+    display: flex;
+    padding-left: 1.5em; 
+    flex-direction: column;
+    pointer-events: all;
+}
+
+.L{
+    background-color: rgba(185, 184, 182, 0.8);
+    height: 100%;
+    display: flex;
+    padding-left: 1.5em; 
+    flex-direction: column;
+    pointer-events: all;
+
+}
+
+.warning {
+    color:rgba(196, 111, 0, 0.869);
+    font-weight: 400;
 }

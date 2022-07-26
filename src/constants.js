@@ -6,7 +6,7 @@
  * @type {boolean}
  * @default
 */
-export const useXplaneData = false;
+export const useXplaneData = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -14,7 +14,7 @@ export const useXplaneData = false;
  * @type {number}
  * @default
 */
-export const nrAiPlanes = 2;
+export const nrAiPlanes = 5;
 
 /** 
  * Zoom level for map
@@ -66,6 +66,12 @@ export const weights_init_data = {
     "total": 0
 }
 
+/**
+ * Airplane init data for offline data use
+ * @constant
+ * @type {object}
+ * @default
+ */
 export const planes_init_data = [{
     "longitude": 15.880926012604708,
     "latitude": 58.41157469382408,
