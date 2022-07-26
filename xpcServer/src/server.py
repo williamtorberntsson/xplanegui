@@ -6,7 +6,6 @@ import xpc
 from time import perf_counter
 
 
-
 app = Flask(__name__)
 
 # Members API Route
@@ -36,7 +35,6 @@ def plane():
         while True:
             print("My program took", perf_counter()/1000 - start_time, "to run")
             start_time = perf_counter()/1000
-            
 
             # Own airplane airplane values
             posi = client.getPOSI()
@@ -86,6 +84,8 @@ def pfd():
         groundspeed_dref = "sim/flightmodel/position/groundspeed"
         true_airspeed_dref = "sim/flightmodel/position/true_airspeed"
         alpha_dref = "sim/flightmodel/position/alpha"
+        g_drefs = ["sim/flightmodel/forces/g_nrml",
+                   "sim/flightmodel/forces/g_axil", "sim/flightmodel/forces/g_side"]
 
         while True:
 
@@ -94,6 +94,7 @@ def pfd():
             groundspeed = client.getDREF(groundspeed_dref)
             true_airspeed = client.getDREF(true_airspeed_dref)
             alpha = client.getDREF(alpha_dref)
+            g = client.getDREFs(g_drefs)
 
             return {
                 "groundspeed": groundspeed[0],
@@ -103,6 +104,9 @@ def pfd():
                 "pitch": posi[3],
                 "roll": posi[4],
                 "alpha": alpha[0],
+                "g_nrml": g[0][0],
+                "g_axil": g[1][0],
+                "g_side": g[2][0]
             }
 
 
@@ -135,17 +139,38 @@ def env():
         nr_of_planes = 5
         planes_data = [0]*nr_of_planes
 
+        team_status_dref = "sim/multiplayer/combat/team_status"
+        planes_lat_drefs = [""]*nr_of_planes
+        planes_lon_drefs = [""]*nr_of_planes
+        planes_el_drefs = [""]*nr_of_planes
+        planes_heading_drefs = [""]*nr_of_planes
+
+        for i in range(nr_of_planes):
+            planes_lat_drefs[i] = "sim/multiplayer/position/plane{}_lat".format(i+1)
+            planes_lon_drefs[i] = "sim/multiplayer/position/plane{}_lon".format(i+1)
+            planes_el_drefs[i] = "sim/multiplayer/position/plane{}_el".format(i+1)
+            planes_heading_drefs[i] = "sim/multiplayer/position/plane{}_psi".format(i+1)
+
         while True:
 
-            for i in range(len(planes_data)):
-                temp = client.getPOSI(i + 1)
+            planes_lat = client.getDREFs(planes_lat_drefs)
+            planes_lon = client.getDREFs(planes_lon_drefs)
+            team_status = client.getDREF(team_status_dref)
+            planes_altitude = client.getDREFs(planes_el_drefs)
+            planes_heading = client.getDREFs(planes_heading_drefs)
+
+            for i in range(nr_of_planes):
                 planes_data[i] = {
-                    "longitude": temp[1],
-                    "latitude": temp[0],
-                    "true_heading": temp[5]
+                    "longitude": planes_lon[i],
+                    "latitude": planes_lat[i],
+                    "true_heading": planes_heading[i],
+                    "team_status": team_status[i],
+                    "altitude": planes_altitude[i]
                 }
 
-            return {"planes": planes_data}
+            return {
+                "planes": planes_data
+            }
 
 
 if __name__ == "__main__":
