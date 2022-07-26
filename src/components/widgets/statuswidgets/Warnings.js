@@ -1,4 +1,6 @@
 
+import styles from "../../styles/Status.module.css"
+
 /**
  * A widget that shows warnings for airplane for every active warning.
  * If no warnings are active this shows nothing.
@@ -21,7 +23,7 @@ const Warnings = ({ size, data }) => {
       transonic: "APPROACHING TRANSONIC"
     }
     return (
-      <div>
+      <div className={styles.small}>
         <p>Warnings: </p>
         {Object.keys(data).map(function (key, index) {
           if (data[key] == 1) return <p id={index}>{Messages[key]}</p>

@@ -42,7 +42,7 @@ const PFD = ({ data, size }) => {
     );
   } else if (size === "S") { // small size widget
     return (
-      <div className={styles.mouseears}>
+      <div className={styles.small}>
         <Attitude roll={data.roll} pitch={data.pitch} />
         <Altimeter altitude={data.altitude} />
       </div>

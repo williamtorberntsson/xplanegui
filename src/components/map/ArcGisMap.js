@@ -3,6 +3,7 @@ import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
 import haversine from "../haversine";
+import AirSpeed from '../widgets/pfd/AirSpeed';
 
 //
 
@@ -184,6 +185,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           tempPoint.geometry.latitude = aiPlaneData.planes[i].latitude;    // update latitude
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
 
+        
           tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
           if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
             let j = i;
@@ -211,6 +213,32 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
 
   // With offline data: Updates the map and airplane positions 
   useEffect(() => {
+
+        // Creating markers for different airplanes
+        const myAirPlaneMarker = {
+          type: "picture-marker",
+          url: myAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
+        };
+
+        const enemyAirPlaneMarker = {
+          type: "picture-marker",
+          url: enemyAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px",
+        };
+
+        const friendlyAirPlaneMarker = {
+          type: "picture-marker",
+          url: friendlyAirPlaneSvg,
+          angle: 0,
+          width: "20px",
+          height: "20px"
+        };
+
     if (!useXplaneData && offlineData && view) {
       // Set rotation and position for camera
       view.center = [offlineData.longitude, offlineData.latitude];
@@ -238,6 +266,8 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           view.popup.location = { longitude: offlineData[j].longitude, latitude: offlineData[j].latitude };
 
         }
+
+        tempPoint.symbol = friendlyAirPlaneMarker;
 
         const distance = haversine(offlineData.latitude, offlineData.longitude, offlineData[i].latitude, offlineData[i].longitude)
 

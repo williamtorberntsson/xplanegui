@@ -30,8 +30,10 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
 
     // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
-      <Grid container direction="column" className={container} id="wb_three">
-        <WidgetSelector widget={widgetPositions[`M${side}`]} size={'L'} data={data} />
+      <Grid container direction="column" className={container}>
+        <Grid item className={Usize} id="wb_three">
+          <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} />
+        </Grid>
       </Grid>)
   }
 
@@ -90,11 +92,11 @@ function WAD() {
     console.log('clean')
 
     if (side == 'left') {
-      setWidgetPositions({...widgetPositions, UL: null, ML: null, BL: null })
+      setWidgetPositions({ ...widgetPositions, UL: null, ML: null, BL: null })
       setWidgetData('')
     }
     else if (side == 'right') {
-      setWidgetPositions({...widgetPositions, UR: null, MR: null, BR: null })
+      setWidgetPositions({ ...widgetPositions, UR: null, MR: null, BR: null })
       setWidgetData('')
     }
   }
@@ -158,7 +160,7 @@ function WAD() {
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
-        <Grid item position="absolute" bottom={'0'} left={'35vw'} right={'35vw'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between' }}>
+        <Grid item position="absolute" bottom={'0'} left={'10vw'} right={'10vw'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between', justifyContent: 'center' }}>
           <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button>
           <WidgetButtons update={updateWidgetPos} />
           <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button>

@@ -1,11 +1,17 @@
 .pfd {
     display: flex;
+    padding: 1em;
+    padding-left: 3em;
+    padding-right: 3em;
+    /* padding-left: 1.5em; 
+    padding-right: 1.5em; */
     flex-direction: column;
-    background-color: rgba(182, 182, 182, 0.8);
-    height: 100%;
+    /* background-color: rgba(185, 184, 182, 0.8); */
+    /* height: 100%; */
     pointer-events: all;
 }
 .mouseears {
+    
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -30,8 +36,20 @@
     align-items: center;
 }
 
+.small {
+    /* background-color: rgba(185, 184, 182, 0.8); */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1em;
+}
+
 .expanded {
+    /* background-color: rgba(185, 184, 182, 0.8); */
+    height: 100%;
+    padding: 4em;
     padding-left: 7em;
+    padding-right: 7em;
     /* justify-content:space-around; */
     display: flex;
     flex-direction: column;
