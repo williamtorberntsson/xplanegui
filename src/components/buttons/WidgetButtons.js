@@ -1,3 +1,4 @@
+import { useState } from "react";
 /**
  * Widget selection buttons for WAD (bottom)
  * @component
@@ -5,14 +6,18 @@
  * @param {string} activeWidget name of recently pressed widget 
  * @returns array of buttons
  */
-const WidgetButtons = ({ update }) => {
+const WidgetButtons = ({ update, activeBtn, selecter}) => {
+
+  function updateAll(widget) {
+    update(widget)
+  }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '30vw', paddingBottom: '1.5em', paddingLeft: '9em', paddingRight: '9em'  }}>
-      <button className="button-30" onClick={() => { update('pfd') }} role="button">PFD</button>
-      <button className="button-30" onClick={() => { update('weights') }} role="button">Weights</button>
-      <button className="button-30" onClick={() => { update('warnings') }} role="button">Warnings</button>
-      <button className="button-30" onClick={() => { update('none') }} role="button">None</button>
+    <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '30vw', paddingBottom: '1.5em', paddingLeft: '9em', paddingRight: '9em' }}>
+      <button className={`button-30 ${activeBtn === 'pfd' ? 'active' : ''} ${selecter === 'pfd' ? 'border' : ""}`} onClick={() => { updateAll('pfd') }} role="button">PFD</button>
+      <button className={`button-30 ${activeBtn === 'weights' ? 'active' : ''} ${selecter === 'weights' ? 'border' : ""}`} onClick={() => { updateAll('weights') }} role="button">Weights</button>
+      <button className={`button-30 ${activeBtn === 'warnings' ? 'active' : ''} ${selecter === 'warnings' ? 'border' : ""}`} onClick={() => { updateAll('warnings') }} role="button">Warnings</button>
+      <button className={`button-30 ${activeBtn === 'none' ? 'active' : ''} ${selecter === 'none' ? 'border' : ""}`} onClick={() => { updateAll('none'); }} role="button">None</button>
     </div>
   )
 };

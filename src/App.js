@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import WAD from './components/WAD'
 import './App.css';
+import buttonNavigator from './buttonNavigator';
 
 /**
  * Head app function
@@ -8,7 +10,7 @@ import './App.css';
 function App() {
 
   return (
-    <WAD></WAD>
+    <WAD />
   );
 }
 

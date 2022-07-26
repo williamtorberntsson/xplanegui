@@ -1,10 +1,11 @@
-import { React, useState, useEffect } from 'react';
-import { BoxButtonsL, BoxButtonsR } from './buttons/BoxButtons';
+import { React, useState, useEffect, useRef } from 'react';
+import BoxButtons from './buttons/testButtons';
 import ResetButton from './buttons/ResetButtons';
 import ExtendableButtons from './buttons/ExtendableButtons';
 import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
+import buttonNavigator from '../buttonNavigator';
 
 import './WAD.css';
 import WidgetSelector from './WidgetSelector';
@@ -81,6 +82,37 @@ function WAD() {
   const [aiPlaneData, setAiPlaneData] = useState();
   const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
+
+  // States for navigating buttons with throttle
+  const [activeBtn, setActiveBtn] = useState('1');
+  const [selecterMode, _setSelecterMode] = useState("side");
+  const [selecter, _setSelecter] = useState('1');
+  
+  const selecterRef = useRef(selecter)
+  const setSelecter = state => {
+    selecterRef.current = state;
+    _setSelecter(state);
+  }
+
+  const selecterModeRef = useRef(selecterMode)
+  const setSelecterMode = state => {
+    selecterModeRef.current = state;
+    _setSelecterMode(state);
+  }
+
+  function handleKeyDown(e) {
+    console.log("key pressed: ", e.keyCode);
+    buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode)
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return function clean() {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, []);
+
 
 
   /**
@@ -162,14 +194,14 @@ function WAD() {
         </Grid>
         <Grid item position="absolute" bottom={'0'} left={'10vw'} right={'10vw'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between', justifyContent: 'center' }}>
           <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button>
-          <WidgetButtons update={updateWidgetPos} />
+          <WidgetButtons update={updateWidgetPos} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />
           <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button>
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtonsL Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} />
+          <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />
         </Grid>
         <Grid item position="absolute" right={'1vh'} style={{ zIndex: '3' }}>
-          <BoxButtonsR Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} arrow={'<'} />
+          <BoxButtons Usize={setUR} Bsize={setBR} selectedPos={setSelectedWidgetPos} side={"R"} arrow={'<'} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />
         </Grid>
       </Grid>
     </Grid>

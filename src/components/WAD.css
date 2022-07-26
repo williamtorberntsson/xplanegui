@@ -165,6 +165,14 @@
     will-change: box-shadow,transform;
     font-size: 18px;
   }
+
+  .active {
+    background-color: #8bb08f;
+  }
+
+  .border {
+    border: 6px solid rgb(92, 159, 213);
+  }
   
   /* .button-40:focus {
     background-color: #8bb08f;
