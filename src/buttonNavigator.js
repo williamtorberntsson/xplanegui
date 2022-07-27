@@ -68,7 +68,6 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter) => {
 
           break;
       }
-      break;
   }
 }
 

@@ -11,7 +11,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
-import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from '../constants';
+import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from '../constants';
 
 
 /**
@@ -25,39 +25,39 @@ import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from '../
  * @prop {string} widgetName name of the widget
  * @returns one widget that covers the entire side or two widgets (top and bottom)
  */
-function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
+function GridType({ Usize, Bsize, side, container, data, widgetPositions, viewMode }) {
 
-  if (Usize === 'L' && Bsize === 'L') {
+    if (Usize === 'L' && Bsize === 'L') {
 
-    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
-    return (
-      <Grid container direction="column" className={container}>
-        <Grid item className={Usize} id="wb_three">
-          <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} />
-        </Grid>
-      </Grid>)
-  }
-
-  else {
-    if (Usize == 'L') {
-      Usize = ''
+      // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
+      return (
+        <Grid container direction="column" className={container}>
+          <Grid item className={Usize} id="wb_three">
+            <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} />
+          </Grid>
+        </Grid>)
     }
-    else if (Bsize == 'L') {
-      Bsize = ''
-    }
-    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
-    return (
-      <Grid container direction="column" className={container}>
-        <Grid item className={Usize} id="wb_one">
-          <WidgetSelector widget={widgetPositions[`U${side}`]} size={Usize} data={data} />
-        </Grid>
-        <Grid item className={Bsize} id="wb_two">
-          <WidgetSelector widget={widgetPositions[`B${side}`]} size={Bsize} data={data} />
-        </Grid>
-      </Grid>)
-  }
 
-}
+    else {
+      if (Usize == 'L') {
+        Usize = ''
+      }
+      else if (Bsize == 'L') {
+        Bsize = ''
+      }
+      // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
+      return (
+        <Grid container direction="column" className={container}>
+          <Grid item className={Usize} id="wb_one">
+            <WidgetSelector widget={widgetPositions[`U${side}`]} size={Usize} data={data} />
+          </Grid>
+          <Grid item className={Bsize} id="wb_two">
+            <WidgetSelector widget={widgetPositions[`B${side}`]} size={Bsize} data={data} />
+          </Grid>
+        </Grid>)
+    }
+  }
+// }
 
 /**
   * Component for creating the WAD.
@@ -82,6 +82,7 @@ function WAD() {
   const [aiPlaneData, setAiPlaneData] = useState();
   const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
+  const [viewMode, setViewMode] = useState();
 
   // States for navigating buttons with throttle
   /**
@@ -212,17 +213,26 @@ function WAD() {
 
   // Use offline data
   useEffect(() => {
-    if(!USE_XPLANE_DATA){
-    const interval = setInterval(() => {
-      UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-      setWidgetData(offlineData)
-    }, 200); // update 20 times/s
+    if (!USE_XPLANE_DATA) {
+      const interval = setInterval(() => {
+        UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
+        setWidgetData(offlineData)
+      }, 200); // update 20 times/s
 
-    // console.log(widgetData)
-  
-    return () => clearInterval(interval); // Unmount function to prevent memory leaks.
-  }
+      // console.log(widgetData)
+
+      return () => clearInterval(interval); // Unmount function to prevent memory leaks.
+    }
   })
+
+  function updateViewMode(mode) {
+    setWidgetPositions(mode.widgets)
+    setUL(mode.sizes.UL)
+    setBL(mode.sizes.BL)
+    setUR(mode.sizes.UR)
+    setBR(mode.sizes.BR)
+    // setViewMode(mode)
+  }
 
   return (
     <Grid container className="wad_frame">
@@ -235,12 +245,12 @@ function WAD() {
 
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} />
+            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} viewMode={viewMode}/>
           </Grid>
           <Grid item xs={6}>
           </Grid>
           <Grid item xs={3}>
-            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositions} />
+            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositions} viewMode={viewMode}/>
           </Grid>
         </Grid>
 
@@ -252,7 +262,8 @@ function WAD() {
         <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', width: "94%" }}>
           {/* <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button> */}
           <WidgetButtons update={updateWidgetPos} activeBtn={activeBtn} selecter={selecter} reset={cleanUp} />
-          {/* <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button> */}
+          <button className="button-30" onClick={() => { updateViewMode(VIEW_MODE_LANDING) }}>MODE1</button>
+          <button className="button-30" onClick={() => { updateViewMode(VIEW_MODE_MINI) }}>MODE2</button>
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
           <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />

@@ -11,7 +11,7 @@ import styles from "../../styles/Heading.module.css"
  */
 const Heading = ({ heading }) => {
   const calc_heading = heading * (93.3 - 6.7) / 360 + 6.7; // fit heading to svg
-  console.log(heading)
+  // console.log(heading)
 
   return (
     <div className={styles.compass_mask}>
