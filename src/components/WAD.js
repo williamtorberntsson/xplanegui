@@ -33,7 +33,7 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_three">
-          <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} USE_XPLANE_DATA={USE_XPLANE_DATA} />
+          <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} />
         </Grid>
       </Grid>)
   }

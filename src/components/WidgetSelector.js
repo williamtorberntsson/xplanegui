@@ -2,6 +2,7 @@ import PFD from "./widgets/pfd/PFD";
 import Weights from "./widgets/statuswidgets/Weights";
 import Warnings from "./widgets/statuswidgets/Warnings";
 import Status from "./widgets/statuswidgets/Status";
+import { USE_XPLANE_DATA } from "../constants";
 
 /**
  * Component for returning widget from a name and giving the widget the right data
@@ -13,9 +14,9 @@ import Status from "./widgets/statuswidgets/Status";
  * @prop {boolean} USE_XPLANE_DATA bool is false when offline data should be used
  * @returns widget
  */
-const WidgetSelector = ({ widget, size, data, USE_XPLANE_DATA }) => {
+const WidgetSelector = ({ widget, size, data }) => {
   let dataPFD
-  if (!USE_XPLANE_DATA) {
+  if (!USE_XPLANE_DATA || data == undefined) {
     dataPFD = data
   }
   else {
