@@ -69,33 +69,33 @@ function WAD() {
   // States to keep track of widget sizes
   const [UL, _setUL] = useState('');
   const UL_Ref = useRef(UL);
-  const setUL = state => {UL_Ref.current = state; _setUL(state)}
+  const setUL = state => { UL_Ref.current = state; _setUL(state) }
 
   const [BL, _setBL] = useState('');
   const BL_Ref = useRef(BL);
-  const setBL = state => {BL_Ref.current = state; _setBL(state)}
+  const setBL = state => { BL_Ref.current = state; _setBL(state) }
 
   const [UR, _setUR] = useState('');
   const UR_Ref = useRef(UR);
-  const setUR = state => {UR_Ref.current = state; _setUR(state)}
+  const setUR = state => { UR_Ref.current = state; _setUR(state) }
 
   const [BR, _setBR] = useState('');
   const BR_Ref = useRef(BR);
-  const setBR = state => {BR_Ref.current = state; _setBR(state)}
+  const setBR = state => { BR_Ref.current = state; _setBR(state) }
 
   // States to keep track of layout.
   const [selectedWidget, _setSelectedWidget] = useState("");
   const selectedWidgetRef = useRef(selectedWidget);
-  const setSelectedWidget = state => {selectedWidgetRef.current = state; _setSelectedWidget(state)}
+  const setSelectedWidget = state => { selectedWidgetRef.current = state; _setSelectedWidget(state) }
 
 
   const [selectedWidgetPos, _setSelectedWidgetPos] = useState('1')
   const selectedWidgetPosRef = useRef(selectedWidgetPos);
-  const setSelectedWidgetPos = state => {selectedWidgetPosRef.current = state; _setSelectedWidgetPos(state)}
-  
+  const setSelectedWidgetPos = state => { selectedWidgetPosRef.current = state; _setSelectedWidgetPos(state) }
+
   const [widgetPositions, _setWidgetPositions] = useState({ UL: null, ML: null, BL: null, UR: null, MR: null, BR: null });
   const widgetPositionsRef = useRef(widgetPositions);
-  const setWidgetPositions = state => {widgetPositionsRef.current = state; _setWidgetPositions(widgetPositions)}
+  const setWidgetPositions = state => { widgetPositionsRef.current = state; _setWidgetPositions(widgetPositions) }
 
   // States to manage data with/without X-Plane
   const [myAirPlaneData, setMyAirPlaneData] = useState();

@@ -69,67 +69,49 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
       break;
     case KEY.P:
       if (selecterMode == 0) {
-        updateActiveBtn(selecter.toString());
-
-        /*
-        Usize('S')
-        selectedPos("U" + side)
-        btnUpdate('1')
-        */
-
-        //function update(name, size, side)
+        updateActiveBtn(selecter)
         switch (selecter) {
           case '1':
             setUL('S')
             setSelectedWidgetPos('U' + 'L')
-            updateActiveBtn(selecter)
             break;
           case '2':
             setUL('M')
             setSelectedWidgetPos('U' + 'L')
-            updateActiveBtn(selecter)
             break;
           case '3':
             setUL('L')
             setBL('L')
             setSelectedWidgetPos('M' + 'L')
-            updateActiveBtn(selecter)
             break;
           case '4':
             setBL('M')
             setSelectedWidgetPos('B' + 'L')
-            updateActiveBtn(selecter)
             break;
           case '5':
             setBL('S')
             setSelectedWidgetPos('B' + 'L')
-            updateActiveBtn(selecter)
             break;
           case '6':
             setUR('S')
             setSelectedWidgetPos('U' + 'R')
-            updateActiveBtn(selecter)
             break;
           case '7':
             setUR('M')
             setSelectedWidgetPos('U' + 'R')
-            updateActiveBtn(selecter)
             break;
           case '8':
             setUR('L')
             setBR('L')
             setSelectedWidgetPos('M' + 'R')
-            updateActiveBtn(selecter)
             break;
           case '9':
             setBR('M')
             setSelectedWidgetPos('B' + 'R')
-            updateActiveBtn(selecter)
             break;
           case '10':
             setBR('S')
             setSelectedWidgetPos('B' + 'R')
-            updateActiveBtn(selecter)
             break;
         }
       }
