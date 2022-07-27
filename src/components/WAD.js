@@ -67,15 +67,35 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
   */
 function WAD() {
   // States to keep track of widget sizes
-  const [UL, setUL] = useState('');
-  const [BL, setBL] = useState('');
-  const [UR, setUR] = useState('');
-  const [BR, setBR] = useState('');
+  const [UL, _setUL] = useState('');
+  const UL_Ref = useRef(UL);
+  const setUL = state => {UL_Ref.current = state; _setUL(state)}
+
+  const [BL, _setBL] = useState('');
+  const BL_Ref = useRef(BL);
+  const setBL = state => {BL_Ref.current = state; _setBL(state)}
+
+  const [UR, _setUR] = useState('');
+  const UR_Ref = useRef(UR);
+  const setUR = state => {UR_Ref.current = state; _setUR(state)}
+
+  const [BR, _setBR] = useState('');
+  const BR_Ref = useRef(BR);
+  const setBR = state => {BR_Ref.current = state; _setBR(state)}
 
   // States to keep track of layout.
-  const [selectedWidget, setSelectedWidget] = useState("");
-  const [selectedWidgetPos, setSelectedWidgetPos] = useState("")
-  const [widgetPositions, setWidgetPositions] = useState({ UL: null, ML: null, BL: null, UR: null, MR: null, BR: null });
+  const [selectedWidget, _setSelectedWidget] = useState("");
+  const selectedWidgetRef = useRef(selectedWidget);
+  const setSelectedWidget = state => {selectedWidgetRef.current = state; _setSelectedWidget(state)}
+
+
+  const [selectedWidgetPos, _setSelectedWidgetPos] = useState('1')
+  const selectedWidgetPosRef = useRef(selectedWidgetPos);
+  const setSelectedWidgetPos = state => {selectedWidgetPosRef.current = state; _setSelectedWidgetPos(state)}
+  
+  const [widgetPositions, _setWidgetPositions] = useState({ UL: null, ML: null, BL: null, UR: null, MR: null, BR: null });
+  const widgetPositionsRef = useRef(widgetPositions);
+  const setWidgetPositions = state => {widgetPositionsRef.current = state; _setWidgetPositions(widgetPositions)}
 
   // States to manage data with/without X-Plane
   const [myAirPlaneData, setMyAirPlaneData] = useState();
@@ -83,51 +103,13 @@ function WAD() {
   const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
 
-  // States for navigating buttons with throttle
-  /**
-   * State for recently pressed button
-   */
-  const [activeBtn, setActiveBtn] = useState('1');
-  /**
-   * State for navigation mode.
-   * 0 is side buttons
-   * 1 is widget buttons
-   * @category keynavigation
-   */
+
+  const [activeBtn, _setActiveBtn] = useState('1');
+  const activeBtnRef = useRef(activeBtn);
+  const setActiveBtn = state => { activeBtnRef.current = state; _setActiveBtn(state) }
+
   const [selecterMode, _setSelecterMode] = useState(0);
-  /**
-   * State for which key is selected when navigating with throttle
-   * @category keynavigation
-   */
-  const [selecter, _setSelecter] = useState('1');
-
-  /**
-   * Ref for selecter state
-   * @category keynavigation
-   */
-  const selecterRef = useRef(selecter)
-  /**
-   * Update selecter state function
-   * @function
-   * @category keynavigation
-   * @param {number} state key
-   */
-  const setSelecter = state => {
-    selecterRef.current = state;
-    _setSelecter(state);
-  }
-
-  /**
-   * Ref for selecterMode state
-   * @category keynavigation
-   */
   const selecterModeRef = useRef(selecterMode)
-  /**
-   * Update selecterMode state function
-   * @function
-   * @category keynavigation
-   * @param {number} state mode
-   */
   const setSelecterMode = state => {
     if (state == 0) setSelecter('1')
     else if (state == 1) setSelecter(WIDGET_ORDER[1])
@@ -135,21 +117,19 @@ function WAD() {
     _setSelecterMode(state);
   }
 
+  const [selecter, _setSelecter] = useState('1');
+  const selecterRef = useRef(selecter)
+  const setSelecter = state => { selecterRef.current = state; _setSelecter(state) }
+
+
   /**
    * Handle key is pressed events.
-   * Manages mode and select buttons
    * @function
    * @category keynavigation
    * @param {event} event 
    */
   function handleKeyDown(e) {
-    console.log("key pressed: ", e.keyCode);
-    console.log(selecterRef.current.toString())
-    console.log(activeBtn)
-
-    if (e.keyCode == KEY.P) setActiveBtn(selecterRef.current.toString());
-    else if (e.keyCode == KEY.M) setSelecterMode((selecterModeRef.current + 1) % 2)
-    else buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode);
+    buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode, setActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos);
   }
 
   /**
@@ -176,11 +156,11 @@ function WAD() {
     console.log('clean')
 
     if (side == 'left') {
-      setWidgetPositions({ ...widgetPositions, UL: null, ML: null, BL: null })
+      setWidgetPositions({ ...widgetPositionsRef.current, UL: null, ML: null, BL: null })
       setWidgetData('')
     }
     else if (side == 'right') {
-      setWidgetPositions({ ...widgetPositions, UR: null, MR: null, BR: null })
+      setWidgetPositions({ ...widgetPositionsRef.current, UR: null, MR: null, BR: null })
       setWidgetData('')
     }
   }
@@ -192,8 +172,9 @@ function WAD() {
    * @param {string} widget name of widget
    */
   const updateWidgetPos = (widget) => {
+    console.log("Update: ", widget)
     setSelectedWidget(widget) // update selected widget
-    setWidgetPositions({ ...widgetPositions, [selectedWidgetPos]: widget }) // use param (widget) instead of state as it may not be updated
+    setWidgetPositions({ ...widgetPositionsRef.current, [selectedWidgetPosRef.current]: widget }) // use param (widget) instead of state as it may not be updated
   }
 
   // Use myAirPlaneData from xplane
@@ -212,16 +193,16 @@ function WAD() {
 
   // Use offline data
   useEffect(() => {
-    if(!USE_XPLANE_DATA){
-    const interval = setInterval(() => {
-      UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-      setWidgetData(offlineData)
-    }, 200); // update 20 times/s
+    if (!USE_XPLANE_DATA) {
+      const interval = setInterval(() => {
+        UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
+        setWidgetData(offlineData)
+      }, 200); // update 20 times/s
 
-    // console.log(widgetData)
-  
-    return () => clearInterval(interval); // Unmount function to prevent memory leaks.
-  }
+      // console.log(widgetData)
+
+      return () => clearInterval(interval); // Unmount function to prevent memory leaks.
+    }
   })
 
   return (
@@ -235,12 +216,12 @@ function WAD() {
 
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositions} />
+            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositionsRef.current} />
           </Grid>
           <Grid item xs={6}>
           </Grid>
           <Grid item xs={3}>
-            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositions} />
+            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositionsRef.current} />
           </Grid>
         </Grid>
 
@@ -250,9 +231,7 @@ function WAD() {
           <ExtendableButtons />
         </Grid>
         <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', width: "94%" }}>
-          {/* <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button> */}
-          <WidgetButtons update={updateWidgetPos} activeBtn={activeBtn} selecter={selecter} reset={cleanUp} />
-          {/* <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button> */}
+          <WidgetButtons update={updateWidgetPos} selecter={selecter} reset={cleanUp} />
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
           <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />
