@@ -11,7 +11,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
-import { USE_XPLANE_DATA } from '../constants';
+import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from '../constants';
 
 
 /**
@@ -84,31 +84,79 @@ function WAD() {
   const [offlineData, setOfflineData] = useState();
 
   // States for navigating buttons with throttle
+  /**
+   * State for recently pressed button
+   */
   const [activeBtn, setActiveBtn] = useState('1');
-  const [selecterMode, _setSelecterMode] = useState("sidebuttons");
+  /**
+   * State for navigation mode.
+   * 0 is side buttons
+   * 1 is widget buttons
+   * @category keynavigation
+   */
+  const [selecterMode, _setSelecterMode] = useState(0);
+  /**
+   * State for which key is selected when navigating with throttle
+   * @category keynavigation
+   */
   const [selecter, _setSelecter] = useState('1');
 
+  /**
+   * Ref for selecter state
+   * @category keynavigation
+   */
   const selecterRef = useRef(selecter)
+  /**
+   * Update selecter state function
+   * @function
+   * @category keynavigation
+   * @param {number} state key
+   */
   const setSelecter = state => {
     selecterRef.current = state;
     _setSelecter(state);
   }
 
+  /**
+   * Ref for selecterMode state
+   * @category keynavigation
+   */
   const selecterModeRef = useRef(selecterMode)
+  /**
+   * Update selecterMode state function
+   * @function
+   * @category keynavigation
+   * @param {number} state mode
+   */
   const setSelecterMode = state => {
+    if (state == 0) setSelecter('1')
+    else if (state == 1) setSelecter(WIDGET_ORDER[1])
     selecterModeRef.current = state;
     _setSelecterMode(state);
   }
 
+  /**
+   * Handle key is pressed events.
+   * Manages mode and select buttons
+   * @function
+   * @category keynavigation
+   * @param {event} event 
+   */
   function handleKeyDown(e) {
     console.log("key pressed: ", e.keyCode);
     console.log(selecterRef.current.toString())
     console.log(activeBtn)
 
-    if (e.keyCode == 80) setActiveBtn(selecterRef.current.toString());
+    if (e.keyCode == KEY.P) setActiveBtn(selecterRef.current.toString());
+    else if (e.keyCode == KEY.M) setSelecterMode((selecterModeRef.current + 1) % 2)
     else buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode);
   }
 
+  /**
+   * useEffect to handle key presses
+   * Using this way to detect key presses refs are required for updating states
+   * @category keynavigation
+   */
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -196,10 +244,10 @@ function WAD() {
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
-        <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', display: 'flex', flexDirection: 'row', alignContent: 'space-between', justifyContent: 'center' }}>
-          <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button>
-          <WidgetButtons update={updateWidgetPos} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />
-          <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button>
+        <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', width: "94%" }}>
+          {/* <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button> */}
+          <WidgetButtons update={updateWidgetPos} activeBtn={activeBtn} selecter={selecter} reset={cleanUp} />
+          {/* <button className="button-30" role="button" onClick={() => { cleanUp('right') }}>Reset Right side</button> */}
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
           <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />

@@ -1,5 +1,7 @@
 // Settings
 
+import PFD from "./components/widgets/pfd/PFD";
+
 /** 
  * Whether to use data fetched from XPlane.
  * @constant
@@ -19,7 +21,16 @@ export const NR_AI_PLANES = 5;
 /**
  * Key configuration for navigating the WAD with throttle controls
  */
-export const KEY_NAVIGATION_CONFIG = {}
+export const KEY_NAVIGATION_CONFIG = {
+    LEFT_ARROW: 37,
+    UP_ARROW: 38,
+    RIGHT_ARROW: 39,
+    DOWN_ARROW: 40,
+    P: 80,
+    M: 77
+}
+
+export const WIDGET_ORDER = ["reset_left", "pfd", "weights", "warnings", "none", "reset_right"]
 
 /** 
  * Zoom level for map
