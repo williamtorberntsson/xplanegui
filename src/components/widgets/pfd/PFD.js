@@ -18,7 +18,7 @@ import { USE_XPLANE_DATA, PFD_INIT_DATA } from "../../../constants";
  */
 const PFD = ({ data, size }) => {
 
-  if (!USE_XPLANE_DATA) data = PFD_INIT_DATA;
+  // if (!USE_XPLANE_DATA) data = PFD_INIT_DATA;
 
   // Medium size widget
   if (size === "M") {
@@ -43,9 +43,9 @@ const PFD = ({ data, size }) => {
   } else if (size === "S") { // small size widget
     return (
       <div className={styles.S}>
-        <Attitude roll={data.roll} pitch={data.pitch} width={'55vh'} />
-        <AirSpeed speed={data.true_airspeed} width={'55vh'} />
-        <Altimeter altitude={data.altitude} width={'55vh'} />
+        <Attitude roll={data.roll} pitch={data.pitch}/>
+        <AirSpeed speed={data.true_airspeed}/>
+        <Altimeter altitude={data.altitude}/>
       </div>
     )
   }
