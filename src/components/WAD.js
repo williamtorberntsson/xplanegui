@@ -33,7 +33,7 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_three">
-          <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} useXplaneData={useXplaneData} />
+          <WidgetSelector widget={widgetPositions[`M${side}`]} size={Usize} data={data} USE_XPLANE_DATA={USE_XPLANE_DATA} />
         </Grid>
       </Grid>)
   }
@@ -212,7 +212,7 @@ function WAD() {
 
   // Use offline data
   useEffect(() => {
-    if(!useXplaneData){
+    if(!USE_XPLANE_DATA){
     const interval = setInterval(() => {
       UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
       setWidgetData(offlineData)

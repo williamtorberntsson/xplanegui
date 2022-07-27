@@ -10,12 +10,12 @@ import Status from "./widgets/statuswidgets/Status";
  * @prop {string} widget widget name
  * @prop {size} size size of widget
  * @prop {dict} data dictionary containing data
- * @prop {boolean} useXplaneData bool is false when offline data should be used
+ * @prop {boolean} USE_XPLANE_DATA bool is false when offline data should be used
  * @returns widget
  */
-const WidgetSelector = ({ widget, size, data, useXplaneData }) => {
+const WidgetSelector = ({ widget, size, data, USE_XPLANE_DATA }) => {
   let dataPFD
-  if (!useXplaneData) {
+  if (!USE_XPLANE_DATA) {
     dataPFD = data
   }
   else {
