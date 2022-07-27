@@ -11,7 +11,11 @@ To see all documented implementations run `npm run jsdoc` and then `npm run open
 - Run `npm install` (might have to use ``--legacy-peer-deps`)
 
 ### How to run
-Start up X-plane together with front-end and back-end on the same computer.
+Start up:
+- X-plane
+- Front-End
+- Back-End
+- JoyToKey (required if navigating with throttle)
 
 #### Back-end
 Start the python server `server.py`
@@ -39,4 +43,4 @@ The buttons at the bottom select what widget should be placed at the recently se
 ## Structure Back-end
 The server gets data from X-plane and sends it to the Front-end. What data is send or recieved to/from Xplane
 is decided with a reference to a specific data with the help of a plugin, [XPlaneConnect](https://github.com/nasa/XPlaneConnect).
-The plugin has a gigantic data reference page for all data that can be send and recieved.
+There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin.

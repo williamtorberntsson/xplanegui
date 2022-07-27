@@ -5,7 +5,7 @@ import Attitude from "./Attitude";
 import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
-import { useXplaneData, pfd_init_data } from "../../../constants";
+import { USE_XPLANE_DATA, PFD_INIT_DATA } from "../../../constants";
 
 /**
  * Creates a PFD (primary flight display) with the help of smaller instruments
@@ -18,7 +18,7 @@ import { useXplaneData, pfd_init_data } from "../../../constants";
  */
 const PFD = ({ data, size }) => {
 
-  if (!useXplaneData) data = pfd_init_data;
+  if (!USE_XPLANE_DATA) data = PFD_INIT_DATA;
 
   // Medium size widget
   if (size === "M") {

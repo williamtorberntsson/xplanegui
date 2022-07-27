@@ -1,4 +1,4 @@
-import { position_init_data, pfd_init_data, planes_init_data } from "../../constants";
+import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA } from "../../constants";
 
 const UpdateOfflineData = (data, updateData) => {
   // simple example
@@ -20,7 +20,7 @@ const UpdateOfflineData = (data, updateData) => {
     })
 
   } else { // no data
-    updateData(Object.assign({}, position_init_data, pfd_init_data, planes_init_data)) // merge two dict
+    updateData(Object.assign({}, POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA)) // merge two dict
   }
 }
 

@@ -6,7 +6,7 @@
  * @type {boolean}
  * @default
 */
-export const useXplaneData = true;
+export const USE_XPLANE_DATA = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -14,7 +14,12 @@ export const useXplaneData = true;
  * @type {number}
  * @default
 */
-export const nrAiPlanes = 5;
+export const NR_AI_PLANES = 5;
+
+/**
+ * Key configuration for navigating the WAD with throttle controls
+ */
+export const KEY_NAVIGATION_CONFIG = {}
 
 /** 
  * Zoom level for map
@@ -22,7 +27,7 @@ export const nrAiPlanes = 5;
  * @type {number}
  * @default
 */
-export const mapZoom = 8;
+export const MAP_ZOOM = 8;
 
 /**
  * Example location and heading init data
@@ -30,7 +35,7 @@ export const mapZoom = 8;
  * @type {object}
  * @default
  */
-export const position_init_data = {
+export const POSITION_INIT_DATA = {
     "longitude": 15.680926012604708,
     "latitude": 58.41157469382408,
     "true_heading": 0
@@ -42,7 +47,7 @@ export const position_init_data = {
  * @type {object}
  * @default
  */
-export const pfd_init_data = {
+export const PFD_INIT_DATA = {
     "groundspeed": 0,
     "true_airspeed": 0,
     "true_heading": 0,
@@ -58,7 +63,7 @@ export const pfd_init_data = {
  * @type {object}
  * @default
  */
-export const weights_init_data = {
+export const WEIGHTS_INIT_DATA = {
     "fuel1": 0,
     "fuel2": 0,
     "total_fuel": 0,
@@ -72,7 +77,7 @@ export const weights_init_data = {
  * @type {object}
  * @default
  */
-export const planes_init_data = [{
+export const PLANES_INIT_DATA = [{
     "longitude": 15.880926012604708,
     "latitude": 58.41157469382408,
     "true_heading": 0,

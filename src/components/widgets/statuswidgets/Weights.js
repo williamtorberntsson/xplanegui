@@ -1,4 +1,4 @@
-import { useXplaneData, weights_init_data } from "../../../constants";
+import { USE_XPLANE_DATA, WEIGHTS_INIT_DATA } from "../../../constants";
 import styles from "../../styles/Status.module.css"
 
 /**
@@ -14,7 +14,7 @@ import styles from "../../styles/Status.module.css"
  */
 const Weights = ({ size, data }) => {
 
-  if (!useXplaneData) data = weights_init_data;
+  if (!USE_XPLANE_DATA) data = WEIGHTS_INIT_DATA;
 
   return (
     <div className={styles.S}>

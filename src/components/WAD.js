@@ -11,7 +11,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
-import { useXplaneData } from '../constants';
+import { USE_XPLANE_DATA } from '../constants';
 
 
 /**
@@ -150,7 +150,7 @@ function WAD() {
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
-    if (useXplaneData) {
+    if (USE_XPLANE_DATA) {
       const interval = setInterval(() => {
         fetchData("env", setAiPlaneData)
         fetchData("plane", setMyAirPlaneData)

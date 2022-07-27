@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, neutralAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
-import { useXplaneData, nrAiPlanes, mapZoom } from '../../constants';
+import { USE_XPLANE_DATA, NR_AI_PLANES, MAP_ZOOM } from '../../constants';
 import haversine from "../haversine";
 import AirSpeed from '../widgets/pfd/AirSpeed';
 
@@ -15,7 +15,7 @@ import AirSpeed from '../widgets/pfd/AirSpeed';
  * @returns map
  */
 const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
-  const [zoomvalue, setZoomvalue] = useState(mapZoom);
+  const [zoomvalue, setZoomvalue] = useState(MAP_ZOOM);
   const [view, setView] = useState(null);
   const [myPoint, setMyPoint] = useState(null);
   const [points, setPoints] = useState(null);
@@ -122,7 +122,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
 
         // Add points for all pointCoordinates
         let pointsArray = [] // init array to add points (markings) to
-        for (let i = 0; i < nrAiPlanes; i++) {
+        for (let i = 0; i < NR_AI_PLANES; i++) {
           // Create a point
           // console.log(pointsArray)
 
@@ -198,7 +198,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   // With xplane data: Updates the map and airplane positions 
   useEffect(() => {
 
-    if (useXplaneData && myAirPlaneData && aiPlaneData) {
+    if (USE_XPLANE_DATA && myAirPlaneData && aiPlaneData) {
       // Set rotation and position for camera
       try {
         view.center = [myAirPlaneData.longitude, myAirPlaneData.latitude];
@@ -255,13 +255,13 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         console.log(error)
       }
     }
-  }, [myAirPlaneData, useXplaneData, aiPlaneData]);
+  }, [myAirPlaneData, USE_XPLANE_DATA, aiPlaneData]);
 
 
   // With offline data: Updates the map and airplane positions 
   useEffect(() => {
 
-    if (!useXplaneData && offlineData && view) {
+    if (!USE_XPLANE_DATA && offlineData && view) {
       // Set rotation and position for camera
       view.center = [offlineData.longitude, offlineData.latitude];
       view.rotation = offlineData.true_heading;
