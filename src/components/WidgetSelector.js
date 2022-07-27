@@ -9,12 +9,21 @@ import Status from "./widgets/statuswidgets/Status";
  * @category Widget
  * @prop {string} widget widget name
  * @prop {size} size size of widget
+ * @prop {dict} data dictionary containing data
+ * @prop {boolean} useXplaneData bool is false when offline data should be used
  * @returns widget
  */
-const WidgetSelector = ({ widget, size, data }) => {
+const WidgetSelector = ({ widget, size, data, useXplaneData }) => {
+  let dataPFD
+  if (!useXplaneData) {
+    dataPFD = data
+  }
+  else {
+    dataPFD = data.pfd
+  }
 
   switch (widget) {
-    case "pfd": return <PFD size={size} data={data.pfd} />
+    case "pfd": return <PFD size={size} data={dataPFD} />
     case "weights": return <Weights size={size} data={data.weights} />
     case "warnings": return <Warnings size={size} data={data} />
     case "status": return <Status size={size} data={data} />

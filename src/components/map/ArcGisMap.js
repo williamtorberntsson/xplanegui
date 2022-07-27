@@ -244,6 +244,8 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
       view.center = [offlineData.longitude, offlineData.latitude];
       view.rotation = offlineData.true_heading;
 
+      // console.log(offlineData.true_airspeed)
+
       layer.removeAll() // clear layer with markers
 
       // Update own airplane position
