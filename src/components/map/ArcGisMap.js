@@ -195,7 +195,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           const distance = haversine(myAirPlaneData.latitude, myAirPlaneData.longitude, aiPlaneData.planes[i].latitude, aiPlaneData.planes[i].longitude)
 
           tempPoint.popupTemplate.content = (
-            "<ul><li> ALTITUDE: " + aiPlaneData.planes[i].altitude.toFixed(0) + " feet" + "</li>" +
+            "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed(0) + " feet" + "</li>" +
             "<li>DISTANCE:" + distance + " m" + "</li>" +
             "<li>SOMETHING: </li><ul>")
 
