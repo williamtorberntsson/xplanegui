@@ -11,7 +11,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
-import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from '../constants';
+import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from '../constants';
 
 
 /**
@@ -25,7 +25,7 @@ import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from '../
  * @prop {string} widgetName name of the widget
  * @returns one widget that covers the entire side or two widgets (top and bottom)
  */
-function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
+function GridType({ Usize, Bsize, side, container, data, widgetPositions, viewMode }) {
 
   if (Usize === 'L' && Bsize === 'L') {
 
@@ -56,8 +56,8 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
         </Grid>
       </Grid>)
   }
-
 }
+// }
 
 /**
   * Component for creating the WAD.
@@ -102,6 +102,7 @@ function WAD() {
   const [aiPlaneData, setAiPlaneData] = useState();
   const [widgetData, setWidgetData] = useState({});
   const [offlineData, setOfflineData] = useState();
+  const [viewMode, setViewMode] = useState();
 
 
   const [activeBtn, _setActiveBtn] = useState('1');
@@ -129,7 +130,7 @@ function WAD() {
    * @param {event} event 
    */
   function handleKeyDown(e) {
-    buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode, setActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos);
+    buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode, setActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos, updateViewMode);
   }
 
   /**
@@ -185,7 +186,7 @@ function WAD() {
         fetchData("plane", setMyAirPlaneData)
         fetchWidgetData("pfd", setWidgetData, widgetData)
         fetchWidgetData("weights", setWidgetData, widgetData)
-      }, 500);
+      }, 200);
       return () => clearInterval(interval);
     }
 
@@ -205,6 +206,15 @@ function WAD() {
     }
   })
 
+  function updateViewMode(mode) {
+    setWidgetPositions(mode.widgets)
+    setUL(mode.sizes.UL)
+    setBL(mode.sizes.BL)
+    setUR(mode.sizes.UR)
+    setBR(mode.sizes.BR)
+    // setViewMode(mode)
+  }
+
   return (
     <Grid container className="wad_frame">
       <Grid container className="wad_content">
@@ -216,12 +226,12 @@ function WAD() {
 
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositionsRef.current} />
+            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositionsRef.current} viewMode={viewMode} />
           </Grid>
           <Grid item xs={6}>
           </Grid>
           <Grid item xs={3}>
-            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositionsRef.current} />
+            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositionsRef.current} viewMode={viewMode} />
           </Grid>
         </Grid>
 
@@ -232,6 +242,7 @@ function WAD() {
         </Grid>
         <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', width: "94%" }}>
           <WidgetButtons update={updateWidgetPos} selecter={selecter} reset={cleanUp} />
+          {/* <button className="button-30" role="button" onClick={() => { cleanUp('left') }}>Reset Left side</button> */}
         </Grid>
         <Grid item position="absolute" left={'1vh'} style={{ zIndex: '3' }}>
           <BoxButtons Usize={setUL} Bsize={setBL} selectedPos={setSelectedWidgetPos} side={"L"} arrow={'>'} activeBtn={activeBtn} btnUpdate={setActiveBtn} selecter={selecter} />

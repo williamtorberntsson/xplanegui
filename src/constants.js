@@ -16,7 +16,7 @@ export const USE_XPLANE_DATA = true;
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 5;
+export const NR_AI_PLANES = 7;
 
 /**
  * Key configuration for navigating the WAD with throttle controls
@@ -27,7 +27,9 @@ export const KEY_NAVIGATION_CONFIG = {
     RIGHT_ARROW: 39,
     DOWN_ARROW: 40,
     P: 80,
-    M: 77
+    M: 77,
+    ONE: 49,
+    TWO: 50
 }
 
 export const WIDGET_ORDER = ["reset_left", "pfd", "weights", "warnings", "none", "reset_right"]
@@ -100,4 +102,38 @@ export const PLANES_INIT_DATA = [{
     "true_heading": 0,
     "team_status": 1
 },]
+
+export const VIEW_MODE_LANDING = {
+    widgets: {
+        UL: null,
+        ML: "pfd",
+        BL: null,
+        UR: "warnings",
+        MR: null,
+        BR: "weights"
+    },
+    sizes: {
+        UL: 'L',
+        BL: 'L',
+        UR: 'S',
+        BR: 'M',
+    }
+}
+
+export const VIEW_MODE_MINI = {
+    widgets: {
+        UL: "pfd",
+        ML: null,
+        BL: null,
+        UR: "warnings",
+        MR: null,
+        BR: null
+    },
+    sizes: {
+        UL: 'S',
+        BL: null,
+        UR: 'S',
+        BR: null,
+    }
+}
 

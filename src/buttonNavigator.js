@@ -1,4 +1,4 @@
-import { KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from "./constants";
+import { KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from "./constants";
 
 /**
  * Manages navigation with buttons on throttle (can also use arrow keys, p and m).
@@ -9,7 +9,7 @@ import { KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER } from "./constants";
  * @param {string} selecter which button is selected
  * @param {function} updateSelecter function to update selecter
  */
-const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, updateSelecterMode, updateActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos) => {
+const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, updateSelecterMode, updateActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos, updateViewMode) => {
 
   console.log("Key pressed: ", keyCode, " Mode: ", selecterMode, " selected: ", selecter)
   switch (keyCode) {
@@ -121,6 +121,12 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
       break;
     case KEY.M:
       updateSelecterMode((selecterMode + 1) % 2)
+      break;
+    case KEY.ONE:
+      updateViewMode(VIEW_MODE_LANDING)
+      break;
+    case KEY.TWO:
+      updateViewMode(VIEW_MODE_MINI)
       break;
 
   }

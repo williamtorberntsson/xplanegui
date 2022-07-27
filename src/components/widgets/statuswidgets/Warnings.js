@@ -37,7 +37,7 @@ const Warnings = ({ size, data }) => {
       return (<div className={styles.M}>
         <p>WARNING: </p>
         {Object.keys(data).map(function (key, index) {
-          if (data[key] == 1) return <p className={styles.warning} id={index}>{Messages[key]}</p>
+          if (data[key] == 1) return <p key={key} className={styles.warning} id={index}>{Messages[key]}</p>
         })}
       </div>)
     }
@@ -47,7 +47,7 @@ const Warnings = ({ size, data }) => {
         <div className={styles.S}>
           <p>WARNING: </p>
           {Object.keys(data).map(function (key, index) {
-            if (data[key] == 1) return <p className={styles.warning} id={index}>{Messages[key]}</p>
+            if (data[key] == 1) return <p key={key} className={styles.warning} id={index}>{Messages[key]}</p>
           })}
         </div>
       )
