@@ -45,7 +45,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
     case KEY.RIGHT_ARROW:
       switch (selecterMode) {
         case 0:
-          if ((Number(selecter) + 5) % 10 === 0) updateSelecter((1).toString())
+          if ((Number(selecter) + 5) % 10 === 0) updateSelecter((10).toString())
           else updateSelecter(((Number(selecter) + 5) % 10).toString())
           break;
         case 1:
