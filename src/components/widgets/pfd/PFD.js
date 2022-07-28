@@ -21,9 +21,17 @@ const PFD = ({ data, size }) => {
   // if (!USE_XPLANE_DATA) data = PFD_INIT_DATA;
 
   // Medium size widget
-  if (size === "M") {
+  if (size === "S") { // small size widget
     return (
-      <div className={styles.pfd}>
+      <div className={styles.S}>
+        <Attitude roll={data.roll} pitch={data.pitch}/>
+        <AirSpeed speed={data.true_airspeed}/>
+        <Altimeter altitude={data.altitude}/>
+      </div>
+    )
+  } else if (size === "M") {
+    return (
+      <div className={styles.M}>
         <div className={styles.mouseears}>
           <AirSpeed speed={data.true_airspeed} />
           <Altimeter altitude={data.altitude} />
@@ -40,14 +48,6 @@ const PFD = ({ data, size }) => {
         </div>
       </div>
     );
-  } else if (size === "S") { // small size widget
-    return (
-      <div className={styles.S}>
-        <Attitude roll={data.roll} pitch={data.pitch}/>
-        <AirSpeed speed={data.true_airspeed}/>
-        <Altimeter altitude={data.altitude}/>
-      </div>
-    )
   }
   else if (size === "L") {
     return (
@@ -59,8 +59,8 @@ const PFD = ({ data, size }) => {
         <AirSpeed speed={data.true_airspeed} width={'20vh'} height={'20vh'} />
 
         <Heading heading={data.true_heading} />
-        <Alpha alpha={5} />
-        <G ax={1} ay={1} az={0.5} />
+        <Alpha alpha={data.alpha} />
+        <G ax={data.g_side} ay={data.g_axil} az={data.g_nrml} />
       </div>
     )
   }

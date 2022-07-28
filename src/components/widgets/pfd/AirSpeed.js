@@ -22,9 +22,9 @@ const AirSpeed = ({ speed, width, height }) => {
     airspeed_limit_h: 900
   };
 
-  speed = speed * 1.94384; // m/s to knots
   let speedRad = 0;
   const mach = speed / 340.29;
+  speed = speed * 1.94384; // m/s to knots
 
 
   // Limit speed between 0 and 800

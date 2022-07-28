@@ -2,6 +2,7 @@
     background-color: rgba(185, 184, 182, 0.8);
     height: 100%;
     padding-left: 1.5em; 
+    padding-right: 1.5em; 
     overflow: auto;
     pointer-events: all;
 }
@@ -11,7 +12,8 @@
     background-color: rgba(185, 184, 182, 0.8);
     height: 100%;
     display: flex;
-    padding-left: 1.5em; 
+    padding-left: 1.5em;
+    padding-right: 1.5em; 
     flex-direction: column;
     pointer-events: all;
 }
