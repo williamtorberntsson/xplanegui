@@ -107,7 +107,7 @@ function WAD() {
   const setWidgetPositions = state => { widgetPositionsRef.current = state; _setWidgetPositions(widgetPositions) }
 
 
-  const [activeBtn, _setActiveBtn] = useState('1');
+  const [activeBtn, _setActiveBtn] = useState('');
   const activeBtnRef = useRef(activeBtn);
   const setActiveBtn = state => { activeBtnRef.current = state; _setActiveBtn(state) }
 
