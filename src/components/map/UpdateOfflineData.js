@@ -1,4 +1,4 @@
-import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA } from "../../settings";
+import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA, NR_AI_PLANES } from "../../settings";
 
 /**
  * A function that updates data by increasing some values.
@@ -12,10 +12,9 @@ const UpdateOfflineData = (data, updateData) => {
   // simple example
   // console.log(data)
   if (data) {
-    updateData({
+    let newData = {
       ...data,
-      0:{longitude: data[0].longitude + 0.0001, latitude: data[0].latitude + 0.0001, true_heading: (data[0].true_heading + 0.01) % 360, team_status: 0},
-      1:{longitude: data[1].longitude - 0.0001, latitude: data[1].latitude + 0.0001, true_heading: (data[1].true_heading + 0.1) % 360, team_status: 1},
+      // update own airplane
       longitude: data.longitude + 0.0001,
       latitude: data.latitude + 0.0001,
       groundspeed: data.groundspeed + 1,
@@ -25,7 +24,18 @@ const UpdateOfflineData = (data, updateData) => {
       pitch: (data.pitch + 0.1) % 90,
       roll: data.roll,
       alpha: data.alpha,
-    })
+    }
+    // update AI airplanes
+    for (let i = 0; i < NR_AI_PLANES.length; i++) {
+      newData[i] = {
+        longitude: data[i].longitude + Math.random() * 0.01,
+        latitude: data[i].latitude + Math.random() * 0.01,
+        true_heading: (data[i].true_heading + Math.random() * 0.05) % 360,
+        team_status: PLANES_INIT_DATA[i].team_status
+      }
+    }
+    console.log(newData)
+    updateData(newData)
 
   } else { // no data
     updateData(Object.assign({}, POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA)) // merge two dict
