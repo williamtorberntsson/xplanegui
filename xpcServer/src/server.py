@@ -135,8 +135,7 @@ def weights():
 @app.route("/env")
 def env():
     with xpc.XPlaneConnect() as client:
-
-        nr_of_planes = 5
+        nr_of_planes = 6
         planes_data = [0]*nr_of_planes
 
         team_status_dref = "sim/multiplayer/combat/team_status"
@@ -164,9 +163,11 @@ def env():
                     "longitude": planes_lon[i],
                     "latitude": planes_lat[i],
                     "true_heading": planes_heading[i],
-                    "team_status": team_status[i],
+                    "team_status": team_status[i+1], #team_status have 20 slots, the first one is always 1.0 (friendly), possible to be ourselves
                     "altitude": planes_altitude[i]
                 }
+
+            print(team_status)
 
             return {
                 "planes": planes_data

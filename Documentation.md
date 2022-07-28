@@ -32,8 +32,8 @@ For installation and how to use: see README.md (in source code)
 
 ### Map
 The map is loaded using **[ArcGis](https://developers.arcgis.com/javascript/latest/api-reference/)**. **[Esri-loader](https://github.com/Esri/esri-loader)** is used to load the map. Markers are used to mark own
-airplane and other airplanes. If CGF are friendly or not has to be toggled in the XPlane game itself and
-therefor the markers has be hardcoded. The markers can be designed and use your own svg.
+airplane and other airplanes. If CGF are friendly or not has to be toggled in the XPlane game itself.
+The markers can be designed and use your own svg.
 To create a marker you need a GraphicsLayer, a Point and a Graphic.
 An enemy, friendly and own airplane-markers have been created as examples in the **Map.js** component.
 
@@ -47,3 +47,6 @@ Each position has a size (S/M/L) that can be managed with corresponding state **
 Widgets can be placed at positions by managing the **widgetPositions** state which holds a name for a widget at each position.
 The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with
 **updateWidgetPosition()**.
+
+## Known bugs
+- Sometimes the svg (images) does not load when selecting widgets when XPlane is running (maybe not enough resources for computer?)

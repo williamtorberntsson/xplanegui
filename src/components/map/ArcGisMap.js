@@ -185,8 +185,8 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           }
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
 
-          tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
-          if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Något attribut som är unikt för varje pop-up/plan
+          tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i+1);
+          if (view.popup.title == 'CGI modell' + JSON.stringify(i+1)) { // Något attribut som är unikt för varje pop-up/plan
             let j = i;
             view.popup.location = { longitude: aiPlaneData.planes[i].longitude, latitude: aiPlaneData.planes[i].latitude };
           }
@@ -232,8 +232,8 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         tempPoint.geometry.longitude = offlineData[i].longitude;  // update longitude
         tempPoint.geometry.latitude = offlineData[i].latitude;    // update latitude
 
-        tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i);
-        if (view.popup.title == 'CGI modell' + JSON.stringify(i)) { // Some attribute that is unique for every pop-up/plane
+        tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i+1);
+        if (view.popup.title == 'CGI modell' + JSON.stringify(i+1)) { // Some attribute that is unique for every pop-up/plane
           let j = i;
           view.popup.location = { longitude: offlineData[j].longitude, latitude: offlineData[j].latitude };
         }

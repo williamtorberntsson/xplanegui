@@ -3,21 +3,25 @@
 /** 
  * Whether to use data fetched from XPlane.
  * @constant
+ * @category settings
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = false;
+export const USE_XPLANE_DATA = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
  * @constant
+ * @category settings
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 2;
+export const NR_AI_PLANES = 10;
 
 /**
  * Key configuration for navigating the WAD with throttle controls
+ * @constant
+ * @category settings
  */
 export const KEY_NAVIGATION_CONFIG = {
     LEFT_ARROW: "ArrowLeft",
@@ -29,12 +33,17 @@ export const KEY_NAVIGATION_CONFIG = {
     ONE: "1",
     TWO: "2"
 }
-
+/**
+ * List for all buttoms at bottom of screen
+ * @constant
+ * @category settings
+ */
 export const WIDGET_ORDER = ["reset_left", "pfd", "weights", "warnings", "none", "reset_right"]
 
 /** 
  * Zoom level for map
  * @constant
+ * @category settings
  * @type {number}
  * @default
 */
@@ -43,6 +52,7 @@ export const MAP_ZOOM = 8;
 /**
  * Example location and heading init data
  * @constant
+ * @category settings
  * @type {object}
  * @default
  */
@@ -55,6 +65,7 @@ export const POSITION_INIT_DATA = {
 /**
  * PFD example init data
  * @constant
+ * @category settings
  * @type {object}
  * @default
  */
@@ -71,6 +82,7 @@ export const PFD_INIT_DATA = {
 /**
  * Airplane wheights example init data
  * @constant
+ * @category settings
  * @type {object}
  * @default
  */
@@ -85,6 +97,7 @@ export const WEIGHTS_INIT_DATA = {
 /**
  * Airplane init data for offline data use
  * @constant
+ * @category settings
  * @type {object}
  * @default
  */
@@ -101,6 +114,11 @@ export const PLANES_INIT_DATA = [{
     "team_status": 1
 },]
 
+/**
+ * Setting for a example widget configuration when landing
+ * @constant
+ * @category settings
+ */
 export const VIEW_MODE_LANDING = {
     widgets: {
         UL: null,
@@ -118,6 +136,11 @@ export const VIEW_MODE_LANDING = {
     }
 }
 
+/**
+ * Setting for a example widget configuration with minimum widgets
+ * @constant
+ * @category settings
+ */
 export const VIEW_MODE_MINI = {
     widgets: {
         UL: "pfd",

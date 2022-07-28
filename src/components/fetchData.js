@@ -5,7 +5,7 @@ import axios from 'axios';
  * @function
  * @category WAD
  * @param {string} path path to data etc. "/plane"
- * @param {function} updateStateFunc state update function
+ * @param {function} updateStateFunc call this function with new data to update data
  */
 const fetchData = (path, updateStateFunc) => {
   axios.get(`/${path}`)
@@ -18,7 +18,7 @@ const fetchData = (path, updateStateFunc) => {
  * @function
  * @category Widget
  * @param {string} path path to data etc. "/plane"
- * @param {function} updateStateFunc state update function
+ * @param {function} updateStateFunc call this function with new data to update data
  * @param {state} state state with data
  */
 const fetchWidgetData = (path, updateStateFunc, state) => {
