@@ -7,13 +7,14 @@
    width="404"
    height="404"
    xmlnSvg="http://www.w3.org/2000/svg"
+   xmlnSsvg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlnSsvg="http://www.w3.org/2000/svg">
+   xmlnsSvg="http://www.w3.org/2000/svg">
   <defs
      id="defs1240" />
   <g
      id="g2696"
-     transform="matrix(-0.14809293,0,0,-0.59930431,239.01271,252.44075)">
+     transform="matrix(0.22037029,0,0,0.41013535,146.90743,228.78717)">
     <title
        id="title2686">pointer</title>
     <path
