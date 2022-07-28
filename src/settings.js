@@ -1,6 +1,4 @@
-// Settings
-
-import PFD from "./components/widgets/pfd/PFD";
+// Settings file
 
 /** 
  * Whether to use data fetched from XPlane.
@@ -8,7 +6,7 @@ import PFD from "./components/widgets/pfd/PFD";
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = true;
+export const USE_XPLANE_DATA = false;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -16,20 +14,20 @@ export const USE_XPLANE_DATA = true;
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 7;
+export const NR_AI_PLANES = 2;
 
 /**
  * Key configuration for navigating the WAD with throttle controls
  */
 export const KEY_NAVIGATION_CONFIG = {
-    LEFT_ARROW: 37,
-    UP_ARROW: 38,
-    RIGHT_ARROW: 39,
-    DOWN_ARROW: 40,
-    P: 80,
-    M: 77,
-    ONE: 49,
-    TWO: 50
+    LEFT_ARROW: "ArrowLeft",
+    UP_ARROW: "ArrowUp",
+    RIGHT_ARROW: "ArrowRight",
+    DOWN_ARROW: "ArrowDown",
+    p: "p",
+    m: "m",
+    ONE: "1",
+    TWO: "2"
 }
 
 export const WIDGET_ORDER = ["reset_left", "pfd", "weights", "warnings", "none", "reset_right"]

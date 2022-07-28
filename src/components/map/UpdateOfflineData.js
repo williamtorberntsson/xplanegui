@@ -1,5 +1,13 @@
-import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA } from "../../constants";
+import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA } from "../../settings";
 
+/**
+ * A function that updates data by increasing some values.
+ * This is an example on updating data, the values/update are not
+ * meant to be realistic.
+ * @function
+ * @param {object} data data to update
+ * @param {function} updateData function that sets the data 
+ */
 const UpdateOfflineData = (data, updateData) => {
   // simple example
   // console.log(data)

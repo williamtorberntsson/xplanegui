@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, neutralAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
-import { USE_XPLANE_DATA, NR_AI_PLANES, MAP_ZOOM } from '../../constants';
+import { USE_XPLANE_DATA, NR_AI_PLANES, MAP_ZOOM } from '../../settings';
 import haversine from "../haversine";
-import AirSpeed from '../widgets/pfd/AirSpeed';
-
-//
 
 /**
- * Creates a map and adds points at {pointCoordinates} locations
+ * Creates a map and shows other airplanes from xplanes.
  * @component
  * @category Map
  * @param {*} param0
@@ -84,31 +81,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         const graphicsLayer = new GraphicsLayer();
         map.add(graphicsLayer);
 
-        /* // Creating markers for different airplanes
-        const myAirPlaneMarker = {
-          type: "picture-marker",
-          url: myAirPlaneSvg,
-          angle: 0,
-          width: "20px",
-          height: "20px"
-        };
-
-        const enemyAirPlaneMarker = {
-          type: "picture-marker",
-          url: enemyAirPlaneSvg,
-          angle: 0,
-          width: "20px",
-          height: "20px",
-        };
-
-        const friendlyAirPlaneMarker = {
-          type: "picture-marker",
-          url: friendlyAirPlaneSvg,
-          angle: 0,
-          width: "20px",
-          height: "20px"
-        }; */
-
         // Add point for own airplane
         let mypoint = new Point({
           type: "point"
@@ -124,8 +96,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         let pointsArray = [] // init array to add points (markings) to
         for (let i = 0; i < NR_AI_PLANES; i++) {
           // Create a point
-          // console.log(pointsArray)
-
           var point = new Point({
             type: "point",
           });
@@ -145,13 +115,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
             default:
               symboltype = enemyAirPlaneMarker
           }
-
-          // let fieldInfo = new FieldInfo({
-          //       // fieldName: "NAME",
-          //       label: "Name",
-          //       visible: true,
-          // });
-
 
           var template = new PopupTemplate({
             declaredClass: JSON.stringify(i),
@@ -176,15 +139,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           setPoints(pointsArray)      // add all other airplane graphics to state
           setLayer(graphicsLayer);
         });
-
-        // view.on("click", function(event){
-        //   console.log('klick')
-        //   view.popup.open({
-        //    location: event.mapPoint,  // location of the click on the view
-        //    title: "You clicked here",  // title displayed in the popup
-        //    content: "This is a point of interest"  // content displayed in the popup
-        //   });
-        // });
       })
 
     return () => {
@@ -266,8 +220,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
       view.center = [offlineData.longitude, offlineData.latitude];
       view.rotation = offlineData.true_heading;
 
-      // console.log(offlineData.true_airspeed)
-
       layer.removeAll() // clear layer with markers
 
       // Update own airplane position
@@ -318,7 +270,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
 
     }
   }, [offlineData])
-  const [counter, setCounter] = useState(0);
 
   return (
     <div>

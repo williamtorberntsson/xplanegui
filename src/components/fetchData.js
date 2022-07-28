@@ -14,7 +14,7 @@ const fetchData = (path, updateStateFunc) => {
 }
 
 /**
- * Function to fetch data, updates prev state
+ * Function to fetch data for widget, updates prev state
  * @function
  * @category Widget
  * @param {string} path path to data etc. "/plane"

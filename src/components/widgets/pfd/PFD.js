@@ -5,10 +5,9 @@ import Attitude from "./Attitude";
 import Heading from "./Heading";
 import Alpha from "./Alpha";
 import G from "./G";
-import { USE_XPLANE_DATA, PFD_INIT_DATA } from "../../../constants";
 
 /**
- * Creates a PFD (primary flight display) with the help of smaller instruments
+ * Creates a PFD (primary flight display) widget with the help of smaller instruments
  * @component
  * @category Widget
  * @subcategory PFD

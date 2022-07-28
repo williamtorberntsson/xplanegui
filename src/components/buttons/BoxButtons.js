@@ -1,47 +1,39 @@
+
 /**
  * The left/right side buttons on WAD to select widget size
  * @see WAD
  * @component
  * @category Buttons
- * @param {function} props.Usize function to set size for upper widget
- * @param {function} props.Bsize function to set size for bottom widget
- * @param {function} props.activeWidget function to set the active widget
+ * @param {function} Usize function to set size for upper widget
+ * @param {function} Bsize function to set size for bottom widget
+ * @param {function} selectedPos function to set the active position
+ * @param {string} side L/R which side of screen
+ * @param {boolean} active if buttons active or not
  * @returns array of buttons
  */
+const BoxButtons = ({ Usize, Bsize, selectedPos, side, arrow, activeBtn, btnUpdate, selecter }) => {
 
-  //  let active = false 
-  function toggle(id) {
-    var elements = document.getElementsByClassName("button-40");
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.backgroundColor = "#9b9b9b";
-    }
-    document.getElementById(id).style.backgroundColor = "#8bb08f";
+  if (side === "L") {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
+        <button id='1' className={`button-40 ${activeBtn === '1' ? 'active' : ''} ${selecter === '1' ? 'border' : ''}`} onClick={() => { Usize('S'); selectedPos("U" + side); btnUpdate('1') }} role="button"></button>
+        <button id='2' className={`button-40 ${activeBtn === '2' ? 'active' : ''} ${selecter === '2' ? 'border' : ''}`} onClick={() => { Usize('M'); selectedPos("U" + side); btnUpdate('2') }} role="button"></button>
+        <button id='3' className={`button-40 ${activeBtn === '3' ? 'active' : ''} ${selecter === '3' ? 'border' : ''}`} onClick={() => { Usize('L'); Bsize('L'); selectedPos("M" + side); btnUpdate('3') }} role="button">{arrow}</button>
+        <button id='4' className={`button-40 ${activeBtn === '4' ? 'active' : ''} ${selecter === '4' ? 'border' : ''}`} onClick={() => { Bsize('M'); selectedPos("B" + side); btnUpdate('4') }} role="button"></button>
+        <button id='5' className={`button-40 ${activeBtn === '5' ? 'active' : ''} ${selecter === '5' ? 'border' : ''}`} onClick={() => { Bsize('S'); selectedPos("B" + side); btnUpdate('5') }} role="button"></button>
+      </div>
+    )
+  } else if (side === "R") {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
+        <button id='6' className={`button-40 ${activeBtn === '6' ? 'active' : ''} ${selecter === '6' ? 'border' : ''}`} onClick={() => { Usize('S'); selectedPos("U" + side); btnUpdate('6') }} role="button"></button>
+        <button id='7' className={`button-40 ${activeBtn === '7' ? 'active' : ''} ${selecter === '7' ? 'border' : ''}`} onClick={() => { Usize('M'); selectedPos("U" + side); btnUpdate('7') }} role="button"></button>
+        <button id='8' className={`button-40 ${activeBtn === '8' ? 'active' : ''} ${selecter === '8' ? 'border' : ''}`} onClick={() => { Usize('L'); Bsize('L'); selectedPos("M" + side); btnUpdate('8') }} role="button">{arrow}</button>
+        <button id='9' className={`button-40 ${activeBtn === '9' ? 'active' : ''} ${selecter === '9' ? 'border' : ''}`} onClick={() => { Bsize('M'); selectedPos("B" + side); btnUpdate('9') }} role="button"></button>
+        <button id='10' className={`button-40 ${activeBtn === '10' ? 'active' : ''} ${selecter === '10' ? 'border' : ''}`} onClick={() => { Bsize('S'); selectedPos("B" + side); btnUpdate('10') }} role="button"></button>
+      </div>
+    )
   }
-
-const BoxButtonsL = ({ Usize, Bsize, selectedPos, side, arrow }) => {
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
-      <button id='1' className="button-40" onClick={() => { Usize('S'); selectedPos("U" + side); toggle('1') }} role="button"></button>
-      <button id='2' className="button-40" onClick={() => { Usize('M'); selectedPos("U" + side); toggle('2') }} role="button"></button>
-      <button id='3' className="button-40" onClick={() => { Usize('L'); Bsize('L'); selectedPos("M" + side); toggle('3') }} role="button">{arrow}</button>
-      <button id='4' className="button-40" onClick={() => { Bsize('M'); selectedPos("B" + side); toggle('4') }} role="button"></button>
-      <button id='5' className="button-40" onClick={() => { Bsize('S'); selectedPos("B" + side); toggle('5') }} role="button"></button>
-    </div>
-  )
 };
 
-const BoxButtonsR = ({ Usize, Bsize, selectedPos, side, arrow }) => {
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '1.5vw', height: '87vh' }}>
-      <button id='6' className="button-40" onClick={() => { Usize('S'); selectedPos("U" + side); toggle('6') }} role="button"></button>
-      <button id='7' className="button-40" onClick={() => { Usize('M'); selectedPos("U" + side); toggle('7') }} role="button"></button>
-      <button id='8' className="button-40" onClick={() => { Usize('L'); Bsize('L'); selectedPos("M" + side); toggle('8') }} role="button">{arrow}</button>
-      <button id='9' className="button-40" onClick={() => { Bsize('M'); selectedPos("B" + side); toggle('9') }} role="button"></button>
-      <button id='10' className="button-40" onClick={() => { Bsize('S'); selectedPos("B" + side); toggle('10') }} role="button"></button>
-    </div>
-  )
-};
-
-export {BoxButtonsL, BoxButtonsR};
+export default BoxButtons;

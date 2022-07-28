@@ -1,6 +1,5 @@
 import { React, useState, useEffect, useRef } from 'react';
-import BoxButtons from './buttons/testButtons';
-import ResetButton from './buttons/ResetButtons';
+import BoxButtons from './buttons/BoxButtons';
 import ExtendableButtons from './buttons/ExtendableButtons';
 import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
@@ -11,25 +10,24 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
-import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from '../constants';
+import { USE_XPLANE_DATA, WIDGET_ORDER } from '../settings';
 
 
 /**
- * Component for selecting widget, its position and size.
+ * Component that sets the correct widget, its position and size.
  * @component
  * @category WAD
  * @prop {string} Usize size of upper widget (S/M/L)
  * @prop {string} Bsize size of bottom widget (S/M/L)
+ * @prop {string} side L/R side of screen
  * @prop {string} container left or right side container
- * @prop {dict}
- * @prop {string} widgetName name of the widget
- * @returns one widget that covers the entire side or two widgets (top and bottom)
+ * @prop {object} data data for all widgets
+ * @prop {object} widgetPositions name for widget at every position
+ * @returns one side with widgets
  */
-function GridType({ Usize, Bsize, side, container, data, widgetPositions, viewMode }) {
+function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
 
   if (Usize === 'L' && Bsize === 'L') {
-
-    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_three">
@@ -37,15 +35,13 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions, viewMo
         </Grid>
       </Grid>)
   }
-
   else {
-    if (Usize == 'L') {
+    if (Usize === 'L') {
       Usize = ''
     }
-    else if (Bsize == 'L') {
+    else if (Bsize === 'L') {
       Bsize = ''
     }
-    // console.log('upper size: ' + Usize + ' ,bottom size: ' + Bsize)
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_one">
@@ -66,6 +62,19 @@ function GridType({ Usize, Bsize, side, container, data, widgetPositions, viewMo
   * @return WAD
   */
 function WAD() {
+
+  // States to manage data with/without X-Plane
+  const [myAirPlaneData, setMyAirPlaneData] = useState();
+  const [aiPlaneData, setAiPlaneData] = useState();
+  const [widgetData, setWidgetData] = useState({});
+  const [offlineData, setOfflineData] = useState();
+
+  /**
+   * States to keep track of layout.
+   * Since states are needed to be updated on button press inside a useEffect useRef are
+   * used for every state that needs to be updated with a button press.
+   */
+
   // States to keep track of widget sizes
   const [UL, _setUL] = useState('');
   const UL_Ref = useRef(UL);
@@ -83,7 +92,7 @@ function WAD() {
   const BR_Ref = useRef(BR);
   const setBR = state => { BR_Ref.current = state; _setBR(state) }
 
-  // States to keep track of layout.
+
   const [selectedWidget, _setSelectedWidget] = useState("");
   const selectedWidgetRef = useRef(selectedWidget);
   const setSelectedWidget = state => { selectedWidgetRef.current = state; _setSelectedWidget(state) }
@@ -97,13 +106,6 @@ function WAD() {
   const widgetPositionsRef = useRef(widgetPositions);
   const setWidgetPositions = state => { widgetPositionsRef.current = state; _setWidgetPositions(widgetPositions) }
 
-  // States to manage data with/without X-Plane
-  const [myAirPlaneData, setMyAirPlaneData] = useState();
-  const [aiPlaneData, setAiPlaneData] = useState();
-  const [widgetData, setWidgetData] = useState({});
-  const [offlineData, setOfflineData] = useState();
-  const [viewMode, setViewMode] = useState();
-
 
   const [activeBtn, _setActiveBtn] = useState('1');
   const activeBtnRef = useRef(activeBtn);
@@ -112,8 +114,8 @@ function WAD() {
   const [selecterMode, _setSelecterMode] = useState(0);
   const selecterModeRef = useRef(selecterMode)
   const setSelecterMode = state => {
-    if (state == 0) setSelecter('1')
-    else if (state == 1) setSelecter(WIDGET_ORDER[1])
+    if (state === 0) setSelecter('1')
+    else if (state === 1) setSelecter(WIDGET_ORDER[1])
     selecterModeRef.current = state;
     _setSelecterMode(state);
   }
@@ -124,13 +126,15 @@ function WAD() {
 
 
   /**
-   * Handle key is pressed events.
+   * Handles key on pressed events.
+   * All parents functions needs to be passed along into updater function (buttonNavigator)
    * @function
    * @category keynavigation
    * @param {event} event 
    */
   function handleKeyDown(e) {
-    buttonNavigator(e.keyCode, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode, setActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos, updateViewMode);
+    console.log("key: ", e.key)
+    buttonNavigator(e.key, selecterModeRef.current, selecterRef.current, setSelecter, setSelecterMode, setActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos, updateViewMode);
   }
 
   /**
@@ -140,12 +144,10 @@ function WAD() {
    */
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
-
     return function clean() {
       document.removeEventListener("keydown", handleKeyDown);
     }
   }, []);
-
 
 
   /**
@@ -156,11 +158,11 @@ function WAD() {
   function cleanUp(side) {
     console.log('clean')
 
-    if (side == 'left') {
+    if (side === 'left') {
       setWidgetPositions({ ...widgetPositionsRef.current, UL: null, ML: null, BL: null })
       setWidgetData('')
     }
-    else if (side == 'right') {
+    else if (side === 'right') {
       setWidgetPositions({ ...widgetPositionsRef.current, UR: null, MR: null, BR: null })
       setWidgetData('')
     }
@@ -200,8 +202,6 @@ function WAD() {
         setWidgetData(offlineData)
       }, 200); // update 20 times/s
 
-      // console.log(widgetData)
-
       return () => clearInterval(interval); // Unmount function to prevent memory leaks.
     }
   })
@@ -212,31 +212,31 @@ function WAD() {
     setBL(mode.sizes.BL)
     setUR(mode.sizes.UR)
     setBR(mode.sizes.BR)
-    // setViewMode(mode)
   }
 
   return (
     <Grid container className="wad_frame">
       <Grid container className="wad_content">
         <Grid item className="map_item" xs={12}>
+          {/* Map */}
           <ArcGisMap zoom={8} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
 
 
-
+        {/* Widgets */}
         <Grid container className="overlay_container">
           <Grid item xs={3}>
-            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositionsRef.current} viewMode={viewMode} />
+            <GridType Usize={UL} Bsize={BL} container={'left_container'} data={widgetData} side={"L"} widgetPositions={widgetPositionsRef.current} />
           </Grid>
           <Grid item xs={6}>
           </Grid>
           <Grid item xs={3}>
-            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositionsRef.current} viewMode={viewMode} />
+            <GridType Usize={UR} Bsize={BR} container={'right_container'} data={widgetData} side={"R"} widgetPositions={widgetPositionsRef.current} />
           </Grid>
         </Grid>
 
 
-
+        {/* Buttons */}
         <Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
           <ExtendableButtons />
         </Grid>
