@@ -160,11 +160,11 @@ function WAD() {
 
     if (side === 'left') {
       setWidgetPositions({ ...widgetPositionsRef.current, UL: null, ML: null, BL: null })
-      setWidgetData('')
+      setWidgetData({})
     }
     else if (side === 'right') {
       setWidgetPositions({ ...widgetPositionsRef.current, UR: null, MR: null, BR: null })
-      setWidgetData('')
+      setWidgetData({})
     }
   }
 
