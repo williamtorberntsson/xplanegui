@@ -19,14 +19,9 @@ const Altimeter = ({ altitude, width, height }) => {
   const alt_hundred = (altitude_feet % 1000).toFixed(0)
 
   return (
-    <div className={styles.altimeter} style={{ width: width, height: height }}>
+    <div className={styles.altimeter} style={{ width: width, height: height }} >
       <img className={styles.meter} src={AltitudeMeterBlack} />
-      <div className={styles.dial} style={{
-        transform: `translate(${35 * Math.cos((needle + 90) * (Math.PI / 180))}%,
-          ${35 * Math.sin((needle + 90) * (Math.PI / 180))}%) rotate(${needle}deg) scale(0.4)`
-      }}> {/* translate and rotate needle in a circle */}
-        <img src={AltitudePointerGrey} />
-      </div>
+      <img className={styles.dial} src={AltitudePointerGrey} style={{ transform: `rotate(${needle}deg)` }} /> {/* translate and rotate needle in a circle */}
       <div className={styles.value}>
         <span className={styles.thousand}>{alt_thousand}</span>
         <span className={styles.hundred}>{('00' + alt_hundred).substring(alt_hundred.length + 2 - 3)}</span> {/*always display 3 numbers for hundred value*/}

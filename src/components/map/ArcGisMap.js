@@ -72,8 +72,24 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           container: mapEl.current,
           map: map,
           zoom: zoomvalue,
-          ui: { components: ["attribution"] } // hides default zoom buttons
+          ui: { components: ["attribution"] }, // hides default zoom buttons
+          constraints: {
+            rotationEnabled: false
+          }
         })
+
+        view.on("drag", function(event){
+          // prevents panning with the mouse drag event
+          event.stopPropagation();
+        });
+
+        view.on("key-down", function(event){
+          // prevents panning with the arrow keys
+          var keyPressed = event.key;
+          if(keyPressed.slice(0,5) === "Arrow"){
+            event.stopPropagation();
+          }
+        });
 
         const graphicsLayer = new GraphicsLayer();
         map.add(graphicsLayer);

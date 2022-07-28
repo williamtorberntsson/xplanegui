@@ -101,18 +101,18 @@ export const WEIGHTS_INIT_DATA = {
  * @type {object}
  * @default
  */
-export const PLANES_INIT_DATA = [{
-    "longitude": 15.880926012604708,
-    "latitude": 58.41157469382408,
-    "true_heading": 0,
-    "team_status": 0
-},
-{
-    "longitude": 15.380926012604708,
-    "latitude": 58.41157469382408,
-    "true_heading": 0,
-    "team_status": 1
-},]
+let AI_PLANE_INIT_DATA = []
+for (let i = 0; i < NR_AI_PLANES; i++) {
+    AI_PLANE_INIT_DATA.push(
+        {
+            "longitude": 15.88092 + (Math.random() * 2 - 1) * 0.1,
+            "latitude": 58.41157469382408 + (Math.random() * 2 - 1) * 0.1,
+            "true_heading": Math.random() * 360,
+            "team_status": Math.floor(Math.random() * 3)
+        }
+    )
+}
+export const PLANES_INIT_DATA = AI_PLANE_INIT_DATA;
 
 /**
  * Setting for a example widget configuration when landing

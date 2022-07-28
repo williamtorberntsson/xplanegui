@@ -107,7 +107,7 @@ function WAD() {
   const setWidgetPositions = state => { widgetPositionsRef.current = state; _setWidgetPositions(widgetPositions) }
 
 
-  const [activeBtn, _setActiveBtn] = useState('1');
+  const [activeBtn, _setActiveBtn] = useState('');
   const activeBtnRef = useRef(activeBtn);
   const setActiveBtn = state => { activeBtnRef.current = state; _setActiveBtn(state) }
 
@@ -160,11 +160,11 @@ function WAD() {
 
     if (side === 'left') {
       setWidgetPositions({ ...widgetPositionsRef.current, UL: null, ML: null, BL: null })
-      setWidgetData('')
+      setWidgetData({})
     }
     else if (side === 'right') {
       setWidgetPositions({ ...widgetPositionsRef.current, UR: null, MR: null, BR: null })
-      setWidgetData('')
+      setWidgetData({})
     }
   }
 
@@ -200,7 +200,7 @@ function WAD() {
       const interval = setInterval(() => {
         UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
         setWidgetData(offlineData)
-      }, 200); // update 20 times/s
+      }, 15); // how many ms between each update
 
       return () => clearInterval(interval); // Unmount function to prevent memory leaks.
     }

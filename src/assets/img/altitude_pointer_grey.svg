@@ -1,12 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlnsBx="https://boxy-svg.com">
-  <g>
-    <title>pointer</title>
-    <path d="M 250 81 L 280 351 L 220 351 L 250 81 Z" style="fill: rgb(40, 40, 40);" bxShape="triangle 220 81 60 270 0.5 0 1@9a796aff" bxOrigin="0 0.821001">
-      <title>large_triangle</title>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 404 404"
+   xmlnsBx="https://boxy-svg.com"
+   version="1.1"
+   id="svg1236"
+   width="404"
+   height="404"
+   xmlnSvg="http://www.w3.org/2000/svg"
+   xmlnSsvg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlnsSvg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1240" />
+  <g
+     id="g2696"
+     transform="matrix(0.22037029,0,0,0.41013535,146.90743,228.78717)">
+    <title
+       id="title2686">pointer</title>
+    <path
+       d="m 250,81 30,270 h -60 z"
+       style="fill:#282828"
+       bxShape="triangle 220 81 60 270 0.5 0 1@9a796aff"
+       bxOrigin="0 0.821001"
+       id="path2690">
+      <title
+         id="title2688">large_triangle</title>
     </path>
-    <path d="M -250 -414.535 L -220 -350 L -280 -350 L -250 -414.535 Z" style="fill: rgb(40, 40, 40);" transform="matrix(-1, 0, 0, -1, 0, 0)" bxShape="triangle -280 -414.535 60 64.535 0.5 0 1@d182af1c">
-      <title>small_triangle</title>
+    <path
+       d="m -250,-414.535 30,64.535 h -60 z"
+       style="fill:#282828"
+       transform="scale(-1)"
+       bxShape="triangle -280 -414.535 60 64.535 0.5 0 1@d182af1c"
+       id="path2694">
+      <title
+         id="title2692">small_triangle</title>
     </path>
   </g>
 </svg>
