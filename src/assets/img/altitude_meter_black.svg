@@ -1,38 +1,308 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 10.577957 198.48837"
+   viewBox="0 0 404 404"
    xmlnsBx="https://boxy-svg.com"
    version="1.1"
    id="svg418"
-   width="10.577957"
-   height="198.48837"
+   width="404"
+   height="404"
    xmlnSvg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlnsSvg="http://www.w3.org/2000/svg">
+   xmlnSsvg="http://www.w3.org/2000/svg">
   <defs
      id="defs422" />
   <g
-     id="g1363"
-     transform="matrix(-0.17629927,0,0,-0.5951051,49.363791,246.69189)">
-    <title
-       id="title1353">pointer</title>
-    <path
-       d="m 250,81 30,270 h -60 z"
-       style="fill:#282828"
-       bxShape="triangle 220 81 60 270 0.5 0 1@9a796aff"
-       bxOrigin="0 0.821001"
-       id="path1357">
-      <title
-         id="title1355">large_triangle</title>
-    </path>
-    <path
-       d="m -250,-414.535 30,64.535 h -60 z"
-       style="fill:#282828"
-       transform="scale(-1)"
-       bxShape="triangle -280 -414.535 60 64.535 0.5 0 1@d182af1c"
-       id="path1361">
-      <title
-         id="title1359">small_triangle</title>
-    </path>
+     id="g590">
+    <g
+       id="g416"
+       transform="translate(-48,-48)">
+      <circle
+         style="fill:none;stroke:#000000;stroke-width:4px"
+         cx="250"
+         cy="250"
+         id="ellipse294"
+         r="200" />
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="250"
+         y1="50"
+         x2="250"
+         y2="80"
+         id="line298">
+        <title
+           id="title296">0deg line</title>
+      </line>
+      <text
+         style="font-size:28px;stroke:#000000;stroke-width:0.999423px;paint-order:fill"
+         transform="matrix(1.001155,0,0,1,-8.288707,-2.404083)"
+         x="250"
+         y="107.373"
+         bxOrigin="-1.000806 0.5"
+         id="text302"><title
+   id="title300">0</title>0</text>
+      <line
+         style="stroke:#000000"
+         x1="308.71301"
+         y1="59.299999"
+         x2="308.71301"
+         y2="79.300003"
+         transform="rotate(17.999992,308.71289,69.300456)"
+         id="line306">
+        <title
+           id="title304">18deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="358.73901"
+         y1="85.332001"
+         x2="358.73901"
+         y2="115.332"
+         transform="rotate(35.999988,358.73906,100.33193)"
+         id="line310">
+        <title
+           id="title308">36deg line</title>
+      </line>
+      <text
+         style="font-size:28px;stroke:#000000"
+         x="335"
+         y="129.983"
+         bxOrigin="0.012849 0.000011"
+         id="text314"><title
+   id="title312">1</title>1</text>
+      <line
+         style="stroke:#000000"
+         x1="403.71301"
+         y1="128.321"
+         x2="403.71301"
+         y2="148.321"
+         transform="rotate(54.000012,403.71306,138.32095)"
+         id="line318">
+        <title
+           id="title316">54deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="425.94501"
+         y1="177.832"
+         x2="425.94501"
+         y2="207.832"
+         transform="rotate(72.000008,425.94484,192.83207)"
+         id="line322">
+        <title
+           id="title320">72deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="395"
+         y="206.983"
+         id="text326"><title
+   id="title324">2</title>2</text>
+      <line
+         style="stroke:#000000"
+         x1="450"
+         y1="250"
+         x2="430"
+         y2="250"
+         id="line330">
+        <title
+           id="title328">90deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="425.94501"
+         y1="292.168"
+         x2="425.94501"
+         y2="322.168"
+         transform="rotate(107.99999,425.94486,307.16802)"
+         id="line334">
+        <title
+           id="title332">108deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="395"
+         y="309.983"
+         id="text338"><title
+   id="title336">3</title>3</text>
+      <line
+         style="stroke:#000000"
+         x1="403.71301"
+         y1="351.67899"
+         x2="403.71301"
+         y2="371.67899"
+         transform="rotate(125.99999,403.71305,361.679)"
+         id="line342">
+        <title
+           id="title340">126deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="358.73999"
+         y1="384.668"
+         x2="358.73999"
+         y2="414.668"
+         transform="rotate(144.00001,358.74003,399.66802)"
+         id="line346">
+        <title
+           id="title344">144deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="335"
+         y="384.983"
+         id="text350"><title
+   id="title348">4</title>4</text>
+      <line
+         style="stroke:#000000"
+         x1="308.71301"
+         y1="420.70099"
+         x2="308.71301"
+         y2="440.70099"
+         transform="rotate(162.00001,308.71294,430.70089)"
+         id="line354">
+        <title
+           id="title352">162deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="250"
+         y1="420"
+         x2="250"
+         y2="450"
+         id="line358">
+        <title
+           id="title356">180deg line</title>
+      </line>
+      <text
+         style="font-size:28px;white-space:pre;stroke:#000000;stroke-width:0.999355px"
+         transform="matrix(1.00129,0,0,1,-8.32249,310.37738)"
+         x="250"
+         y="107.373"
+         bxOrigin="-1.000806 0.5"
+         id="text362"><title
+   id="title360">5</title>5</text>
+      <line
+         style="stroke:#000000"
+         x1="191.287"
+         y1="420.70099"
+         x2="191.287"
+         y2="440.70099"
+         transform="rotate(-161.99999,191.28703,430.7011)"
+         id="line366">
+        <title
+           id="title364">198deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="141.25999"
+         y1="384.668"
+         x2="141.25999"
+         y2="414.668"
+         transform="rotate(-144.00001,141.25999,399.66803)"
+         id="line370">
+        <title
+           id="title368">216deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="150"
+         y="384.983"
+         id="text374"><title
+   id="title372">6</title>6</text>
+      <line
+         style="stroke:#000000"
+         x1="96.287003"
+         y1="351.67899"
+         x2="96.287003"
+         y2="371.67899"
+         transform="rotate(-125.99999,96.286997,361.67902)"
+         id="line378">
+        <title
+           id="title376">234deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="74.055"
+         y1="292.168"
+         x2="74.055"
+         y2="322.168"
+         transform="rotate(-107.99999,74.055044,307.16792)"
+         id="line382">
+        <title
+           id="title380">252deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="90"
+         y="309.983"
+         id="text386"><title
+   id="title384">7</title>7</text>
+      <line
+         style="stroke:#000000"
+         x1="50"
+         y1="250"
+         x2="70"
+         y2="250"
+         id="line390">
+        <title
+           id="title388">270deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="74.055"
+         y1="177.832"
+         x2="74.055"
+         y2="207.832"
+         transform="rotate(-72.000008,74.055037,192.83193)"
+         id="line394">
+        <title
+           id="title392">288deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="90"
+         y="206.983"
+         id="text398"><title
+   id="title396">8</title>8</text>
+      <line
+         style="stroke:#000000"
+         x1="96.287003"
+         y1="128.321"
+         x2="96.287003"
+         y2="148.321"
+         transform="rotate(-54.000012,96.28699,138.32102)"
+         id="line402">
+        <title
+           id="title400">324deg line</title>
+      </line>
+      <line
+         style="stroke:#000000;stroke-width:2px"
+         x1="141.25999"
+         y1="85.332001"
+         x2="141.25999"
+         y2="115.332"
+         transform="rotate(-35.999988,141.25998,100.33204)"
+         id="line406">
+        <title
+           id="title404">324deg line</title>
+      </line>
+      <text
+         style="font-size:28px;font-family:Arial, sans-serif;white-space:pre;fill:#333333;stroke:#000000"
+         x="150"
+         y="129.983"
+         id="text410"><title
+   id="title408">9</title>9</text>
+      <line
+         style="stroke:#000000"
+         x1="191.287"
+         y1="59.299"
+         x2="191.287"
+         y2="79.299004"
+         transform="rotate(-17.999992,191.28709,69.298713)"
+         id="line414">
+        <title
+           id="title412">342deg line</title>
+      </line>
+    </g>
   </g>
 </svg>
