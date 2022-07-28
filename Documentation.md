@@ -50,3 +50,5 @@ The recently pressed widget and position is stored in the states: **activeWidget
 
 ## Known bugs
 - Sometimes the svg (images) does not load when selecting widgets when XPlane is running (maybe not enough resources for computer?)
+- Sometimes the reset buttons make the screen go white and crash (look at errors in console)
+- Sometimes the map doesn't load but reloading page fixes it.

@@ -202,16 +202,15 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           tempPoint.symbol.angle = aiPlaneData.planes[i].true_heading - myAirPlaneData.true_heading;     // update angle
 
           tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i+1);
-          if (view.popup.title == 'CGI modell' + JSON.stringify(i+1)) { // Något attribut som är unikt för varje pop-up/plan
-            let j = i;
+          if (view.popup.title === 'CGI modell' + JSON.stringify(i+1)) { // Något attribut som är unikt för varje pop-up/plan
             view.popup.location = { longitude: aiPlaneData.planes[i].longitude, latitude: aiPlaneData.planes[i].latitude };
           }
 
           const distance = haversine(myAirPlaneData.latitude, myAirPlaneData.longitude, aiPlaneData.planes[i].latitude, aiPlaneData.planes[i].longitude)
 
           tempPoint.popupTemplate.content = (
-            "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed(0) + " feet" + "</li>" +
-            "<li>DISTANCE:" + distance + " m" + "</li>" +
+            "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed(0) + " feet</li>" +
+            "<li>DISTANCE:" + distance + " m</li>" +
             "<li>SOMETHING: </li><ul>")
 
           view.popup.visibleElements.featureNavigation = false;
@@ -249,9 +248,8 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
         tempPoint.geometry.latitude = offlineData[i].latitude;    // update latitude
 
         tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i+1);
-        if (view.popup.title == 'CGI modell' + JSON.stringify(i+1)) { // Some attribute that is unique for every pop-up/plane
-          let j = i;
-          view.popup.location = { longitude: offlineData[j].longitude, latitude: offlineData[j].latitude };
+        if (view.popup.title === 'CGI modell' + JSON.stringify(i+1)) { // Some attribute that is unique for every pop-up/plane
+          view.popup.location = { longitude: offlineData[i].longitude, latitude: offlineData[i].latitude };
         }
 
         // Set correct symbol type and heading (angle)
@@ -272,8 +270,8 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
 
         const distance = haversine(offlineData.latitude, offlineData.longitude, offlineData[i].latitude, offlineData[i].longitude)
         tempPoint.popupTemplate.content = (
-          "<ul><li> ALTITUDE: " + offlineData[i].longitude.toFixed(0) + " feet" + "</li>" +
-          "<li>DISTANCE:" + distance + " m" + "</li>" +
+          "<ul><li> ALTITUDE: " + offlineData[i].longitude.toFixed(0) + " feet</li>" +
+          "<li>DISTANCE:" + distance + " m</li>" +
           "<li>SOMETHING: </li><ul>")
 
         view.popup.visibleElements.featureNavigation = false;
