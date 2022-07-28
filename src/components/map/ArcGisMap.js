@@ -17,9 +17,6 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   const [myPoint, setMyPoint] = useState(null);
   const [points, setPoints] = useState(null);
   const [layer, setLayer] = useState(null);
-  const [popup, setPopup] = useState('');
-  const [content1, setContent1] = useState('');
-  const [content2, setContent2] = useState('');
   const mapEl = useRef();
 
   // Creating markers for different airplanes
