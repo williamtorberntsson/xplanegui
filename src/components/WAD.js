@@ -200,7 +200,7 @@ function WAD() {
       const interval = setInterval(() => {
         UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
         setWidgetData(offlineData)
-      }, 200); // update 20 times/s
+      }, 15); // how many ms between each update
 
       return () => clearInterval(interval); // Unmount function to prevent memory leaks.
     }

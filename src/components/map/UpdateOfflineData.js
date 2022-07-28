@@ -26,15 +26,15 @@ const UpdateOfflineData = (data, updateData) => {
       alpha: data.alpha,
     }
     // update AI airplanes
-    for (let i = 0; i < NR_AI_PLANES.length; i++) {
+    for (let i = 0; i < NR_AI_PLANES; i++) {
+      const sign = (-1) ** ((i % 2) + 1); // 1/-1 for odd/even numbers
       newData[i] = {
-        longitude: data[i].longitude + Math.random() * 0.01,
-        latitude: data[i].latitude + Math.random() * 0.01,
-        true_heading: (data[i].true_heading + Math.random() * 0.05) % 360,
+        longitude: data[i].longitude + sign * Math.random() * 0.001,
+        latitude: data[i].latitude + sign * Math.random() * 0.001,
+        true_heading: (data[i].true_heading + Math.random()) % 360,
         team_status: PLANES_INIT_DATA[i].team_status
       }
     }
-    console.log(newData)
     updateData(newData)
 
   } else { // no data

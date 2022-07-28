@@ -14,7 +14,7 @@ export const USE_XPLANE_DATA = false;
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 5;
+export const NR_AI_PLANES = 10;
 
 /**
  * Key configuration for navigating the WAD with throttle controls
