@@ -48,6 +48,13 @@ Widgets can be placed at positions by managing the **widgetPositions** state whi
 The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with
 **updateWidgetPosition()**.
 
+## Research
+- Insert CGF in the simulator enviroment is possible and their team status is choosen when adding a plane. The team status can be friendly, enemy or non-combat.
+- The AI controlling the planes are constructed by xplane and the decision trees are not changable, the user can change the level of difficulty. There is an option to disable the AI and the planes must then be located manually each frame.
+- It is not possible to see if another player/plane have locked on you.
+- The HUD in 2D view are easy to modify with Plane Maker, models with a costumized 3D HUD exists but the tools or implementation of that is still unknown to us.
+- Radar functions is possible to "fake", but all planes have god mode in xplane.s
+
 ## Known bugs
 - Sometimes the svg (images) does not load when selecting widgets when XPlane is running (maybe not enough resources for computer?)
 - Sometimes the reset buttons make the screen go white and crash (look at errors in console)
