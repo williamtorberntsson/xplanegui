@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from "react"
 
 /**
  * Custom Hook to play audio.
- * @param {string} filename for file 
- * @returns {[state, function]}
+ * @function
+ * @param {string} filename filename for audio file 
+ * @returns {Array<*, function>}
  */
 const useAudio = (filename) => {
   const audio = useMemo(() => new Audio(require(`../assets/sound/${filename}`)), [filename]);
