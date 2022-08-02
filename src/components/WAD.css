@@ -21,6 +21,36 @@
   pointer-events: none;
 }
 
+.overlay_container_warn {
+  height: 88vh;
+  width: 94vw;
+  /* display: inline-block; */
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+@keyframes blink {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+.warning_arrow {
+  animation: blink 1s;
+  animation-iteration-count: infinite;
+}
+
 .left_container {
   height: 100%;
   justify-content: space-between;

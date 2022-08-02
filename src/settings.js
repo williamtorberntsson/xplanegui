@@ -7,7 +7,7 @@
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = true;
+export const USE_XPLANE_DATA = false;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -16,7 +16,7 @@ export const USE_XPLANE_DATA = true;
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 10;
+export const NR_AI_PLANES = 3;
 
 /**
  * Key configuration for navigating the WAD with throttle controls

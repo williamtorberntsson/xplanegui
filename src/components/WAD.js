@@ -5,6 +5,7 @@ import WidgetButtons from './buttons/WidgetButtons';
 import { Grid } from '@mui/material';
 import UpdateOfflineData from './map/UpdateOfflineData';
 import buttonNavigator from '../buttonNavigator';
+import arrowUp from '../assets/img/arrow-up.png'
 
 import './WAD.css';
 import WidgetSelector from './WidgetSelector';
@@ -26,8 +27,17 @@ import { USE_XPLANE_DATA, WIDGET_ORDER } from '../settings';
  * @returns one side with widgets
  */
 function GridType({ Usize, Bsize, side, container, data, widgetPositions }) {
+  if (Usize === 'WARN') {
+    return (
+      <Grid container direction="column" className={container}>
+        <Grid item className={Usize} id="wb_three">
 
-  if (Usize === 'L' && Bsize === 'L') {
+        </Grid>
+      </Grid>
+    )
+  }
+
+  else if (Usize === 'L' && Bsize === 'L') {
     return (
       <Grid container direction="column" className={container}>
         <Grid item className={Usize} id="wb_three">
@@ -123,6 +133,7 @@ function WAD() {
   const [selecter, _setSelecter] = useState('1');
   const selecterRef = useRef(selecter)
   const setSelecter = state => { selecterRef.current = state; _setSelecter(state) }
+  const [show, setShow] = useState(true)
 
 
   /**
@@ -188,11 +199,19 @@ function WAD() {
         fetchData("plane", setMyAirPlaneData)
         fetchWidgetData("pfd", setWidgetData, widgetData)
         fetchWidgetData("weights", setWidgetData, widgetData)
+        if (myAirPlaneData.altitude < 500 && myAirPlaneData.pitch < - 60) {
+          setShow(true)
+        }
+        else {
+          setShow(false)
+        }
       }, 200);
       return () => clearInterval(interval);
     }
 
   }, [])
+
+  // pitch -70, höjd 500 meter 
 
   // Use offline data
   useEffect(() => {
@@ -205,6 +224,7 @@ function WAD() {
       return () => clearInterval(interval); // Unmount function to prevent memory leaks.
     }
   })
+
 
   function updateViewMode(mode) {
     setWidgetPositions(mode.widgets)
@@ -222,6 +242,18 @@ function WAD() {
           <ArcGisMap zoom={8} myAirPlaneData={myAirPlaneData} aiPlaneData={aiPlaneData} offlineData={offlineData} />
         </Grid>
 
+        {/*Warning overlay*/} 
+        <Grid contatiner className="overlay_container_warn" display={{xs: show? '':'none'}} style={{backgroundColor: 'rgb(69, 69, 69, 0.7)'}}>
+        <Grid item xs={4} style={{padding: '0px', margin: '0px', display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
+            <img src={arrowUp} className="warning_arrow" style={{width: '80%', display: 'flex', alignContent: 'center', justifyContent: 'center'}}/>
+          </Grid>
+          <Grid item xs={4} style={{padding: '0px', margin: '0px', display: 'flex'}}>
+            <img src={arrowUp} className="warning_arrow" style={{width: '80%', display: 'flex', alignContent: 'center', justifyContent: 'center'}}/>
+          </Grid>
+          <Grid item xs={4} style={{padding: '0px', margin: '0px', display: 'flex'}}>
+            <img src={arrowUp} className="warning_arrow" style={{width: '80%', display: 'flex', alignContent: 'center', justifyContent: 'center'}}/>
+          </Grid>
+        </Grid>
 
         {/* Widgets */}
         <Grid container className="overlay_container">
