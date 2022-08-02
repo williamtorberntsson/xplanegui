@@ -7,7 +7,7 @@
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = false;
+export const USE_XPLANE_DATA = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
