@@ -7,6 +7,7 @@ It also contains findings about XPlane and other software that might be interest
 - How often XPlane send data can be toggled, needs a deeper look.
 - It is possible to change difficulty of CGF but not advanced behavior.
 - Cannot get information when locked on from XPlaneConnect.
+- When hit by other airplane everything on the AirPlane stops working, no realistic damage.
 
 ## JoyToKey
 **[JoyToKey](https://joytokey.net/en/)** can be used to emulate mouse movements with the flight controllers.
@@ -53,7 +54,7 @@ The recently pressed widget and position is stored in the states: **activeWidget
 - The AI controlling the planes are constructed by xplane and the decision trees are not changable, the user can change the level of difficulty. There is an option to disable the AI and the planes must then be located manually each frame.
 - It is not possible to see if another player/plane have locked on you.
 - The HUD in 2D view are easy to modify with Plane Maker, models with a costumized 3D HUD exists but the tools or implementation of that is still unknown to us.
-- Radar functions is possible to "fake", but all planes have god mode in xplane.s
+- Radar functions is possible to "fake", but all planes have god mode in xplane.
 
 ## Known bugs
 - Sometimes the svg (images) does not load when selecting widgets when XPlane is running (maybe not enough resources for computer?)

@@ -8,7 +8,7 @@ import buttonNavigator from '../buttonNavigator';
 import arrowUp from '../assets/img/arrow-up.png'
 
 import './WAD.css';
-import WidgetSelector from './WidgetSelector';
+import WidgetSelector from './widgets/WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
 import { USE_XPLANE_DATA, WIDGET_ORDER } from '../settings';
@@ -195,7 +195,7 @@ function WAD() {
   useEffect(() => {
     if (USE_XPLANE_DATA) {
       const interval = setInterval(() => {
-        fetchData("env", setAiPlaneData)
+        fetchData("env", function (data) { setAiPlaneData(data); setWidgetData(data) })
         fetchData("plane", setMyAirPlaneData)
         fetchWidgetData("pfd", setWidgetData, widgetData)
         fetchWidgetData("weights", setWidgetData, widgetData)
