@@ -11,7 +11,6 @@ import { HorizonBack, HorizonCircle, HorizonMechanics, HorizonPitch } from "../.
  * @prop {float} props.pitch pitch of airplane in degrees
  * @prop {number} props.width width in pixels
  * @prop {number} props.height height in pixels
- * @todo remove width/height as paramater
  * @returns attitude widget
  */
 const Attitude = (props) => {
