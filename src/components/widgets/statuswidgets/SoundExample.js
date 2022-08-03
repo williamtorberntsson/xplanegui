@@ -19,7 +19,6 @@ const SoundExample = () => {
   useEffect(() => {
     const id = setInterval(() => {
       const d = new Date();
-      console.log(d.getMinutes())
       setSeconds(() => d.getSeconds());
       setMinutes(() => d.getMinutes());
       setTime(() => d.toLocaleString('en-UK', {hour12: false}))

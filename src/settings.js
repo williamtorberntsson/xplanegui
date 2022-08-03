@@ -1,6 +1,15 @@
 // Settings file
 
 /** 
+ * Frequency of updating data
+ * @constant
+ * @category settings
+ * @type {number}
+ * @default
+*/
+export const DATA_FREQUENCY = 10;
+
+/** 
  * Whether to use data fetched from XPlane.
  * @constant
  * @category settings
@@ -16,7 +25,7 @@ export const USE_XPLANE_DATA = true;
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 3;
+export const NR_AI_PLANES = 5; // 0-19
 
 /**
  * Key configuration for navigating the WAD with throttle controls

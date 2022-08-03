@@ -14,7 +14,7 @@ import styles from "../../styles/Status.module.css"
  */
 const Weights = ({ size, data }) => {
 
-  if (!USE_XPLANE_DATA) data = WEIGHTS_INIT_DATA;
+  //if (!USE_XPLANE_DATA) data = WEIGHTS_INIT_DATA;
 
   return (
     <div className={styles.S}>

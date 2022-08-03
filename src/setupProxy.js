@@ -5,24 +5,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
  * @param {*} app 
  */
 module.exports = (app) => {
-  app.use(createProxyMiddleware('/plane', {
+  app.use(createProxyMiddleware('/http-call', {
     target: 'http://localhost:5050',
-  }));
-
-  app.use(createProxyMiddleware('/env', {
-    target: 'http://localhost:5050',
-  })
-  );
-
-  app.use(createProxyMiddleware('/pfd', {
-    target: 'http://localhost:5050',
-  }));
-
-  app.use(createProxyMiddleware('/weights', {
-    target: 'http://localhost:5050',
-  }));
-
-  app.use(createProxyMiddleware('/env', {
-    target: 'http://localhost:5050',
+    origin: true,
   }));
 };
