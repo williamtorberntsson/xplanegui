@@ -94,7 +94,7 @@ def handle_setup(data):
 
 @socketio.on("plane")
 def handle_plane(message):
-    with xpc.XPlaneConnect() as client:
+    """with xpc.XPlaneConnect() as client:
 
         # Own airplane airplane values
         posi = client.getPOSI()
@@ -103,18 +103,19 @@ def handle_plane(message):
         alpha = client.getDREF(alpha_dref)
 
         global nr_of_planes
+    """
 
-        emit("plane", {
-            "longitude": posi[1],
-            "latitude": posi[0],
-            "groundspeed": groundspeed[0],
-            "true_airspeed": true_airspeed[0],
-            "true_heading": posi[5],
-            "altitude": posi[2],
-            "pitch": posi[3],
-            "roll": posi[4],
-            "alpha": alpha[0]
-        })
+    emit("plane", {
+        "longitude": 15.88092,
+        "latitude": 58.41157469382408,
+        "groundspeed": 10,
+        "true_airspeed": 30,
+        "true_heading": 30,
+        "altitude": 1000,
+        "pitch": 3,
+        "roll": 2,
+        "alpha": 0.4
+    })
 
 
 @socketio.on('pfd')
@@ -192,7 +193,7 @@ def handle_warnings(message):
 
 @socketio.on("aiplanes")
 def handle_aiplanes(nr_ai):
-    with xpc.XPlaneConnect() as client:
+    """with xpc.XPlaneConnect() as client:
 
         planes_lat = client.getDREFs(planes_lat_drefs[0:nr_ai])
         planes_lon = client.getDREFs(planes_lon_drefs[0:nr_ai])
@@ -210,10 +211,27 @@ def handle_aiplanes(nr_ai):
                 # team_status have 20 slots, the first one is always 1.0 (friendly), possible to be ourselves
                 "team_status": team_status[i+1]
             }
+    """
 
-        emit("aiplanes", {
-            "planes": planes_data[0:nr_ai]
-        })
+    planes_data = [{
+        "longitude": 16,
+        "latitude": 59,
+        "true_heading": 70,
+        "altitude": 2000,
+        "team_status": 1
+    },
+    {
+        "longitude": 16.5,
+        "latitude": 59.2,
+        "true_heading": 140,
+        "altitude": 1000,
+        "team_status": 2
+    }
+    ]
+
+    emit("aiplanes", {
+        "planes": planes_data
+    })
 
 
 if __name__ == "__main__":

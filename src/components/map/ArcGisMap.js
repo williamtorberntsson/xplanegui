@@ -165,7 +165,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   // With xplane data: Updates the map and airplane positions 
   useEffect(() => {
 
-    if (USE_XPLANE_DATA && myAirPlaneData && aiPlaneData) {
+    if (!USE_XPLANE_DATA && myAirPlaneData && aiPlaneData) {
       // Set rotation and position for camera
       try {
         view.center = [myAirPlaneData.longitude, myAirPlaneData.latitude];
@@ -228,7 +228,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   // With offline data: Updates the map and airplane positions 
   useEffect(() => {
 
-    if (!USE_XPLANE_DATA && offlineData && view) {
+    if (USE_XPLANE_DATA && offlineData && view) {
       // Set rotation and position for camera
       view.center = [offlineData.longitude, offlineData.latitude];
       view.rotation = offlineData.true_heading;

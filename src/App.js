@@ -18,7 +18,7 @@ function App() {
 
 
   useEffect(() => {
-    if (USE_XPLANE_DATA) {
+    if (!USE_XPLANE_DATA) {
       const socket = io("localhost:5050/", {
         transports: ["websocket"],
         cors: {
@@ -64,7 +64,7 @@ function App() {
     }
   } else {
     return (
-      <WAD />
+      <p>test</p> /*<WAD /> */
     )
   }
 }

@@ -40,7 +40,7 @@ function WAD({ socket }) {
    * Whenever socket updates corresponding event is triggered
    */
   useEffect(() => {
-    if (USE_XPLANE_DATA) {
+    if (!USE_XPLANE_DATA) {
 
       socket.on("plane", (data) => {
         setMyAirPlaneData(data)
@@ -94,18 +94,18 @@ function WAD({ socket }) {
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
-    if (USE_XPLANE_DATA) {
+    if (!USE_XPLANE_DATA) {
       handleSubmit("plane")
-      handleSubmit("pfd")
-      handleSubmit("weights")
-      handleSubmit("warnings")
+      //handleSubmit("pfd")
+      //handleSubmit("weights")
+      //handleSubmit("warnings")
       handleSubmit("aiplanes", NR_AI_PLANES)
     }
   }, [time])
 
   // Use offline data
   useEffect(() => {
-    if (!USE_XPLANE_DATA) {
+    if (USE_XPLANE_DATA) {
       UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
       //setWidgetData(offlineData)
     }
