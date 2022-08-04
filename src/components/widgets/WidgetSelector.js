@@ -1,8 +1,9 @@
-import PFD from "./widgets/pfd/PFD";
-import Weights from "./widgets/statuswidgets/Weights";
-import Warnings from "./widgets/statuswidgets/Warnings";
-import Status from "./widgets/statuswidgets/Status";
-import { USE_XPLANE_DATA } from "../settings";
+import PFD from "./pfd/PFD";
+import Weights from "./statuswidgets/Weights";
+import Warnings from "./statuswidgets/Warnings";
+import Status from "./statuswidgets/Status";
+import SoundExample from "./statuswidgets/SoundExample";
+import { USE_XPLANE_DATA } from "../../settings";
 
 /**
  * Selects a widget from name, size and data
@@ -15,7 +16,7 @@ import { USE_XPLANE_DATA } from "../settings";
  */
 const WidgetSelector = ({ widget, size, data }) => {
   let dataPFD
-  if (!USE_XPLANE_DATA || data == undefined) {
+  if (!USE_XPLANE_DATA || data === undefined) {
     dataPFD = data
   }
   else {
@@ -27,6 +28,7 @@ const WidgetSelector = ({ widget, size, data }) => {
     case "weights": return <Weights size={size} data={data.weights} />
     case "warnings": return <Warnings size={size} data={data} />
     case "status": return <Status size={size} data={data} />
+    case "sound_example": return <SoundExample />
     case "none": return <div></div>
     default: return <div></div>
   }

@@ -3,8 +3,10 @@
  * Widget selection buttons for WAD (bottom)
  * @component
  * @category Buttons
- * @param {string} activeWidget name of recently pressed widget 
- * @returns array of buttons
+ * @param {function} update function to set name pressed widget
+ * @param {string} selecter name of currently selected widget
+ * @param {function} reset function to reset widget layout 
+ * @returns widget buttons
  */
 const WidgetButtons = ({ update, selecter, reset }) => {
 
@@ -16,6 +18,7 @@ const WidgetButtons = ({ update, selecter, reset }) => {
         <button className={`button-30 ${selecter === 'pfd' ? 'border' : ""}`} onClick={() => { update('pfd') }} role="button">PFD</button>
         <button className={`button-30 ${selecter === 'weights' ? 'border' : ""}`} onClick={() => { update('weights') }} role="button">Weights</button>
         <button className={`button-30 ${selecter === 'warnings' ? 'border' : ""}`} onClick={() => { update('warnings') }} role="button">Warnings</button>
+        <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('sound_example'); }} role="button">Time and Sound</button>
         <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('none'); }} role="button">None</button>
       </div>
 

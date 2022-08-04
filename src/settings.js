@@ -7,7 +7,7 @@
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = false;
+export const USE_XPLANE_DATA = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -54,7 +54,6 @@ export const MAP_ZOOM = 8;
  * @constant
  * @category settings
  * @type {object}
- * @default
  */
 export const POSITION_INIT_DATA = {
     "longitude": 15.680926012604708,
@@ -67,7 +66,6 @@ export const POSITION_INIT_DATA = {
  * @constant
  * @category settings
  * @type {object}
- * @default
  */
 export const PFD_INIT_DATA = {
     "groundspeed": 0,
@@ -84,7 +82,6 @@ export const PFD_INIT_DATA = {
  * @constant
  * @category settings
  * @type {object}
- * @default
  */
 export const WEIGHTS_INIT_DATA = {
     "fuel1": 0,
@@ -94,13 +91,7 @@ export const WEIGHTS_INIT_DATA = {
     "total": 0
 }
 
-/**
- * Airplane init data for offline data use
- * @constant
- * @category settings
- * @type {object}
- * @default
- */
+
 let AI_PLANE_INIT_DATA = []
 for (let i = 0; i < NR_AI_PLANES; i++) {
     AI_PLANE_INIT_DATA.push(
@@ -112,6 +103,12 @@ for (let i = 0; i < NR_AI_PLANES; i++) {
         }
     )
 }
+/**
+ * Airplane init data for offline data use
+ * @constant
+ * @category settings
+ * @type {object}
+ */
 export const PLANES_INIT_DATA = AI_PLANE_INIT_DATA;
 
 /**

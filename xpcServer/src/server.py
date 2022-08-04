@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 # Members API Route
 
+# See XPlane Data Ref https://developer.x-plane.com/datarefs/
 
 @app.route("/plane")
 def plane():
@@ -135,7 +136,7 @@ def weights():
 @app.route("/env")
 def env():
     with xpc.XPlaneConnect() as client:
-        nr_of_planes = 6
+        nr_of_planes = 3
         planes_data = [0]*nr_of_planes
 
         team_status_dref = "sim/multiplayer/combat/team_status"
@@ -154,20 +155,21 @@ def env():
 
             planes_lat = client.getDREFs(planes_lat_drefs)
             planes_lon = client.getDREFs(planes_lon_drefs)
-            team_status = client.getDREF(team_status_dref)
             planes_altitude = client.getDREFs(planes_el_drefs)
             planes_heading = client.getDREFs(planes_heading_drefs)
 
+            team_status = client.getDREF(team_status_dref)
+            
             for i in range(nr_of_planes):
                 planes_data[i] = {
                     "longitude": planes_lon[i],
                     "latitude": planes_lat[i],
                     "true_heading": planes_heading[i],
-                    "team_status": team_status[i+1], #team_status have 20 slots, the first one is always 1.0 (friendly), possible to be ourselves
-                    "altitude": planes_altitude[i]
+                    "altitude": planes_altitude[i],
+                    "team_status": team_status[i+1] #team_status have 20 slots, the first one is always 1.0 (friendly), possible to be ourselves
                 }
 
-            print(team_status)
+            print("team status: ", team_status)
 
             return {
                 "planes": planes_data
