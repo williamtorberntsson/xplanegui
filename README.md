@@ -50,9 +50,14 @@ navigated to. The buttons can be pressed with **'p'** on the keyboard. The butto
 on the bottom are divided into two modes. You can switch between the side buttons and bottom buttons by pressing
 the mode key **'m'** on the keyboard.
 
-###
+### Getting data from Back-end
+The communication between React and Flask uses a socket. When React wants certain data from Flask it sends an emit to Flask
+with event name and data. The data contains at least a value **"online"** if Flask should use data from XPlane or not.
+Flask then sends a new emit back to React with data. This way the server controls what data should be used and React does
+not need to handle the data differently depending on if it is from XPlane or not, as long as the server has the same data
+structure for both cases.
 
 ## Structure Back-end
 The server gets data from X-plane and sends it to the Front-end. What data is send or recieved to/from Xplane
 is decided with a reference to a specific data with the help of a plugin, [XPlaneConnect](https://github.com/nasa/XPlaneConnect).
-There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin.
+There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin. For sending data see [this](#Getting-data-from-Back-end).

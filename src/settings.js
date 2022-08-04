@@ -7,7 +7,7 @@
  * @type {number}
  * @default
 */
-export const DATA_FREQUENCY = 10;
+export const DATA_FREQUENCY = 1;
 
 /** 
  * Whether to use data fetched from XPlane.
