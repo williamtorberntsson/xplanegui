@@ -14,7 +14,7 @@ import { WIDGET_ORDER } from "../settings";
  * @param {object} data data for widgets 
  * @returns widgets and buttons
  */
-const WidgetsNButtons = ({ data, dataRequest }) => {
+const WidgetsNButtons = ({ data }) => {
 
   /**
    * States to keep track of layout.
@@ -149,7 +149,7 @@ const WidgetsNButtons = ({ data, dataRequest }) => {
 
       {/* Buttons */}
       < Grid item position="absolute" top={'0'} right={'0'} style={{ zIndex: '3' }}>
-        <ExtendableButtons connect={"d"} dataRequest={dataRequest} />
+        <ExtendableButtons connect={"d"} />
       </Grid >
       <Grid item position="absolute" bottom={'0'} style={{ zIndex: '3', width: "94%" }}>
         <WidgetButtons update={updateWidgetPos} selecter={selecter} reset={cleanUp} />

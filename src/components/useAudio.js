@@ -21,7 +21,7 @@ const useAudio = (filename) => {
       audio.removeEventListener('ended', () => setPlaying(false));
     }
   }, [audio])
-  
+
   return [playing, play]
 }
 export default useAudio;

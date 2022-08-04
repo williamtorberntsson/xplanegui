@@ -38,10 +38,6 @@ The markers can be designed and use your own svg.
 To create a marker you need a GraphicsLayer, a Point and a Graphic.
 An enemy, friendly and own airplane-markers have been created as examples in the **Map.js** component.
 
-### Data
-**fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
-The constants.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
-
 ### WAD (Wide Area Display)
 The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section).
 Each position has a size (S/M/L) that can be managed with corresponding state **UL**/**ML**/**BL**/**UR**/**MR**/**BR**.

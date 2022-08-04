@@ -13,38 +13,37 @@ function App() {
   // Socket
   const [socketInstance, setSocketInstance] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [setupDone, setSetupDone] = useState(false);
 
 
   useEffect(() => {
-      const socket = io("localhost:5050/", {
-        transports: ["websocket"],
-        cors: {
-          origin: "http://localhost:3000/",
-        },
-      });
+    const socket = io("localhost:5050/", {
+      transports: ["websocket"],
+      cors: {
+        origin: "http://localhost:3000/",
+      },
+    });
 
-      setSocketInstance(socket);
+    setSocketInstance(socket);
 
-      socket.on("connect", (data) => {
-        console.log(data);
-      });
+    socket.on("connect", (data) => {
+      console.log(data);
+    });
 
-      setLoading(false);
+    setLoading(false);
 
-      socket.on("setup", (data) => {
-        console.log("Recieved setup:\n", data)
-        setSetupDone(true);
-      })
+    socket.on("setup", (data) => {
+      console.log("Recieved setup:\n", data)
+      setSetupDone(true);
+    })
 
-      socket.on("disconnect", (data) => {
-        console.log(data);
-      });
+    socket.on("disconnect", (data) => {
+      console.log(data);
+    });
 
-      return function cleanup() {
-        socket.disconnect();
-      };
+    return function cleanup() {
+      socket.disconnect();
+    };
   }, []);
 
   if (!loading) {
@@ -58,11 +57,11 @@ function App() {
         <WAD socket={socketInstance} />
       )
     } else {
-      return <h1>Waiting for setup</h1>
+      return <h1>Waiting for XPlane to setup</h1>
     }
   } else {
     return (
-      <p>Waiting for socket</p> /*<WAD /> */
+      <p>Waiting for socket</p>
     )
   }
 }

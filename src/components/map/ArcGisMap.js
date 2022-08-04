@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, neutralAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
 import { NR_AI_PLANES, MAP_ZOOM } from '../../settings';
-import haversine from "../haversine";
+import haversine from '../../functions/haversine';
 
 /**
  * Creates a map and shows other airplanes from xplanes.
@@ -175,7 +175,6 @@ const Map = ({ myAirPlaneData, aiPlaneData }) => {
 
         // Update own airplane position
         let tempPoint = myPoint.clone();
-        console.log("heading: ", myAirPlaneData.true_heading)
         tempPoint.geometry.longitude = myAirPlaneData.longitude;  // update longitude
         tempPoint.geometry.latitude = myAirPlaneData.latitude;    // update latitude
         layer.add(tempPoint) // add updated point to layer
@@ -219,7 +218,7 @@ const Map = ({ myAirPlaneData, aiPlaneData }) => {
           layer.add(tempPoint) // add edited point to layer
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     }
   }, [myAirPlaneData, aiPlaneData]);

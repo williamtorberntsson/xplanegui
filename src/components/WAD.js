@@ -31,11 +31,6 @@ function WAD({ socket }) {
   // Socket
   const [time, setTime] = useState(Date.now())
 
-  const handleSubmit = (path, message = { online: USE_XPLANE_DATA }) => {
-    console.log(message)
-    socket.emit(path, message)
-  };
-
   /**
    * Whenever socket updates corresponding event is triggered
    */
@@ -67,6 +62,9 @@ function WAD({ socket }) {
 
   }, [socket]);
 
+  const handleSubmit = (path, message = { online: USE_XPLANE_DATA }) => {
+    socket.emit(path, message)
+  };
 
   // PULL UP Warning when pitch < -60 and altitude < 5000m 
   useEffect(() => {
@@ -90,7 +88,7 @@ function WAD({ socket }) {
   }, [])
 
 
-  // Use myAirPlaneData from xplane
+  // Request data from server
   useEffect(() => {
     handleSubmit("plane")
     handleSubmit("pfd")
@@ -108,7 +106,7 @@ function WAD({ socket }) {
 
         <WarningOverlay show={showPullUp} />
 
-        <WidgetsNButtons data={widgetData} dataRequest={handleSubmit} />
+        <WidgetsNButtons data={widgetData} />
 
       </Grid>
     </Grid>

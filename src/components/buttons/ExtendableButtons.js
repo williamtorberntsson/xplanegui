@@ -4,7 +4,7 @@
  * @category Buttons
  * @returns array of buttons
  */
-const ExtendableButtons = ({dataRequest}) => {
+const ExtendableButtons = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '100vw', paddingTop: '1.3vh' }}>
@@ -13,7 +13,7 @@ const ExtendableButtons = ({dataRequest}) => {
       <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>
-      <button className="button-30" onClick={() => dataRequest("plane")} role="button">Get Data</button>
+      <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>
       <button className="button-30" role="button">   </button>

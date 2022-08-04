@@ -14,17 +14,16 @@ import styles from "../../styles/G.module.css";
  */
 const G = ({ ax, ay, az }) => {
 
-  let G = Math.abs(ax)
+  let G = Math.abs(ax) // x-axis biggest?
 
   if(Math.abs(ay) > Math.abs(ax) && Math.abs(ay) > Math.abs(az)) G = Math.abs(ay) // y-axis biggest
   else if(Math.abs(az) > Math.abs(ax) && Math.abs(az) > Math.abs(ay)) G = az // z-axis biggest
-
+  // otherwise x-axis biggest
 
 
   return (
     <div className={styles.g}>
-      <span>G: </span>
-      <span>{G.toFixed(1)}</span>
+      <span>G: {G.toFixed(1)}</span>
     </div>
   )
 }
