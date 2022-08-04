@@ -200,7 +200,6 @@ def handle_aiplanes(nr_ai):
         planes_heading = client.getDREFs(planes_heading_drefs[0:nr_ai])
 
         team_status = client.getDREF(team_status_dref)
-        print("Got ai data")
 
         for i in range(nr_ai):
             planes_data[i] = {

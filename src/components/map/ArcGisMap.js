@@ -175,6 +175,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
 
         // Update own airplane position
         let tempPoint = myPoint.clone();
+        console.log("heading: ", myAirPlaneData.true_heading)
         tempPoint.geometry.longitude = myAirPlaneData.longitude;  // update longitude
         tempPoint.geometry.latitude = myAirPlaneData.latitude;    // update latitude
         layer.add(tempPoint) // add updated point to layer

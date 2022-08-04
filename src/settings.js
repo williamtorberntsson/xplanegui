@@ -16,7 +16,7 @@ export const DATA_FREQUENCY = 10;
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = true;
+export const USE_XPLANE_DATA = false;
 
 /** 
  * Same number as nr of airplanes in XPlane

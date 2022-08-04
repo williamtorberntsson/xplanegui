@@ -40,31 +40,32 @@ function WAD({ socket }) {
    * Whenever socket updates corresponding event is triggered
    */
   useEffect(() => {
+    if (USE_XPLANE_DATA) {
 
-    socket.on("plane", (data) => {
-      setMyAirPlaneData(data)
-    });
+      socket.on("plane", (data) => {
+        setMyAirPlaneData(data)
+      });
 
-    socket.on("pfd", (data) => {
-      setWidgetData((state) => ({ ...state, "pfd": data }))
-    });
+      socket.on("pfd", (data) => {
+        setWidgetData((state) => ({ ...state, "pfd": data }))
+      });
 
-    socket.on("weights", (data) => {
-      setWidgetData((state) => ({ ...state, "weights": data }))
-    });
+      socket.on("weights", (data) => {
+        setWidgetData((state) => ({ ...state, "weights": data }))
+      });
 
-    socket.on("warnings", (data) => {
-      setWidgetData((state) => ({ ...state, "warnings": data }))
-    });
+      socket.on("warnings", (data) => {
+        setWidgetData((state) => ({ ...state, "warnings": data }))
+      });
 
-    socket.on("status", (data) => {
-      console.log("recieved status")
-      setWidgetData((state) => ({ ...state, "status": data }))
-    });
+      socket.on("status", (data) => {
+        setWidgetData((state) => ({ ...state, "status": data }))
+      });
 
-    socket.on("aiplanes", (data) => {
-      setAiPlaneData(data)
-    });
+      socket.on("aiplanes", (data) => {
+        setAiPlaneData(data)
+      });
+    }
 
   }, [socket]);
 

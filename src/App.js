@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import WAD from './components/WAD'
 import { io } from "socket.io-client";
-import { DATA_FREQUENCY, NR_AI_PLANES } from './settings';
+import { DATA_FREQUENCY, NR_AI_PLANES, USE_XPLANE_DATA } from './settings';
 import './App.css';
 
 /**
@@ -13,21 +13,12 @@ function App() {
   // Socket
   const [socketInstance, setSocketInstance] = useState("");
   const [loading, setLoading] = useState(true);
-  const [buttonStatus, setButtonStatus] = useState(true);
 
   const [setupDone, setSetupDone] = useState(false);
 
 
-  const handleClick = () => {
-    if (buttonStatus === false) {
-      setButtonStatus(true);
-    } else {
-      setButtonStatus(false);
-    }
-  };
-
   useEffect(() => {
-    if (buttonStatus === true) {
+    if (USE_XPLANE_DATA) {
       const socket = io("localhost:5050/", {
         transports: ["websocket"],
         cors: {
@@ -56,7 +47,7 @@ function App() {
         socket.disconnect();
       };
     }
-  }, [buttonStatus]);
+  }, []);
 
   if (!loading) {
     // Send setup data to xplane
@@ -72,7 +63,9 @@ function App() {
       return <h1>Waiting for setup</h1>
     }
   } else {
-    <p>Loading...</p>
+    return (
+      <WAD />
+    )
   }
 }
 
