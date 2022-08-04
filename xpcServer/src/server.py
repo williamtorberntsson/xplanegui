@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
 import xpc
+import random, math
 
 
 app = Flask(__name__)
@@ -59,6 +60,7 @@ g_drefs = ["sim/flightmodel/forces/g_nrml",
 nr_of_planes = 20
 team_status_dref = "sim/multiplayer/combat/team_status"
 planes_data = [0]*nr_of_planes
+planes_data_offline = []
 
 
 planes_lat_drefs = [""]*nr_of_planes
@@ -82,8 +84,23 @@ def handle_setup(data):
     with xpc.XPlaneConnect() as client:
 
         global nr_of_planes
+        global planes_data_offline
         nr_of_planes = data['nr_ai']
-        client.sendDREF(data_freq_dref, data['freq'])  # send data data.freq times/second
+        planes_data_offline = [0]*nr_of_planes
+
+
+        for i in range(nr_of_planes):
+            planes_data_offline[i] = {
+                    "longitude": 15.88092 + (random.uniform(0, 1) * 2 - 1) * 0.1,
+                    "latitude": 58.41157 + (random.uniform(0, 1) * 2 - 1) * 0.1,
+                    "true_heading": random.uniform(0, 1) * 360,
+                    "altitude": 2000,
+                    "team_status": math.floor(random.uniform(0, 1) * 3)
+                }
+
+
+        # send data data.freq times/second
+        client.sendDREF(data_freq_dref, data['freq'])  
         print("Setup done!")
 
         emit("setup", "Setup done!\nData frequency set to: {}\nAnd {} AI planes".format(data['freq'], nr_of_planes))
@@ -240,10 +257,10 @@ def handle_warnings(data):
 
 @socketio.on("aiplanes")
 def handle_aiplanes(data):
+    nr_ai = data["nr_ai"]
+
     if(data["online"]):
         with xpc.XPlaneConnect() as client:
-
-            nr_ai = data["nr_ai"]
 
             planes_lat = client.getDREFs(planes_lat_drefs[0:nr_ai])
             planes_lon = client.getDREFs(planes_lon_drefs[0:nr_ai])
@@ -266,24 +283,9 @@ def handle_aiplanes(data):
                 "planes": planes_data[0:nr_ai]
             })
     else:
-        planes_data = [{
-            "longitude": 16,
-            "latitude": 59,
-            "true_heading": 70,
-            "altitude": 2000,
-            "team_status": 1
-        },
-        {
-            "longitude": 16.5,
-            "latitude": 59.2,
-            "true_heading": 140,
-            "altitude": 1000,
-            "team_status": 2
-        }]
 
-        emit("aiplanes", {
-            "planes": planes_data
-        })
+        global planes_data_offline
+        emit("aiplanes", { "planes": planes_data_offline })
 
 
 if __name__ == "__main__":

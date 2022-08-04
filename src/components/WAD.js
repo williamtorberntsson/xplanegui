@@ -31,7 +31,7 @@ function WAD({ socket }) {
   // Socket
   const [time, setTime] = useState(Date.now())
 
-  const handleSubmit = (path, message = {online: USE_XPLANE_DATA, nr_ai: ""}) => {
+  const handleSubmit = (path, message = { online: USE_XPLANE_DATA }) => {
     console.log(message)
     socket.emit(path, message)
   };
@@ -41,29 +41,29 @@ function WAD({ socket }) {
    */
   useEffect(() => {
 
-      socket.on("plane", (data) => {
-        setMyAirPlaneData(data)
-      });
+    socket.on("plane", (data) => {
+      setMyAirPlaneData(data)
+    });
 
-      socket.on("pfd", (data) => {
-        setWidgetData((state) => ({ ...state, "pfd": data }))
-      });
+    socket.on("pfd", (data) => {
+      setWidgetData((state) => ({ ...state, "pfd": data }))
+    });
 
-      socket.on("weights", (data) => {
-        setWidgetData((state) => ({ ...state, "weights": data }))
-      });
+    socket.on("weights", (data) => {
+      setWidgetData((state) => ({ ...state, "weights": data }))
+    });
 
-      socket.on("warnings", (data) => {
-        setWidgetData((state) => ({ ...state, "warnings": data }))
-      });
+    socket.on("warnings", (data) => {
+      setWidgetData((state) => ({ ...state, "warnings": data }))
+    });
 
-      socket.on("status", (data) => {
-        setWidgetData((state) => ({ ...state, "status": data }))
-      });
+    socket.on("status", (data) => {
+      setWidgetData((state) => ({ ...state, "status": data }))
+    });
 
-      socket.on("aiplanes", (data) => {
-        setAiPlaneData(data)
-      });
+    socket.on("aiplanes", (data) => {
+      setAiPlaneData(data)
+    });
 
   }, [socket]);
 
@@ -92,11 +92,11 @@ function WAD({ socket }) {
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
-      handleSubmit("plane")
-      //handleSubmit("pfd")
-      //handleSubmit("weights")
-      //handleSubmit("warnings")
-      handleSubmit("aiplanes", {"online": USE_XPLANE_DATA, "nr_ai": NR_AI_PLANES})
+    handleSubmit("plane")
+    handleSubmit("pfd")
+    handleSubmit("weights")
+    handleSubmit("warnings")
+    handleSubmit("aiplanes", { "online": USE_XPLANE_DATA, "nr_ai": NR_AI_PLANES })
   }, [time])
 
   return (
