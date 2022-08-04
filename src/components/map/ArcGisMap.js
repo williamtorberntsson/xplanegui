@@ -74,7 +74,7 @@ const Map = ({ myAirPlaneData, aiPlaneData }) => {
           zoom: zoomvalue,
           ui: { components: ["attribution"] }, // hides default zoom buttons
           constraints: {
-            rotationEnabled: false
+            rotationEnabled: true
           }
         })
 

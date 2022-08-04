@@ -1,7 +1,7 @@
 /**
  * The haversine formula calculates the great-circle distance between two points –
  * the shortest distance over the earth’s surface.
- * See: http://www.movable-type.co.uk/scripts/latlong.html
+ * See {@link http://www.movable-type.co.uk/scripts/latlong.html}
  * @function
  * @param {float} lat1 latitude travel from
  * @param {float} lon1 longitude travel from

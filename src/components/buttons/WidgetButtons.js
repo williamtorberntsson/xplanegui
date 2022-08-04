@@ -18,7 +18,7 @@ const WidgetButtons = ({ update, selecter, reset }) => {
         <button className={`button-30 ${selecter === 'pfd' ? 'border' : ""}`} onClick={() => { update('pfd') }} role="button">PFD</button>
         <button className={`button-30 ${selecter === 'weights' ? 'border' : ""}`} onClick={() => { update('weights') }} role="button">Weights</button>
         <button className={`button-30 ${selecter === 'warnings' ? 'border' : ""}`} onClick={() => { update('warnings') }} role="button">Warnings</button>
-        <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('sound_example'); }} role="button">Time and Sound</button>
+        <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('time'); }} role="button">Time and Sound</button>
         <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('none'); }} role="button">None</button>
       </div>
 

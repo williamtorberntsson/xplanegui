@@ -7,7 +7,7 @@
  * @type {number}
  * @default
 */
-export const DATA_FREQUENCY = 1;
+export const DATA_FREQUENCY = 15;
 
 /** 
  * Whether to use data fetched from XPlane.
@@ -16,7 +16,7 @@ export const DATA_FREQUENCY = 1;
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = false;
+export const USE_XPLANE_DATA = true;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -25,7 +25,7 @@ export const USE_XPLANE_DATA = false;
  * @type {number}
  * @default
 */
-export const NR_AI_PLANES = 15; // Same number as in XPlane (0-19), when not using XPlane any number works
+export const NR_AI_PLANES = 3; // Same number as in XPlane (0-19), when not using XPlane any number works
 
 /**
  * Key configuration for navigating the WAD with throttle controls

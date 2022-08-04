@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react"
 
 /**
- * Custom Hook to play audio.
+ * Custom Hook to play audio. Customize if needed.
+ * Uses sound files from the assets/sound/ folder.
  * @function
  * @param {string} filename filename for audio file 
  * @returns {Array<*, function>}
