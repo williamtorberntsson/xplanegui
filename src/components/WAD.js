@@ -1,6 +1,5 @@
-import { React, useState, useEffect, useRef } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import arrowUp from '../assets/img/arrow-up.png'
 import './WAD.css';
 
 // components

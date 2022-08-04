@@ -47,7 +47,7 @@ export const KEY_NAVIGATION_CONFIG = {
  * @constant
  * @category settings
  */
-export const WIDGET_ORDER = ["reset_left", "pfd", "weights", "warnings", "none", "reset_right"]
+export const WIDGET_ORDER = ["reset_left", "pfd", "weights", "warnings", "time", "none", "reset_right"]
 
 /** 
  * Zoom level for map
