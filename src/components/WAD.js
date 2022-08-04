@@ -133,7 +133,7 @@ function WAD() {
   const [selecter, _setSelecter] = useState('1');
   const selecterRef = useRef(selecter)
   const setSelecter = state => { selecterRef.current = state; _setSelecter(state) }
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
 
 
   /**

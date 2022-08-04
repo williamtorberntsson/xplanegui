@@ -41,8 +41,11 @@ An enemy, friendly and own airplane-markers have been created as examples in the
 **fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
 The constants.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
 
+## IOSOCKET
+Installera simple_wesocket till python samt flask_iosocket 
+
 ### WAD (Wide Area Display)
-The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section).
+The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section). To display the right widgets in the desired area the function **GridType** is used. This function is expandabe if more types of grids will be added.
 Each position has a size (S/M/L) that can be managed with corresponding state **UL**/**ML**/**BL**/**UR**/**MR**/**BR**.
 Widgets can be placed at positions by managing the **widgetPositions** state which holds a name for a widget at each position.
 The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with
