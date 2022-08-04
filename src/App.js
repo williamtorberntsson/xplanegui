@@ -18,7 +18,6 @@ function App() {
 
 
   useEffect(() => {
-    if (!USE_XPLANE_DATA) {
       const socket = io("localhost:5050/", {
         transports: ["websocket"],
         cors: {
@@ -46,7 +45,6 @@ function App() {
       return function cleanup() {
         socket.disconnect();
       };
-    }
   }, []);
 
   if (!loading) {
@@ -64,7 +62,7 @@ function App() {
     }
   } else {
     return (
-      <p>test</p> /*<WAD /> */
+      <p>Waiting for socket</p> /*<WAD /> */
     )
   }
 }

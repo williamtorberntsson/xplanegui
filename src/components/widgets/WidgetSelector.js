@@ -15,13 +15,13 @@ import { USE_XPLANE_DATA } from "../../settings";
  * @returns widget
  */
 const WidgetSelector = ({ widget, size, data }) => {
-  let dataPFD
-  if (!USE_XPLANE_DATA || data === undefined) {
-    dataPFD = data
-  }
-  else {
-    dataPFD = data.pfd
-  }
+  // let dataPFD
+  // if (!USE_XPLANE_DATA || data === undefined) {
+  //   dataPFD = data
+  // }
+  // else {
+  //   dataPFD = data.pfd
+  // }
   //console.log(data)
 
   switch (widget) {

@@ -5,7 +5,6 @@ import './WAD.css';
 
 // components
 import ArcGisMap from './map/ArcGisMap';
-import UpdateOfflineData from './map/UpdateOfflineData';
 import WarningOverlay from './WarningOverlay';
 import WidgetsNButtons from './WidgetsNButtons';
 
@@ -25,14 +24,15 @@ function WAD({ socket }) {
   const [myAirPlaneData, setMyAirPlaneData] = useState();
   const [aiPlaneData, setAiPlaneData] = useState();
   const [widgetData, setWidgetData] = useState({});
-  const [offlineData, setOfflineData] = useState();
+  const [offlineData, setOfflineData] = useState(); //Ta bort 
 
   const [showPullUp, setShowPullUp] = useState(false)
 
   // Socket
   const [time, setTime] = useState(Date.now())
 
-  const handleSubmit = (path, message = "") => {
+  const handleSubmit = (path, message = {online: USE_XPLANE_DATA, nr_ai: ""}) => {
+    console.log(message)
     socket.emit(path, message)
   };
 
@@ -40,7 +40,6 @@ function WAD({ socket }) {
    * Whenever socket updates corresponding event is triggered
    */
   useEffect(() => {
-    if (!USE_XPLANE_DATA) {
 
       socket.on("plane", (data) => {
         setMyAirPlaneData(data)
@@ -65,7 +64,6 @@ function WAD({ socket }) {
       socket.on("aiplanes", (data) => {
         setAiPlaneData(data)
       });
-    }
 
   }, [socket]);
 
@@ -94,21 +92,11 @@ function WAD({ socket }) {
 
   // Use myAirPlaneData from xplane
   useEffect(() => {
-    if (!USE_XPLANE_DATA) {
       handleSubmit("plane")
       //handleSubmit("pfd")
       //handleSubmit("weights")
       //handleSubmit("warnings")
-      handleSubmit("aiplanes", NR_AI_PLANES)
-    }
-  }, [time])
-
-  // Use offline data
-  useEffect(() => {
-    if (USE_XPLANE_DATA) {
-      UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
-      //setWidgetData(offlineData)
-    }
+      handleSubmit("aiplanes", {"online": USE_XPLANE_DATA, "nr_ai": NR_AI_PLANES})
   }, [time])
 
   return (
