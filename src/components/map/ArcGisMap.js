@@ -210,8 +210,7 @@ const Map = ({ myAirPlaneData, aiPlaneData }) => {
 
           tempPoint.popupTemplate.content = (
             "<ul><li> ALTITUDE: " + Number(aiPlaneData.planes[i].altitude).toFixed(0) + " feet</li>" +
-            "<li>DISTANCE:" + distance + " m</li>" +
-            "<li>SOMETHING: </li><ul>")
+            "<li>DISTANCE:" + distance + " m</li>")
 
           view.popup.visibleElements.featureNavigation = false;
 
