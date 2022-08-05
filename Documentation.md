@@ -41,15 +41,18 @@ The markers can be designed and use your own svg.
 To create a marker you need a GraphicsLayer, a Point and a Graphic.
 An enemy, friendly and own airplane-markers have been created as examples in the **Map.js** component.
 
-### Data
-**fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
-The settings.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
+### Getting data from Back-end
+The communication between React and Flask uses a socket. When React wants certain data from Flask it sends an emit to Flask
+with event name and data. The data contains at least a value **"online"** if Flask should use data from XPlane or not.
+Flask then sends a new emit back to React with data. This way the server controls what data should be used and React does
+not need to handle the data differently depending on if it is from XPlane or not, as long as the server has the same data
+structure for both cases. When **not** using XPlane the data is **static**.
 
-## IOSOCKET
-Installera simple_wesocket till python samt flask_iosocket 
+## SOCKETIO
+Install simple_websocket and flask_iosocket 
 
 ### WAD (Wide Area Display)
-The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section). To display the right widgets in the desired area the function **GridType** is used. This function is expandabe if more types of grids will be added.
+The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section).
 Each position has a size (S/M/L) that can be managed with corresponding state **UL**/**ML**/**BL**/**UR**/**MR**/**BR**.
 Widgets can be placed at positions by managing the **widgetPositions** state which holds a name for a widget at each position.
 The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with

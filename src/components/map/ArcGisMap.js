@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, neutralAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
-import { USE_XPLANE_DATA, NR_AI_PLANES, MAP_ZOOM } from '../../settings';
-import haversine from "../haversine";
+import { NR_AI_PLANES, MAP_ZOOM } from '../../settings';
+import haversine from '../../functions/haversine';
 
 /**
  * Creates a map and shows other airplanes from xplanes.
@@ -11,7 +11,7 @@ import haversine from "../haversine";
  * @param {*} param0
  * @returns map
  */
-const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
+const Map = ({ myAirPlaneData, aiPlaneData }) => {
   const [zoomvalue, setZoomvalue] = useState(MAP_ZOOM);
   const [view, setView] = useState(null);
   const [myPoint, setMyPoint] = useState(null);
@@ -74,7 +74,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           zoom: zoomvalue,
           ui: { components: ["attribution"] }, // hides default zoom buttons
           constraints: {
-            rotationEnabled: false
+            rotationEnabled: true
           }
         })
 
@@ -165,7 +165,7 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
   // With xplane data: Updates the map and airplane positions 
   useEffect(() => {
 
-    if (USE_XPLANE_DATA && myAirPlaneData && aiPlaneData) {
+    if (myAirPlaneData && aiPlaneData) {
       // Set rotation and position for camera
       try {
         view.center = [myAirPlaneData.longitude, myAirPlaneData.latitude];
@@ -218,69 +218,10 @@ const Map = ({ myAirPlaneData, aiPlaneData, offlineData }) => {
           layer.add(tempPoint) // add edited point to layer
         })
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     }
-  }, [myAirPlaneData, USE_XPLANE_DATA, aiPlaneData]);
-
-
-  // With offline data: Updates the map and airplane positions 
-  useEffect(() => {
-
-    if (!USE_XPLANE_DATA && offlineData && view) {
-      // Set rotation and position for camera
-      view.center = [offlineData.longitude, offlineData.latitude];
-      view.rotation = offlineData.true_heading;
-
-      layer.removeAll() // clear layer with markers
-
-      // Update own airplane position
-      let tempPoint = myPoint.clone();
-      tempPoint.geometry.longitude = offlineData.longitude;  // update longitude
-      tempPoint.geometry.latitude = offlineData.latitude;  // update latitude
-      // update angle
-      layer.add(tempPoint) // add updated point to layer
-
-      // Update AI airplane positions
-      points.forEach(function (point, i) {
-        let tempPoint = point.clone();
-        tempPoint.geometry.longitude = offlineData[i].longitude;  // update longitude
-        tempPoint.geometry.latitude = offlineData[i].latitude;    // update latitude
-
-        tempPoint.popupTemplate.title = 'CGI modell' + JSON.stringify(i+1);
-        if (view.popup.title === 'CGI modell' + JSON.stringify(i+1)) { // Some attribute that is unique for every pop-up/plane
-          view.popup.location = { longitude: offlineData[i].longitude, latitude: offlineData[i].latitude };
-        }
-
-        // Set correct symbol type and heading (angle)
-        switch (offlineData[i].team_status) {
-          case 0:
-            tempPoint.symbol = neutralAirPlaneMarker;
-            break;
-          case 1:
-            tempPoint.symbol = friendlyAirPlaneMarker;
-            break;
-          case 2:
-            tempPoint.symbol = enemyAirPlaneMarker;
-            break;
-          default:
-            tempPoint.symbol = neutralAirPlaneMarker;
-        }
-        tempPoint.symbol.angle = offlineData[i].true_heading - offlineData.true_heading;     // update angle
-
-        const distance = haversine(offlineData.latitude, offlineData.longitude, offlineData[i].latitude, offlineData[i].longitude)
-        tempPoint.popupTemplate.content = (
-          "<ul><li> ALTITUDE: " + offlineData[i].longitude.toFixed(0) + " feet</li>" +
-          "<li>DISTANCE:" + distance + " m</li>" +
-          "<li>SOMETHING: </li><ul>")
-
-        view.popup.visibleElements.featureNavigation = false;
-        tempPoint.geometry.angle = offlineData.heading;
-        layer.add(tempPoint) // add edited point to layer
-      })
-
-    }
-  }, [offlineData])
+  }, [myAirPlaneData, aiPlaneData]);
 
   return (
     <div>

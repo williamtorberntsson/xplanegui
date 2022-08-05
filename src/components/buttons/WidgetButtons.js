@@ -1,6 +1,8 @@
 
 /**
  * Widget selection buttons for WAD (bottom)
+ * Dont forgett to update settings when changing button layout
+ * to make sure the navigation controls works.
  * @component
  * @category Buttons
  * @param {function} update function to set name pressed widget
@@ -18,7 +20,7 @@ const WidgetButtons = ({ update, selecter, reset }) => {
         <button className={`button-30 ${selecter === 'pfd' ? 'border' : ""}`} onClick={() => { update('pfd') }} role="button">PFD</button>
         <button className={`button-30 ${selecter === 'weights' ? 'border' : ""}`} onClick={() => { update('weights') }} role="button">Weights</button>
         <button className={`button-30 ${selecter === 'warnings' ? 'border' : ""}`} onClick={() => { update('warnings') }} role="button">Warnings</button>
-        <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('sound_example'); }} role="button">Time and Sound</button>
+        <button className={`button-30 ${selecter === 'time' ? 'border' : ""}`} onClick={() => { update('time'); }} role="button">Time</button>
         <button className={`button-30 ${selecter === 'none' ? 'border' : ""}`} onClick={() => { update('none'); }} role="button">None</button>
       </div>
 

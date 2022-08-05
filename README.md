@@ -50,9 +50,11 @@ navigated to. The buttons can be pressed with **'p'** on the keyboard. The butto
 on the bottom are divided into two modes. You can switch between the side buttons and bottom buttons by pressing
 the mode key **'m'** on the keyboard.
 
-###
-
 ## Structure Back-end
 The server gets data from X-plane and sends it to the Front-end. What data is send or recieved to/from Xplane
 is decided with a reference to a specific data with the help of a plugin, [XPlaneConnect](https://github.com/nasa/XPlaneConnect).
-There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin.
+There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin. For sending data see [this](#Getting-data-from-Back-end).
+
+### oldServerSetup (slow)
+Contains another version of server setup with xpc. This version is slow and works only with low frequency of GET request. There is however no errors on the server side. **fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
+The settings.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
