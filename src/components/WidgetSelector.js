@@ -2,7 +2,7 @@ import PFD from "./widgets/pfd/PFD";
 import Weights from "./widgets/statuswidgets/Weights";
 import Warnings from "./widgets/statuswidgets/Warnings";
 import Status from "./widgets/statuswidgets/Status";
-import { USE_XPLANE_DATA } from "../constants";
+import { USE_XPLANE_DATA } from "../settings";
 
 /**
  * Component for returning widget from a name and giving the widget the right data

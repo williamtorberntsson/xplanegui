@@ -11,7 +11,7 @@ import './WAD.css';
 import WidgetSelector from './WidgetSelector';
 import ArcGisMap from './map/ArcGisMap';
 import { fetchData, fetchWidgetData } from './fetchData';
-import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from '../constants';
+import { USE_XPLANE_DATA, KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from '../settings';
 
 
 /**
@@ -198,7 +198,7 @@ function WAD() {
       const interval = setInterval(() => {
         UpdateOfflineData(offlineData, setOfflineData); // change data with Offline
         setWidgetData(offlineData)
-      }, 200); // update 20 times/s
+      }, 100); // update 20 times/s
 
       // console.log(widgetData)
 

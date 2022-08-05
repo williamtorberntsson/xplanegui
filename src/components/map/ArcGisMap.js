@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadModules } from "esri-loader";
 import { myAirPlaneSvg, neutralAirPlaneSvg, friendlyAirPlaneSvg, enemyAirPlaneSvg } from "../../images";
-import { USE_XPLANE_DATA, NR_AI_PLANES, MAP_ZOOM } from '../../constants';
+import { USE_XPLANE_DATA, NR_AI_PLANES, MAP_ZOOM } from '../../settings';
 import haversine from "../haversine";
 import AirSpeed from '../widgets/pfd/AirSpeed';
 

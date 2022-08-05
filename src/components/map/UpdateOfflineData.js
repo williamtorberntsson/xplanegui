@@ -1,4 +1,4 @@
-import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA } from "../../constants";
+import { POSITION_INIT_DATA, PFD_INIT_DATA, PLANES_INIT_DATA } from "../../settings";
 
 const UpdateOfflineData = (data, updateData) => {
   // simple example

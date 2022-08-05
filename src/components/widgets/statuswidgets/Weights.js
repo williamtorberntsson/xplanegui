@@ -1,4 +1,4 @@
-import { USE_XPLANE_DATA, WEIGHTS_INIT_DATA } from "../../../constants";
+import { USE_XPLANE_DATA, WEIGHTS_INIT_DATA } from "../../../settings";
 import styles from "../../styles/Status.module.css"
 
 /**
