@@ -5,9 +5,12 @@ It also contains findings about XPlane and other software that might be interest
 ## XPlane
 - XPlane **do** support missile lock/target sounds but **airplanes with FMOD soundengine** does not support that sound as of 2022/07.
 - How often XPlane send data can be toggled, needs a deeper look.
-- It is possible to change difficulty of CGF but not advanced behavior.
 - Cannot get information when locked on from XPlaneConnect.
 - When hit by other airplane everything on the AirPlane stops working, no realistic damage.
+- Insert CGF in the simulator enviroment is possible and their team status is choosen when adding a plane. The team status can be friendly, enemy or non-combat.
+- The AI controlling the CGF are constructed by xplane and the decision trees are not changable, the user can change the level of difficulty. There is an option to disable the AI and the planes must then be located manually each frame.
+- The HUD in 2D view are easy to modify with Plane Maker, models with a costumized 3D HUD exists but the tools or implementation of that is still unknown to us.
+- Radar functions is possible to "fake", but all planes have god mode in xplane.
 
 ## JoyToKey
 **[JoyToKey](https://joytokey.net/en/)** can be used to emulate mouse movements with the flight controllers.
@@ -40,7 +43,7 @@ An enemy, friendly and own airplane-markers have been created as examples in the
 
 ### Data
 **fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
-The constants.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
+The settings.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
 
 ## IOSOCKET
 Installera simple_wesocket till python samt flask_iosocket 
@@ -51,13 +54,6 @@ Each position has a size (S/M/L) that can be managed with corresponding state **
 Widgets can be placed at positions by managing the **widgetPositions** state which holds a name for a widget at each position.
 The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with
 **updateWidgetPosition()**.
-
-## Research
-- Insert CGF in the simulator enviroment is possible and their team status is choosen when adding a plane. The team status can be friendly, enemy or non-combat.
-- The AI controlling the planes are constructed by xplane and the decision trees are not changable, the user can change the level of difficulty. There is an option to disable the AI and the planes must then be located manually each frame.
-- It is not possible to see if another player/plane have locked on you.
-- The HUD in 2D view are easy to modify with Plane Maker, models with a costumized 3D HUD exists but the tools or implementation of that is still unknown to us.
-- Radar functions is possible to "fake", but all planes have god mode in xplane.
 
 ## Known bugs
 - Sometimes the svg (images) does not load when selecting widgets when XPlane is running (maybe not enough resources for computer?)
