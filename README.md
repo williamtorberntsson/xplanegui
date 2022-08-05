@@ -16,6 +16,7 @@ Start up:
 - Front-End
 - Back-End
 - JoyToKey (required if navigating with throttle)
+If runned without Xplane, set the USE_XPLANE_DATA in settings.js to false
 
 #### Back-end
 Start the python server `server.py`
