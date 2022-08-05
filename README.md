@@ -15,7 +15,7 @@ Start up:
 - X-plane
 - Front-End
 - Back-End
-- JoyToKey (required if navigating with throttle)
+- JoyToKey or equivalent software (required if navigating with throttle)
 
 #### Back-end
 Start the python server `server.py`
@@ -49,6 +49,30 @@ The **arrow keys** can be used to navigate the buttons. A blue border is shown o
 navigated to. The buttons can be pressed with **'p'** on the keyboard. The buttons on the side and the ones
 on the bottom are divided into two modes. You can switch between the side buttons and bottom buttons by pressing
 the mode key **'m'** on the keyboard.
+
+## Button configutation
+When using flight controllers the buttons needs to be mapped to buttons on the keyboard.
+JoyToKey or any other equivalent software can be used. The keyboard configuration can be changed with
+**KEY_NAVIGATION_CONFIG** in **settings.js**.
+
+
+### JoyToKey configuration
+Hotas Warthog throttle configuration
+Joystick 2
+- Stick1:   ←  Mouse: ←(50) Adjust(50%)
+- Stick1:   →  Mouse: →(50) Adjust(50%)
+- Stick1:   ↑  Mouse: ↑(50) Adjust(50%)
+- Stick1:   ↓  Mouse: ↓(50) Adjust(50%)
+- Button1   Mouse:L-click
+- Button2   P
+- Button3   ↑
+- Button4   →
+- Button5   ↓
+- Button6   ←
+- Button8   M
+- Button9   2
+- Button10  1
+
 
 ### Getting data from Back-end
 The communication between React and Flask uses a socket. When React wants certain data from Flask it sends an emit to Flask

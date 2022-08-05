@@ -16,7 +16,7 @@ export const DATA_FREQUENCY = 15;
  * @type {boolean}
  * @default
 */
-export const USE_XPLANE_DATA = true;
+export const USE_XPLANE_DATA = false;
 
 /** 
  * Same number as nr of airplanes in XPlane
@@ -33,14 +33,14 @@ export const NR_AI_PLANES = 3; // Same number as in XPlane (0-19), when not usin
  * @category settings
  */
 export const KEY_NAVIGATION_CONFIG = {
-    LEFT_ARROW: "ArrowLeft",
-    UP_ARROW: "ArrowUp",
-    RIGHT_ARROW: "ArrowRight",
-    DOWN_ARROW: "ArrowDown",
-    p: "p",
-    m: "m",
-    ONE: "1",
-    TWO: "2"
+    LEFT: "ArrowLeft",
+    UP: "ArrowUp",
+    RIGHT: "ArrowRight",
+    DOWN: "ArrowDown",
+    PRESS: "p",
+    MODE: "m",
+    VIEW_ONE: "1",
+    VIEW_TWO: "2"
 }
 /**
  * List for all buttoms at bottom of screen

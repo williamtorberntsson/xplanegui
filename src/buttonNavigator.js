@@ -13,7 +13,7 @@ import { KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MOD
 const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, updateSelecterMode, updateActiveBtn, updateWidgetPos, setUL, setUR, setBL, setBR, setSelectedWidgetPos, updateViewMode) => {
 
   switch (keyCode) {
-    case KEY.LEFT_ARROW:
+    case KEY.LEFT:
       switch (selecterMode) {
         case 0:
           if ((Number(selecter) + 5) % 10 === 0) updateSelecter((10).toString())
@@ -26,7 +26,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
         default: // do nothing
       }
       break;
-    case KEY.UP_ARROW:
+    case KEY.UP:
       switch (selecterMode) {
         case 0:
           if (Number(selecter <= 5)) {
@@ -42,7 +42,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
         default: // do nothing
       }
       break;
-    case KEY.RIGHT_ARROW:
+    case KEY.RIGHT:
       switch (selecterMode) {
         case 0:
           if ((Number(selecter) + 5) % 10 === 0) updateSelecter((10).toString())
@@ -54,7 +54,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
         default: // do nothing
       }
       break;
-    case KEY.DOWN_ARROW:
+    case KEY.DOWN:
       switch (selecterMode) {
         case 0:
           if (Number(selecter) <= 5) {
@@ -70,7 +70,7 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
         default: // do nothing
       }
       break;
-    case KEY.p:
+    case KEY.PRESS:
       if (selecterMode === 0) {
         updateActiveBtn(selecter)
         switch (selecter) {
@@ -123,13 +123,13 @@ const buttonNavigator = (keyCode, selecterMode, selecter, updateSelecter, update
         updateWidgetPos(selecter)
       }
       break;
-    case KEY.m:
+    case KEY.MODE:
       updateSelecterMode((selecterMode + 1) % 2)
       break;
-    case KEY.ONE:
+    case KEY.VIEW_ONE:
       updateViewMode(VIEW_MODE_LANDING)
       break;
-    case KEY.TWO:
+    case KEY.VIEW_TWO:
       updateViewMode(VIEW_MODE_MINI)
       break;
     default: // do nothing
