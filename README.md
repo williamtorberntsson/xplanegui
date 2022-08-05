@@ -1,34 +1,56 @@
 # Xplane GUI
-This project creates a flask-server that connects to X-Plane and sends data from/to X-Plane with a react frontend.
-
-### Generate documenation website with JSdoc
-To see all documented implementations run `npm run jsdoc` and then `npm run open-docs`.
+This App contains a WAD (Wide Area Display) that shows information from XPlane with different widgets. It communicates with XPlane though a socket between React and Flask. Flask uses XPlaneConnect to get/send data from XPlane. Server can easily be edited to use other data than from XPlane.
 
 ## Run and install
 
 ### Installation
-- Install flask (python)
-- Run `npm install` (might have to use ``--legacy-peer-deps`)
+
+#### XPlane (required for live data)
+Install [XPlaneConnect](https://github.com/nasa/XPlaneConnect) plugin to XPlane.
+
+#### React (Client)
+```bash
+npm install # might have to use `--legacy-peer-deps'
+```
+
+#### Flask (Server)
+```bash
+pip install Flask \
+    simple-websocket \
+    flask-socketio
+```
 
 ### How to run
+See instructions further below for more details.
 Start up:
-- X-plane
-- Front-End
-- Back-End
-- JoyToKey 
-- JoyToKey or equivalent software (required if navigating with throttle)
+- X-plane (required for live data)
+- Flask
+- React
+- JoyToKey or equivalent software (required if navigating WAD with flight controlls)
 
-If runned without Xplane, set the **USE_XPLANE_DATA** in **settings.js** to **false**.
-The number of airplanes in XPlane needs to be set with **NR_AI_PLANES** in **settings.js**. 
+- The number of airplanes in XPlane needs to be set with **NR_AI_PLANES** in **src/settings.js**. 
+- When not using Xplane, set the **USE_XPLANE_DATA** in **src/settings.js** to **false**.
 
-#### Back-end
-Start the python server `server.py`
+#### Start Flask
+```bash
+python3 xpcServer/src/server.py
+```
 
-#### Front-end
-Run `npm start` and the app can be seen in your browser at http://localhost:3000
+#### Start React
+```bash
+npm start
+```
+and the app can be seen in your browser at http://localhost:3000
 You might have to refresh the webpage.
 
-## Structure Front-end
+### Generate documenation website with JSdoc
+To see all documented implementations run:
+```bash
+npm run jsdoc
+npm run open-docs
+```
+
+## How to use and description
 In the middle of the screen there is a WAD (wide area display) and buttons around for configuring
 the WAD. The whole WAD is covered by a map that shows your own plane (orange) and other airplanes (green/red).
 There are widgets that you can place at the different locations on the WAD with different buttons.
@@ -52,12 +74,13 @@ All buttons are clickable but right now only the buttons on the side and at the 
 The **arrow keys** can be used to navigate the buttons. A blue border is shown on the button that you have
 navigated to. The buttons can be pressed with **'p'** on the keyboard. The buttons on the side and the ones
 on the bottom are divided into two modes. You can switch between the side buttons and bottom buttons by pressing
-the mode key **'m'** on the keyboard.
+the mode key **'m'** on the keyboard. The buttons can be configured in
+**src/settings.js**.
 
 ## Button configutation
 When using flight controllers the buttons needs to be mapped to buttons on the keyboard.
 JoyToKey or any other equivalent software can be used. The keyboard configuration can be changed with
-**KEY_NAVIGATION_CONFIG** in **settings.js**.
+**KEY_NAVIGATION_CONFIG** in **src/settings.js**.
 
 
 ### JoyToKey configuration
@@ -78,11 +101,6 @@ Joystick 2
 - Button10  1
 
 
-## Structure Back-end
-The server gets data from X-plane and sends it to the Front-end. What data is send or recieved to/from Xplane
-is decided with a reference to a specific data with the help of a plugin, [XPlaneConnect](https://github.com/nasa/XPlaneConnect).
-There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin. For sending data see [this](#Getting-data-from-Back-end).
-
-### oldServerSetup (slow)
-Contains another version of server setup with xpc. This version is slow and works only with low frequency of GET request. There is however no errors on the server side. **fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
-The settings.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
+## branch: oldServerSetup (slow)
+Contains another version of server setup with xpc. This version is slow and works only with low frequency of GET request. Might be helpful for debugging the socket version. There is however no errors on the server side. **fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
+The **src/settings.js** contains configuration numbers, like nr of airplanes map should draw and zoom level.

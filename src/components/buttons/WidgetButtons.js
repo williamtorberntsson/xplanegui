@@ -1,7 +1,7 @@
 
 /**
  * Widget selection buttons for WAD (bottom)
- * Dont forgett to update settings when changing button layout
+ * Dont forgett to update WIDGET_ORDER in src/settings.js when changing button layout
  * to make sure the navigation controls works.
  * @component
  * @category Buttons
