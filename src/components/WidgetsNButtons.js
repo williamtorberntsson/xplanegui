@@ -4,7 +4,7 @@ import GridType from "./GridType";
 import ExtendableButtons from "./buttons/ExtendableButtons";
 import WidgetButtons from "./buttons/WidgetButtons";
 import BoxButtons from "./buttons/BoxButtons";
-import buttonNavigator from "../buttonNavigator";
+import buttonNavigator from "../functions/buttonNavigator";
 
 import { WIDGET_ORDER } from "../settings";
 

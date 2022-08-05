@@ -1,4 +1,4 @@
-import { KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from "./settings";
+import { KEY_NAVIGATION_CONFIG as KEY, WIDGET_ORDER, VIEW_MODE_LANDING, VIEW_MODE_MINI } from "../settings";
 
 /**
  * Manages navigation with buttons on throttle (can also use arrow keys, p and m).
