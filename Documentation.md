@@ -5,9 +5,12 @@ It also contains findings about XPlane and other software that might be interest
 ## XPlane
 - XPlane **do** support missile lock/target sounds but **airplanes with FMOD soundengine** does not support that sound as of 2022/07.
 - How often XPlane send data can be toggled, needs a deeper look.
-- It is possible to change difficulty of CGF but not advanced behavior.
 - Cannot get information when locked on from XPlaneConnect.
-- When hit by other airplane everything on the AirPlane gets disabled, no realistic damage.
+- When hit by other airplane everything on the AirPlane stops working, no realistic damage.
+- Insert CGF in the simulator enviroment is possible and their team status is choosen when adding a plane. The team status can be friendly, enemy or non-combat.
+- The AI controlling the CGF are constructed by xplane and the decision trees are not changable, the user can change the level of difficulty. There is an option to disable the AI and the planes must then be located manually each frame.
+- The HUD in 2D view are easy to modify with Plane Maker, models with a costumized 3D HUD exists but the tools or implementation of that is still unknown to us.
+- Radar functions is possible to "fake", but all planes have god mode in xplane.
 
 ## JoyToKey
 **[JoyToKey](https://joytokey.net/en/)** can be used to emulate mouse movements with the flight controllers.
@@ -39,19 +42,22 @@ The markers can be designed and use your own svg.
 To create a marker you need a GraphicsLayer, a Point and a Graphic.
 An enemy, friendly and own airplane-markers have been created as examples in the **Map.js** component.
 
+### Getting data from Back-end
+The communication between React and Flask uses a socket. When React wants certain data from Flask it sends an emit to Flask
+with event name and data. The data contains at least a value **"online"** if Flask should use data from XPlane or not.
+Flask then sends a new emit back to React with data. This way the server controls what data should be used and React does
+not need to handle the data differently depending on if it is from XPlane or not, as long as the server has the same data
+structure for both cases. When **not** using XPlane the data is **static**.
+
+## SOCKETIO
+Install simple_websocket and flask_iosocket 
+
 ### WAD (Wide Area Display)
 The WAD consists of a border with buttons (see Buttons section) and the entire display is covered by a map (see Map section).
 Each position has a size (S/M/L) that can be managed with corresponding state **UL**/**ML**/**BL**/**UR**/**MR**/**BR**.
 Widgets can be placed at positions by managing the **widgetPositions** state which holds a name for a widget at each position.
 The recently pressed widget and position is stored in the states: **activeWidgetArea** and **activeWidget**, and updated with
 **updateWidgetPosition()**.
-
-## Research
-- Insert CGF in the simulator enviroment is possible and their team status is choosen when adding a plane. The team status can be friendly, enemy or non-combat.
-- The AI controlling the planes are constructed by xplane and the decision trees are not changable, the user can change the level of difficulty. There is an option to disable the AI and the planes must then be located manually each frame.
-- It is not possible to see if another player/plane have locked on you.
-- The HUD in 2D view is easy to modify with Plane Maker, models with a custumized 3D HUD exists but the tools or implementation of that is still unknown to us.
-- Radar functions is possible to "fake", but all planes have god mode in xplane.
 
 ## Known bugs
 - Sometimes the svg (images) does not load when selecting widgets when XPlane is running (maybe not enough resources for computer?)

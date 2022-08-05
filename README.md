@@ -15,7 +15,11 @@ Start up:
 - X-plane
 - Front-End
 - Back-End
+- JoyToKey 
 - JoyToKey or equivalent software (required if navigating with throttle)
+
+If runned without Xplane, set the **USE_XPLANE_DATA** in **settings.js** to **false**.
+The number of airplanes in XPlane needs to be set with **NR_AI_PLANES** in **settings.js**. 
 
 #### Back-end
 Start the python server `server.py`
@@ -74,14 +78,11 @@ Joystick 2
 - Button10  1
 
 
-### Getting data from Back-end
-The communication between React and Flask uses a socket. When React wants certain data from Flask it sends an emit to Flask
-with event name and data. The data contains at least a value **"online"** if Flask should use data from XPlane or not.
-Flask then sends a new emit back to React with data. This way the server controls what data should be used and React does
-not need to handle the data differently depending on if it is from XPlane or not, as long as the server has the same data
-structure for both cases. When **not** using XPlane the data is **static**.
-
 ## Structure Back-end
 The server gets data from X-plane and sends it to the Front-end. What data is send or recieved to/from Xplane
 is decided with a reference to a specific data with the help of a plugin, [XPlaneConnect](https://github.com/nasa/XPlaneConnect).
 There is a gigantic **[data reference page](https://developer.x-plane.com/datarefs/)** for all data that can be send and recieved and can be used with the plugin. For sending data see [this](#Getting-data-from-Back-end).
+
+### oldServerSetup (slow)
+Contains another version of server setup with xpc. This version is slow and works only with low frequency of GET request. There is however no errors on the server side. **fetchData.js** is used to get data from Flask server with Axios. A proxy is used to get data from different routes.
+The settings.js contains configuration numbers, like nr of airplanes map should draw and zoom level.
