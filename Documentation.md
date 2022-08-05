@@ -69,3 +69,4 @@ The recently pressed widget and position is stored in the states: **activeWidget
 - Sometimes the reset buttons make the screen go white and crash (look at errors in console)
 - Sometimes the map doesn't load but reloading page fixes it.
 - The server gets alot of errors when sending data very frequent.
+- JSDoc does sometimes not work for linux/mac
